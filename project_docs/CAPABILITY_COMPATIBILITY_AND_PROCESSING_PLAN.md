@@ -1,11 +1,11 @@
 # Capability, compatibility and canonical processing plan
 
-**Purpose:** Canonical FFmpeg discovery, compatibility and per-job plan contracts.  
-**Read when:** Implementing `REQ-033`–`REQ-035`, hardware, preview, streams or verification.  
-**Owner:** Media pipeline maintainer.  
-**Authority:** Capability/compatibility/plan owner.  
-**Update trigger:** Tool parser, cache key, compatibility rule, plan field or FFmpeg argument change.  
-**Linked IDs:** `PH-11`–`PH-16`, `AC-060`–`AC-064`, `VAL-039`–`VAL-041`, `RISK-028`–`RISK-030`.
+**Purpose:** Canonical FFmpeg discovery, compatibility and per-job plan contracts.
+**Read when:** Implementing `REQ-033`–`REQ-035`, hardware, preview, streams or verification.
+**Owner:** Media pipeline maintainer.
+**Authority:** Capability/compatibility/plan owner.
+**Update trigger:** Tool parser, cache key, compatibility rule, plan field or FFmpeg argument change.
+**Linked IDs:** legacy `PH-11`–`PH-16`, `AC-060`–`AC-078`, `VAL-039`–`VAL-053`, `RISK-028`–`RISK-041`; V2 `REQ-060`–`REQ-065`, `PH-23`–`PH-30`, `AC-093`–`AC-101`, `VAL-068`–`VAL-078`, `RISK-051`–`RISK-055`.
 
 ## Capability evidence
 
@@ -60,3 +60,37 @@ The plan builder is pure/testable. FFmpeg compilation uses `ArgumentList`, not s
 ## Loss warnings
 
 Preflight surfaces expected alpha loss, HDR/colour changes, bit-depth reduction, metadata stripping, attachment/chapter removal, subtitle conversion and forced CPU transfers. Warnings require acknowledgement only where risk is material; routine informational notices remain non-blocking.
+
+## MediaForge 2 WorkflowIntent contract
+
+V2 resolves user intent through one path:
+
+`WorkflowIntent -> capability/compatibility -> immutable ProcessingPlan`
+
+The ProcessingPlan is the authority for:
+
+- visible technical summary;
+- compatibility/loss warnings;
+- estimates;
+- preview transform intent;
+- executable FFmpeg compilation;
+- active-job snapshot;
+- verification expectation;
+- diagnostics.
+
+The UI never constructs raw FFmpeg command fragments.
+
+Normal quality intents are `Smaller file`, `Balanced`, `Higher quality`, `Custom`; their technical mapping is codec/capability-dependent.
+
+Normal geometry intents are:
+
+- **Fit within:** proportional bounding-box resize; no crop; no padding.
+- **Fit in frame:** proportional exact-frame output with explicit padding/background.
+- **Fill frame:** proportional exact-frame output with crop.
+- **Stretch:** exact dimensions with distortion, explicit only.
+
+Mixed batches use explicit target policies for dimensions, aspect and frame rate. Every file has a pre-run plan summary; incompatible items show a reason and declared skip/block/decision state rather than silently altering global intent.
+
+Output-size estimates are advisory. Fixed-bitrate paths may use narrow approximations; CRF/CQ/content-dependent paths use ranges/confidence unless stronger evidence exists.
+
+Changes to pending UI state after Start cannot mutate the immutable active ProcessingPlan.

@@ -1,5 +1,13 @@
 # Project Settings — MediaForge Desktop
 
+## Current MediaForge 2 sequence
+
+The active roadmap is `PH-20`, then `PH-22` through `PH-31`. `PH-21` is retained as the immutable V1-closure/rollback bridge and is already satisfied by the merged V1 rollback point.
+
+Historical `PH-11` through `PH-19` are not reused. Their useful technical scope is carried into the V2 phases where mapped.
+
+MediaForge 2 retains all local-first, evidence, Git, PowerShell and source-safety rules. Governance adoption does not itself change the product/package version or prove V2 runtime behaviour.
+
 Read `/AGENTS.md`, then `project_docs/PROJECT_INDEX.md`, before editing. Identify the active `PH`, route, affected `REQ`, `AC`, `VAL`, `DEC` and `RISK` IDs. Load only relevant governance and source.
 
 ## Evidence and claims

@@ -96,3 +96,11 @@ All notable MediaForge changes should be recorded here. Source presence is not a
 - Deferred checks remain Unproven; they are not release verification.
 - Carried the deferred validation into the reviewed V2 post-build validation architecture for later automated/integration/UI validation.
 - This exception permits establishment of the V1 rollback baseline before MediaForge 2 governance adoption.
+
+### MediaForge 2 canonical governance adoption — 2026-09-19
+
+- Adopted the reviewed task-first V2 governance direction under `BR-20260919-02`.
+- Preserved V1 history and rollback point `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+- Superseded the proposed 1.2.0/PH-11-next sequencing without reusing `PH-11`–`PH-19`.
+- Allocated `REQ-056`–`REQ-070`, `AC-088`–`AC-105`, `VAL-066`–`VAL-081`, `DEC-029`–`DEC-037`, `RISK-051`–`RISK-060` and `PH-20`–`PH-31` in canonical owners.
+- No V2 runtime implementation, version bump or release claim is made by this governance-only change.

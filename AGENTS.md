@@ -30,10 +30,20 @@ Record same-level conflicts; do not guess.
 6. Expand context only for a dependency, conflict or evidence gap
 
 ## Task routes
-Use `ROUTE-001`–`ROUTE-015` in `PROJECT_INDEX.md`. Current priority is `PH-07` through `PH-10`: native baseline, supported platform/architecture seam, projects/recovery, then presets/per-job queue.
+Use `ROUTE-001`–`ROUTE-015` in `PROJECT_INDEX.md`. Current priority is `PH-20` MediaForge 2 canonical governance adoption; after PH-20 exit, implementation proceeds to `PH-22` because the `PH-21` V1-closure bridge was satisfied before canonical adoption.
 
 ## Reports
 Before edits state scope, IDs, risks and checks. After work report inspected, changed, ran, passed, failed, skipped, unproven, governance, rollback and next stop/decision. A check proves only its scope.
 
 ## Stop conditions
 Stop for missing authority, destructive-action approval, release/signing credentials, FFmpeg provenance/licence decision, schema migration decision, source-safety evidence, failed mandatory validation, ambiguous output commit, or unapproved privilege/network behaviour. Never publish, sign, bundle FFmpeg, add a remote, delete source media or run power/command/webhook actions without explicit authorisation.
+
+## MediaForge 2 canonical routing
+
+The approved interaction model is task-first:
+
+`Media -> Task -> Configure -> Review/Preview -> Output -> Process -> Result`
+
+The V1 processing/runtime safety foundation remains authoritative. V2 may replace the MainWindow information architecture while reusing or incrementally refactoring services whose behaviour remains appropriate and evidenced.
+
+Governance adoption does not prove V2 runtime behaviour.

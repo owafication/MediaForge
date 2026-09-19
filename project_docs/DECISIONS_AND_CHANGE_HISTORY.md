@@ -1,10 +1,10 @@
 # Decisions and change history
 
-**Purpose:** Canonical material decisions, change procedure and delivery reports.  
-**Read when:** Revisiting scope, architecture, safety, version, persistence, update or release choices.  
-**Owner:** Project maintainer.  
-**Authority:** Canonical owner for `DEC-###` and `BR-YYYYMMDD-##`.  
-**Update trigger:** Material choice, supersession, delivery, validation reversal or authority conflict.  
+**Purpose:** Canonical material decisions, change procedure and delivery reports.
+**Read when:** Revisiting scope, architecture, safety, version, persistence, update or release choices.
+**Owner:** Project maintainer.
+**Authority:** Canonical owner for `DEC-###` and `BR-YYYYMMDD-##`.
+**Update trigger:** Material choice, supersession, delivery, validation reversal or authority conflict.
 **Project rules:** Preserve history; supersede rather than rewrite silently.
 
 ## Decision register
@@ -23,14 +23,14 @@
 | DEC-010 | Accepted with limitation | MediaElement remains a fast fallback; it is not authority for FFmpeg export fidelity. |
 | DEC-011 | Accepted | Store crop as clamped normalised coordinates and per-clip trim/source metadata. |
 | DEC-012 | Accepted | Active crop/trim/stitch requires an explicit re-encode/processing plan; bypassing stream-copy paths are blocked. |
-| DEC-013 | Proposed | Use 1.2.0 as the workflow-foundation milestone: projects/recovery, presets, per-job options and queue control. |
+| DEC-013 | Superseded 2026-09-19 | Proposed 1.2.0 workflow-foundation milestone; superseded by DEC-029 and the MediaForge 2 roadmap. |
 | DEC-014 | Accepted 2026-07-28 | User explicitly directed implementation of all PH-08. Migrate application/tests to `net10.0-windows`, pin the SDK, preserve settings/installer contracts and retain PH-08A.2 as rollback. Native migration evidence remains required before phase exit. |
 | DEC-015 | Proposed accepted | Introduce incremental ViewModels and domain services without a DI framework or a wholesale rewrite. |
 | DEC-016 | Proposed accepted | Use versioned UTF-8 JSON for `.mediaforge`, `.mediaforge-preset` and `.mediaforge-queue`; typed data only, no raw command fragments. |
 | DEC-017 | Proposed accepted | Manual save is canonical; autosave writes separate recovery snapshots using temp/flush/atomic replace and bounded retention. |
 | DEC-018 | Proposed accepted | Effective options resolve in one service: global default → selected preset → per-job overrides → edit plan. |
 | DEC-019 | Proposed | Capability cache is keyed to the selected FFmpeg/FFprobe executable evidence and can be manually refreshed/exported. |
-| DEC-020 | Proposed | One immutable ProcessingPlan is the authority for UI summary, preview, FFmpeg invocation, verification and diagnostics. |
+| DEC-020 | Superseded 2026-09-19 | Early ProcessingPlan proposal; superseded and extended by DEC-036, which adds WorkflowIntent and immutable run authority. |
 | DEC-021 | Proposed | Build FFmpeg-backed still-frame/proxy preview through CLI processes first; retain MediaElement as labelled fallback; do not embed libav in the immediate roadmap. |
 | DEC-022 | Proposed | Hardware control uses intent profiles and a local benchmark; no generic GPU checkbox. |
 | DEC-023 | Proposed | Run selected verification against temporary output before commit; failed verification cannot silently replace the destination. |
@@ -38,17 +38,25 @@
 | DEC-025 | Proposed accepted | Watch folders never delete sources by default and all potentially destructive completion actions are disabled until explicitly configured. |
 | DEC-026 | Decision required | Update checking and optional FFmpeg acquisition require a signed or hash-anchored release manifest, consent and rollback; no silent self-update. |
 | DEC-027 | Proposed accepted | The product remains a converter/preparation/lightweight assembly app, not a full NLE, cloud service or AI application. |
-| DEC-028 | Decision required | Choose whether PH-07 produces a public 1.1.1 stabilisation release or only an internal validated baseline before 1.2.0. |
+| DEC-028 | Superseded 2026-09-19 | The former public-1.1.1-versus-internal-checkpoint decision was overtaken by the merged V1 rollback baseline and V2 roadmap; exact future versioning remains OD-009. |
+| DEC-029 | Accepted 2026-09-19 | MediaForge 2 is a task-first UX/application redesign; it supersedes the proposed 1.2.0/PH-11-next product sequencing without reusing historical phase IDs. |
+| DEC-030 | Accepted 2026-09-19 | Proven V1 processing and safety services are reused where appropriate; V2 is not a zero-reuse rewrite, while V1 presentation may be replaced. |
+| DEC-031 | Accepted 2026-09-19 | Progressive disclosure is the default strategy for advanced codec/encoder/processing options. |
+| DEC-032 | Accepted 2026-09-19 | WPF and the approved .NET 10 Windows baseline remain the V2 platform unless later evidence supports a separate framework decision. |
+| DEC-033 | Accepted 2026-09-19 | V1 visual/layout compatibility is not a V2 requirement; persistent-data and processing compatibility are evaluated explicitly. |
+| DEC-034 | Accepted 2026-09-19 | Existing REQ/AC/VAL/DEC/RISK/PH identifiers remain immutable; V2 continues the sequences. |
+| DEC-035 | Accepted 2026-09-19 | Project creation is optional for quick tasks; project persistence remains available for durable/repeatable work. |
+| DEC-036 | Accepted 2026-09-19 | Typed WorkflowIntent feeds one immutable ProcessingPlan authority shared by visible summary, execution snapshot and verification expectation. |
+| DEC-037 | Accepted 2026-09-19 | Output-size estimates use method-appropriate confidence/range language and never present uncertain predictions as guarantees. |
 
-## Open decisions before next milestone
+## Open canonical decisions
 
-- `DEC-006`: FFmpeg acquisition/redistribution
-- `DEC-007`: exact output verification tolerances and failed-temp retention
-- `DEC-008`: declared Windows/architecture/codec/accessibility matrix
-- `DEC-014`: .NET 10 migration after baseline
-- `DEC-026`: updater/acquisition integrity design
-- `DEC-028`: public 1.1.1 versus internal checkpoint
+- `DEC-006`: FFmpeg acquisition/redistribution policy.
+- `DEC-007`: exact output-verification tolerances and failed-temp retention.
+- `DEC-008`: declared Windows/architecture/codec/accessibility support matrix.
+- `DEC-026`: updater/tool-acquisition integrity, consent and rollback design.
 
+V2 persistence compatibility and exact package-version questions are tracked separately in the evidence-dependent decision table below.
 ## Governance change procedure
 
 1. Identify canonical owner and affected IDs.
@@ -206,3 +214,26 @@
 - **Decision-ID handling:** No new `DEC-###` is allocated because this is an evidence/sequencing exception, preserving the reviewed V2 draft allocation beginning with `DEC-029`.
 - **Claim boundary:** PH-10 is closed for sequencing and rollback-baseline purposes only. MediaForge 1.1.0 is not declared a fully verified release.
 - **Next stop:** Review and commit the PH-10 closure, push/PR/merge the exact head when repository checks permit, sync `main`, record the V1 rollback point, then canonically adopt the reviewed V2 governance.
+
+## MediaForge 2 evidence-dependent decisions
+
+These items remain open without allocating new immutable `DEC-###` IDs yet:
+
+| Item | Required resolution |
+|---|---|
+| OD-006 | Final V1 `.mediaforge` compatibility class, resolved by PH-28 migration evidence. |
+| OD-007 | Final `.mediaforge-queue` compatibility class, resolved during PH-26/PH-28 evidence. |
+| OD-008 | Whether direct V1 recovery-snapshot migration is justified and safe, resolved during PH-28. |
+| OD-009 | Exact V2 product/package version transition. The rollback prerequisite is now satisfied; resolve before the first version/package-changing V2 delivery. |
+
+### `BR-20260919-02` — MediaForge 2 canonical governance adoption
+
+- **Objective:** migrate reviewed V2 direction into existing canonical owners without creating a second normative hierarchy.
+- **Base/rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+- **Adopted:** task-first shell/workflows, progressive disclosure, optional projects, queue-as-execution/status, WorkflowIntent + immutable ProcessingPlan, early accessibility.
+- **Superseded:** DEC-013 proposed 1.2.0 milestone, PH-11-next sequencing and queue-first presentation; DEC-020 is superseded/extended by DEC-036.
+- **Historical phases:** `PH-11`–`PH-19` remain immutable and are not reused.
+- **Bridge:** `PH-21` V1 closure/rollback work was satisfied before this adoption.
+- **Open:** V1 project/queue/recovery compatibility details and exact V2 package/version transition.
+- **Claim boundary:** governance only; no V2 runtime, phase-exit, package-version or release claim.
+- **Rollback:** revert this governance-only adoption to `5acaf88e751327eac47ca673178fbbd88a8603f1`.

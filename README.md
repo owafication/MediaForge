@@ -1,5 +1,13 @@
 # MediaForge Desktop
 
+## MediaForge 2 direction
+
+The durable V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+
+MediaForge 2 is the approved governance/product direction: keep the Windows/WPF/local-FFmpeg processing foundation and safety boundaries, replace queue-first interaction with task-first workflows and progressive disclosure, and use one typed WorkflowIntent/ProcessingPlan authority.
+
+The active governance phase is `PH-20`. No V2 runtime implementation is yet claimed, and the exact 2.x package/version transition remains unresolved.
+
 MediaForge is a local-first Windows media conversion, preparation and lightweight single-track assembly application. The source is a WPF application that invokes local FFmpeg and FFprobe child processes.
 
 ## Current source foundation
@@ -21,8 +29,11 @@ The application and package-free characterisation tests target `net10.0-windows`
 
 ## Evidence boundary
 
-User-provided Windows evidence verifies that PH-10 compiles. The first startup correction then failed one or more launch-smoke cases. A supplied valid recovery snapshot exposed that the harness did not fully isolate Windows special-folder storage and that recovery prompting occurred before the main window rendered. This revision adds explicit MediaForge roaming/local roots for smoke cases, post-render recovery prompting, recovery failure containment and per-case smoke diagnostics. Native confirmation remains pending because .NET, PowerShell and the Windows runtime are unavailable here.
+`BR-20260911-01` passed the consolidated Windows x64 automated baseline: 39 static checks, FFmpeg/FFprobe provenance, disposable fixtures, Release restore/build, 37 characterisation tests, four isolated launch-smoke cases, multi-file publish and package audit.
 
+`BR-20260919-01` explicitly deferred the remaining PH-09/PH-10 manual/native interaction and real conversion-safety fixtures. Those items remain Skipped/Unproven and are carried into the V2 validation programme.
+
+The V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`. No V2 runtime, UI, migration or release result exists yet.
 ## Startup diagnostics
 
 When startup fails before the main window appears, MediaForge writes a diagnostic log under:
@@ -35,10 +46,9 @@ If Local AppData is unavailable, it falls back to the Windows temporary director
 
 ## Product direction
 
-PH-10 is now implemented in source under the user-authorised risk exception. The next phase is PH-11 capability-aware FFmpeg discovery and compatibility, but it remains gated on a clean Windows build/test/UI run for the consolidated PH-09/PH-10 revision.
+`PH-20` adopts the reviewed MediaForge 2 governance and migration direction. The `PH-21` V1-closure bridge is already satisfied by the merged rollback baseline; after PH-20 exit, the next implementation phase is `PH-22` task-first shell/navigation.
 
-Later stages add capability-aware FFmpeg planning, FFmpeg-backed preview, hardware profiles, stream/metadata control, lossless operations, output verification, history, guarded automation and desktop polish.
-
+V1 capability work originally sequenced as `PH-11` through `PH-19` is preserved historically and redistributed into the V2 roadmap rather than discarded or reused as phase IDs.
 ## Product boundary
 
 MediaForge is not a full non-linear editor. It does not include an unlimited multi-track timeline, complex compositing, keyframe animation, cloud accounts, collaborative editing, a plugin marketplace or generative AI by default.
@@ -64,7 +74,9 @@ The release ZIP is intentionally multi-file. Keep all files together when runnin
 
 ## Status
 
-`Implemented in source`: PH-08 architecture/.NET 10; PH-09 projects/recovery; PH-10 presets, typed per-job precedence, professional queue controls, immutable run snapshots and advisory estimates; Win64 `SingleFile=false` publishing.  
-`Passed in available scope`: 36 deterministic static checks over 123 non-generated files, Python compilation, XML/XAML parsing, handler/ownership checks, explicit OneWay progress binding, normalised startup diagnostics, post-render recovery containment, profile isolation, PH-09/PH-10 contract checks and mandatory launch-smoke packaging guards.  
-`User-provided Windows evidence`: restore/build succeeded, all 37 characterisation tests passed and multi-file publish completed; launch diagnostics then proved a TwoWay binding attempt against read-only `OverallProgress`.  
-`Unproven for this exact corrected PH-10 revision`: repeat native build/tests, the four-case profile-isolated WPF launch smoke, project/preset/queue workflows, Windows filesystem fixtures, FFmpeg safety fixtures, final multi-file release package and installer.
+- **V1 source:** PH-08 architecture/.NET 10, PH-09 projects/recovery and PH-10 presets/per-job queue are implemented in source.
+- **Passed automated Windows scope:** consolidated x64 build/tests/launch-smoke/publish/package evidence recorded by `BR-20260911-01`.
+- **Deferred V1 evidence:** remaining manual/native interaction and real conversion-safety fixtures remain Skipped/Unproven under `BR-20260919-01`.
+- **Rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+- **Current work:** `PH-20` governance-only V2 adoption.
+- **V2 runtime:** Unproven.

@@ -1,11 +1,11 @@
 # Security, privacy and risk
 
-**Purpose:** Canonical safety, privacy, supply-chain and risk controls.  
-**Read when:** Work affects media/source paths, persistence, processes, logs, automation, tools, update, installer or network.  
-**Owner:** Security/reliability maintainer.  
-**Authority:** Canonical owner for `RISK-###`.  
-**Update trigger:** Risk, control, boundary, third-party dependency or destructive action change.  
-**Linked IDs:** `RISK-001`–`RISK-050`, `REQ-009`, `REQ-024`–`REQ-055`.
+**Purpose:** Canonical safety, privacy, supply-chain and risk controls.
+**Read when:** Work affects media/source paths, persistence, processes, logs, automation, tools, update, installer or network.
+**Owner:** Security/reliability maintainer.
+**Authority:** Canonical owner for `RISK-###`.
+**Update trigger:** Risk, control, boundary, third-party dependency or destructive action change.
+**Linked IDs:** `RISK-001`–`RISK-060`, `REQ-009`, `REQ-024`–`REQ-070`.
 
 ## Invariants
 
@@ -90,3 +90,18 @@ Record FFmpeg/FFprobe source, version, architecture, configuration, licence noti
 ## Review rules
 
 A risk is not closed by source presence. Reduce status only after mapped validation passes in the declared environment. Critical risks block phase/release closure unless explicitly accepted by the authorised owner with scope and expiry.
+
+## MediaForge 2 risk additions
+
+| ID | Risk | Severity | Primary control |
+|---|---|---|---|
+| RISK-051 | Simplified UI silently applies technical behaviour the user cannot discover. | High | Always provide a plan summary and accessible advanced details. |
+| RISK-052 | Mixed-media batch defaults crop, stretch or change frame rate unexpectedly. | High | Explicit target policies and per-file pre-run review. |
+| RISK-053 | V2 migration weakens V1 source/output/cancellation safety. | Critical | Treat V1 safety contracts as invariants with regression fixtures. |
+| RISK-054 | New workflow logic duplicates option resolution and causes UI/run divergence. | High | One typed intent resolver and immutable ProcessingPlan authority. |
+| RISK-055 | File-size estimate is interpreted as a guarantee. | Medium | Confidence/range labels and documented estimation basis. |
+| RISK-056 | Reusing UI-coupled V1 services imports V1 complexity into V2. | High | Characterise boundaries and refactor only required seams. |
+| RISK-057 | V1 project/preset/queue data is silently misinterpreted by V2. | High | Versioned migration tests and explicit compatibility states. |
+| RISK-058 | Task-first redesign sacrifices keyboard/accessibility behaviour. | Medium | Accessibility acceptance begins at PH-22. |
+| RISK-059 | Contextual help becomes stale relative to actual processing behaviour. | Medium | Derive summaries from typed state and review help with requirement changes. |
+| RISK-060 | V2 expands into a general NLE and delays converter workflows. | High | Preserve the non-NLE product boundary and phase gates. |

@@ -1,16 +1,16 @@
 # Projects, autosave and recovery
 
-**Purpose:** Canonical project-file, recovery, recent-project, relink and portable-project contracts.  
-**Read when:** Implementing `REQ-026`–`REQ-028` or changing persistent editing state.  
-**Owner:** Persistence maintainer.  
-**Authority:** Project persistence owner.  
-**Update trigger:** Schema, migration, write, recovery, relink or retention change.  
-**Linked IDs:** `PH-09`, `AC-046`–`AC-051`, `VAL-033`–`VAL-035`, `RISK-022`–`RISK-024`.
+**Purpose:** Canonical project-file, recovery, recent-project, relink and portable-project contracts.
+**Read when:** Implementing `REQ-026`–`REQ-028` or changing persistent editing state.
+**Owner:** Persistence maintainer.
+**Authority:** Project persistence owner.
+**Update trigger:** Schema, migration, write, recovery, relink or retention change.
+**Linked IDs:** legacy `PH-09`, `AC-046`–`AC-051`, `VAL-033`–`VAL-035`, `RISK-022`–`RISK-024`; V2 `REQ-066`, `REQ-069`, `PH-28`, `AC-096`–`AC-097`, `AC-104`, `VAL-075`–`VAL-076`, `RISK-057`.
 
 ## File contract
 
-Extension: `.mediaforge`  
-Encoding: UTF-8 JSON  
+Extension: `.mediaforge`
+Encoding: UTF-8 JSON
 Top-level minimum:
 
 ```text
@@ -77,3 +77,30 @@ A portable project root may contain the project file, optional copied sources an
 ## Privacy
 
 Projects contain local paths and may reveal sensitive names. They remain local, are not attached to support bundles by default and are redacted only in exported diagnostic copies. No encryption claim is made.
+
+## MediaForge 2 optional-project and migration policy
+
+One-off work does not require project creation. Project functions remain available for durable/repeatable/recoverable work.
+
+V1 persistence safety remains authoritative: typed data, version validation, atomic writes, separate recovery, source-file preservation on failed migration, and no trusted raw executable arguments.
+
+Every persisted V1 artifact receives one explicit compatibility class:
+
+- Fully compatible
+- Migrated compatible
+- Read-only compatible
+- Import-only compatible
+- Unsupported with a clear message
+
+Current evidence-dependent targets:
+
+| Artifact | Current target |
+|---|---|
+| Settings JSON | field-level migration |
+| `.mediaforge` | migrated compatible where semantics map safely |
+| `.mediaforge-preset` | migrated compatible for supported typed fields |
+| `.mediaforge-queue` | import-only or migrated compatible pending WorkflowIntent equivalence |
+| Recovery snapshot | no automatic migration claim initially |
+| Recent-project store | optional convenience migration |
+
+Final classifications require migration fixtures. First migration never overwrites the only V1 copy.
