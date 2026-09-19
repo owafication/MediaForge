@@ -1,8 +1,8 @@
 # MediaForge architecture and contracts
 
-**Purpose:** Canonical architecture and managed migration rules for the MediaForge WPF source.  
-**Owner:** Technical maintainer.  
-**Linked IDs:** `REQ-001`–`REQ-055`, `PH-07`–`PH-19`, `RISK-001`–`RISK-050`.
+**Purpose:** Canonical architecture and managed migration rules for the MediaForge WPF source.
+**Owner:** Technical maintainer.
+**Linked IDs:** `REQ-001`–`REQ-070`, `PH-07`–`PH-31`, `RISK-001`–`RISK-060`.
 
 ## Current implemented shape
 
@@ -85,3 +85,22 @@ A future immutable `ProcessingPlan` will own input identities, streams, trims/cr
 ## Extension rule
 
 Add a format, codec, hardware path, filter or metadata operation end-to-end: capability discovery → typed option → compatibility rule → processing plan → UI reason/summary → FFmpeg compilation → fixture → verification → documentation. Unknown remains unsupported or unproven.
+
+## MediaForge 2 application architecture
+
+V2 is a new shell/workflow architecture within the existing product lineage, not a zero-reuse rewrite and not a rearrangement of the current MainWindow.
+
+Conceptual layers:
+
+1. **Core/runtime safety** — process lifecycle, FFmpeg/FFprobe discovery/execution, probing, filesystem/path safety, temporary output, collisions, cancellation and atomic persistence.
+2. **Media/domain** — media identity/probe data, edits, output intent, typed codec/container/audio choices and compatibility state.
+3. **WorkflowIntent** — typed representation of what the user wants; never raw executable arguments.
+4. **ProcessingPlan** — immutable resolved authority for summary, compatibility, estimates, preview intent, execution snapshot, verification expectation and diagnostics.
+5. **Application/workflow services** — task state, validation, navigation, project/session integration, batch policy and estimate coordination.
+6. **WPF presentation** — menus, Home, task workspaces, preview/editor, queue/results, dialogs and accessibility.
+
+Reuse is evidence-driven. `ProcessRunner`, path/collision/temp-output safety, probing, atomic persistence and selected queue/project/preset services are strong reuse/refactor candidates. V1 MainWindow structure and control-wall information architecture are not compatibility requirements.
+
+Persistent V1 formats are classified explicitly as fully compatible, migrated compatible, read-only, import-only or unsupported. No compatibility claim is made until fixtures prove it.
+
+The V2 UI never constructs raw FFmpeg command fragments and may not simplify workflows by weakening source, destination, cancellation, persistence or verification safeguards.

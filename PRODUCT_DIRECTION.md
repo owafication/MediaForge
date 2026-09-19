@@ -1,6 +1,6 @@
 # Product direction
 
-**Purpose:** Canonical product priorities, sequencing and non-goals.  
+**Purpose:** Canonical product priorities, sequencing and non-goals.
 **Authority:** Product direction; requirement definitions remain in `project_docs/PROJECT_FOUNDATION.md`.
 
 ## Direction
@@ -47,3 +47,21 @@ MediaForge should become a reliable professional utility before it becomes broad
 - Silent updater or unreviewed bundled FFmpeg
 
 Any non-goal requires a new requirement, architecture decision, risk review and roadmap change.
+
+## MediaForge 2 adopted direction
+
+Strategic priorities:
+
+1. task-first workflows instead of feature/queue-first presentation;
+2. progressive disclosure of advanced controls;
+3. capability-aware, truthful choices;
+4. one immutable ProcessingPlan authority for summary, preview intent, execution and verification;
+5. accessibility from the shell foundation;
+6. quick work without mandatory project creation;
+7. multi-file batch planning inside the same task architecture.
+
+Normal quality vocabulary is `Smaller file`, `Balanced`, `Higher quality`, `Custom`.
+
+Resize geometry vocabulary is `Fit within`, `Fit in frame`, `Fill frame`, and explicit `Stretch`.
+
+`Recommended` is an intent only; before Start it must resolve to visible technical output.

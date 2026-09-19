@@ -1,11 +1,11 @@
 # Traceability and validation catalogue
 
-**Purpose:** Canonical acceptance criteria, validation definitions and requirement mapping.  
-**Read when:** Implementing, testing, reviewing completion or changing requirements.  
-**Owner:** Technical maintainer.  
-**Authority:** Canonical owner for `AC-###`, `VAL-###` and mapping.  
-**Update trigger:** Requirement, phase, acceptance, validation, file ownership or status change.  
-**Linked IDs:** `REQ-001`–`REQ-055`, `AC-001`–`AC-087`, `VAL-001`–`VAL-065`, `PH-07`–`PH-19`.
+**Purpose:** Canonical acceptance criteria, validation definitions and requirement mapping.
+**Read when:** Implementing, testing, reviewing completion or changing requirements.
+**Owner:** Technical maintainer.
+**Authority:** Canonical owner for `AC-###`, `VAL-###` and mapping.
+**Update trigger:** Requirement, phase, acceptance, validation, file ownership or status change.
+**Linked IDs:** `REQ-001`–`REQ-070`, `AC-001`–`AC-105`, `VAL-001`–`VAL-081`, `PH-07`–`PH-31`.
 
 ## Acceptance criteria
 
@@ -261,3 +261,89 @@ For `REQ-024` through `REQ-032`:
 The reviewed external V2 post-build validation architecture carries forward inherited `VAL-001` through `VAL-065` alongside proposed V2 `VAL-066` through `VAL-081`.
 
 The following residual V1 validation areas are especially important to retain: `VAL-006` through `VAL-011`, `VAL-019`, `VAL-022` through `VAL-029`, `VAL-031`, `VAL-034` through `VAL-038`, `VAL-056`, and `VAL-060` through `VAL-064`.
+
+## MediaForge 2 acceptance criteria
+
+| ID | Criterion |
+|---|---|
+| AC-088 | Home presents task choices without exposing unrelated project, queue, FFmpeg or encoder configuration. |
+| AC-089 | Resize can be completed through media selection, target size/aspect behaviour, output choice and Start without codec knowledge. |
+| AC-090 | Crop & Resize explains and previews crop versus resize behaviour. |
+| AC-091 | Conventional File/Edit/View/Project/Tools/Help commands are keyboard reachable. |
+| AC-092 | Advanced controls are collapsed by default and reveal supported technical settings without changing processing authority. |
+| AC-093 | Mixed-media batches allow explicit handling of differing dimensions, aspect ratios and frame rates. |
+| AC-094 | Batch review shows the planned action for each source before execution. |
+| AC-095 | Output-size estimates use a range/confidence indication where exact prediction is unjustified. |
+| AC-096 | Quick processing does not require explicit project creation. |
+| AC-097 | Saved projects retain/recover supported V2 workflow state safely. |
+| AC-098 | V2 preserves source immutability across success, failure and cancellation. |
+| AC-099 | V2 preserves deterministic collision and temporary-output commit behaviour. |
+| AC-100 | Cancellation terminates the owned process tree and does not leave ambiguous final outputs. |
+| AC-101 | UI summary, execution snapshot and verification expectation derive from one canonical ProcessingPlan for supported paths. |
+| AC-102 | Contextual guidance exists for Convert, Resize, Crop & Resize and multi-file/batch review. |
+| AC-103 | Keyboard-only operation covers the primary workflow path. |
+| AC-104 | V1 project/preset/queue compatibility is explicitly tested and labelled rather than assumed. |
+| AC-105 | Advanced diagnostics remain available without dominating the normal workflow. |
+
+## MediaForge 2 validation definitions
+
+| ID | Validation |
+|---|---|
+| VAL-066 | Home/shell control-tree inspection confirms unrelated advanced controls are absent from the default Home view. |
+| VAL-067 | Keyboard-only walkthrough: launch -> add media -> Resize -> configure -> process -> result. |
+| VAL-068 | Resize fixture matrix covers landscape, portrait, odd dimensions, alpha/image where applicable and common aspect ratios. |
+| VAL-069 | Crop geometry fixture compares requested normalised crop/target geometry with probed output. |
+| VAL-070 | Mixed-batch fixture combines differing resolution, orientation, frame rate and codec inputs and verifies per-file planned policy. |
+| VAL-071 | Estimate tests compare fixed-bitrate calculation with produced size and confirm CRF/CQ paths display appropriately uncertain ranges. |
+| VAL-072 | Source hashes before/after success, failure and cancellation remain identical. |
+| VAL-073 | Collision fixtures verify Rename/Overwrite/Skip and existing-destination preservation. |
+| VAL-074 | Cancellation fixture verifies process-tree termination and temporary-file cleanup. |
+| VAL-075 | V1 `.mediaforge` compatibility fixtures cover supported, migrated, read-only and unsupported cases. |
+| VAL-076 | V1 preset/queue compatibility fixtures verify the declared support policy. |
+| VAL-077 | ProcessingPlan consistency test verifies UI summary and executed run snapshot use the same immutable plan identity/content. |
+| VAL-078 | Preview/export parity fixtures validate crop/resize transforms within declared tolerance. |
+| VAL-079 | Accessibility checks cover tab order, visible focus, names, HelpText, high contrast and at least one screen-reader smoke path. |
+| VAL-080 | DPI/multi-monitor checks cover declared Windows scales without clipped primary task controls. |
+| VAL-081 | Release smoke covers absent/valid/malformed settings, blocked storage where applicable, task navigation and one fixture conversion. |
+
+## MediaForge 2 requirement mapping
+
+| Requirement | Scope | Architecture | Phase | Primary files/surfaces | Acceptance | Validation | Status |
+|---|---|---|---|---|---|---|---|
+| REQ-056 | V2 UX | task shell/workflow navigation | PH-20, PH-22 | WPF Home/task views and workflow-state projection | AC-088, AC-089 | VAL-066, VAL-067 | Governance adopted; runtime Unproven |
+| REQ-057 | V2 UX | progressive disclosure over typed intent | PH-22, PH-25 | task views and advanced-control projection | AC-092, AC-105 | VAL-066, VAL-067 | Governance adopted; runtime Unproven |
+| REQ-058 | V2 desktop | conventional shell commands | PH-22 | shell/menu commands and resources | AC-091 | VAL-067, VAL-079 | Governance adopted; runtime Unproven |
+| REQ-059 | V2 UX/help | contextual task guidance | PH-22, PH-24, PH-25, PH-26, PH-31 | task views/help resources | AC-102 | VAL-067 | Governance adopted; runtime Unproven |
+| REQ-060 | V2 batch | WorkflowIntent + per-file batch planning | PH-26 | batch workflow services, plan review and queue projection | AC-093, AC-094 | VAL-070 | Governance adopted; runtime Unproven |
+| REQ-061 | V2 estimate | estimate service over resolved intent/plan | PH-23, PH-24, PH-25, PH-26 | estimate service plus task/result projections | AC-095 | VAL-071 | Governance adopted; runtime Unproven |
+| REQ-062 | V2 normal output | task output intent -> ProcessingPlan | PH-24, PH-25 | normal output controls and plan compiler | AC-089, AC-090 | VAL-068, VAL-069 | Governance adopted; runtime Unproven |
+| REQ-063 | V2 advanced | capability-aware advanced projection | PH-22, PH-25, PH-30 | advanced controls and capability services | AC-092, AC-105 | VAL-066, VAL-077 | Governance adopted; runtime Unproven |
+| REQ-064 | V2 safety | inherited runtime/process/path/persistence safety | PH-22 through PH-31 | process/conversion/path/persistence services and regression fixtures | AC-098, AC-099, AC-100 | VAL-072, VAL-073, VAL-074, VAL-081 | V1 safeguards source-present; V2 integration Unproven |
+| REQ-065 | V2 architecture | WorkflowIntent -> immutable ProcessingPlan -> execution | PH-23 onward | domain intent/plan/compiler/execution-snapshot seams | AC-101 | VAL-077, VAL-078 | Governance adopted; runtime Unproven |
+| REQ-066 | V2 projects | optional session/project persistence | PH-22, PH-28 | task session, project persistence and recovery surfaces | AC-096, AC-097 | VAL-075, VAL-081 | Governance adopted; runtime Unproven |
+| REQ-067 | V2 batch UX | per-file plan projection | PH-26 | batch plan table and exception workflow | AC-094 | VAL-070 | Governance adopted; runtime Unproven |
+| REQ-068 | V2 accessibility | WPF presentation/resources/automation | PH-22 through PH-31 | shell/task views, resources and UI automation | AC-091, AC-103 | VAL-067, VAL-079, VAL-080 | Governance adopted; runtime Unproven |
+| REQ-069 | V2 migration | typed persistence migration/classification | PH-28 | project/preset/queue readers, mappers and fixtures | AC-104 | VAL-075, VAL-076 | Governance adopted; compatibility Unproven |
+| REQ-070 | Product boundary | governance/scope/phase control | PH-20 through PH-31 | product foundation, scope and phase review | AC-083 | VAL-065 | Governance adopted; enforced by phase review |
+
+`PH-21` is a satisfied prerequisite bridge, not future work.
+
+## V1 later-scope disposition
+
+The original `PH-11`–`PH-19` phase column in older requirement rows is historical. Current implementation placement is:
+
+| V1 requirement scope | V2 placement |
+|---|---|
+| REQ-033–REQ-035 capability/compatibility/plan | PH-23, with advanced capability surfaces in PH-30 |
+| REQ-036–REQ-037 preview/editor evidence | PH-24, PH-27 and PH-30 as applicable |
+| REQ-038–REQ-041 hardware/streams/lossless | PH-27 and PH-30 |
+| REQ-042–REQ-043 verification/history | PH-29 |
+| REQ-044 quality/estimate/sample encode | PH-23–PH-26 and PH-30 |
+| REQ-045–REQ-047 professional audio/image/video | PH-30 |
+| REQ-048–REQ-049 guarded automation/completion | PH-30, release-gated by PH-31 |
+| REQ-050 desktop quality/accessibility | PH-22 and PH-31 |
+| REQ-051–REQ-052 product/privacy boundaries | all V2 phases |
+| REQ-053 supply chain | PH-31 and any earlier tool-acquisition change |
+| REQ-054–REQ-055 automated evidence/safety | all active V2 phases |
+
+Exact per-requirement placement must be refined before implementation if scope changes; the historical IDs themselves are not reused.

@@ -1,11 +1,11 @@
 # UI, UX, accessibility and localisation
 
-**Purpose:** Canonical Windows interaction and release-quality UI baseline.  
-**Read when:** Changing views, commands, navigation, resources or shell/first-run experience.  
-**Owner:** UX maintainer.  
-**Authority:** UI/accessibility owner.  
-**Update trigger:** Flow, screen, state, keyboard, theme, DPI, accessible name or locale change.  
-**Linked IDs:** `PH-18`, `AC-081`–`AC-082`, `VAL-056`–`VAL-057`, `RISK-016`, `RISK-049`–`RISK-050`.
+**Purpose:** Canonical Windows interaction and release-quality UI baseline.
+**Read when:** Changing views, commands, navigation, resources or shell/first-run experience.
+**Owner:** UX maintainer.
+**Authority:** UI/accessibility owner.
+**Update trigger:** Flow, screen, state, keyboard, theme, DPI, accessible name or locale change.
+**Linked IDs:** legacy `PH-18`, `AC-081`–`AC-082`, `VAL-056`–`VAL-057`, `RISK-016`, `RISK-049`–`RISK-050`; V2 `REQ-056`–`REQ-068`, `PH-22`–`PH-31`, `AC-088`–`AC-105`, `VAL-066`–`VAL-080`, `RISK-051`–`RISK-059`.
 
 ## Information architecture
 
@@ -46,3 +46,38 @@ Use resource dictionaries and semantic resources; avoid hard-coded colours/strin
 ## Shell, portable and update UX
 
 File association, Send To, jump lists and portable mode remain optional and least-privilege. First run locates existing FFmpeg before offering acquisition. Update checks are opt-in and show current/new version, notes, source, integrity and rollback; no silent update.
+
+## MediaForge 2 task-first shell
+
+Top-level menu:
+
+`File | Edit | View | Project | Tools | Help`
+
+Home answers **What do you want to do?** with `Add Media` as the dominant command and these primary tasks:
+
+- Convert
+- Resize
+- Crop & Resize
+- Trim / Split
+- Combine
+
+Batch is not a separate processing architecture. A Batch Processor shortcut may route into normal multi-file task workflows.
+
+A task workspace normally contains:
+
+1. task title/purpose;
+2. selected-media summary;
+3. task-specific normal controls;
+4. review/preview when relevant;
+5. output summary;
+6. estimate;
+7. collapsed Advanced settings;
+8. primary Process action.
+
+Normal geometry terms are `Fit within`, `Fit in frame`, `Fill frame`, and explicit `Stretch`. Do not label an ambiguous geometry policy simply `Fit`.
+
+Workflow states include Empty, MediaReady, Configuring, NeedsDecision, ReviewReady, Running, Paused, Cancelling, Completed, CompletedWithWarning, Failed and VerificationFailed.
+
+Projects remain optional for quick work. Queue is a running/status surface, not the default conceptual model. Presets are contextual in normal workflows and managed through advanced Tools surfaces.
+
+From PH-22 onward require keyboard access, logical tab order, visible focus, accessible names/help text, high contrast, DPI resilience, screen-reader-compatible status updates and no required pointer-only workflow.

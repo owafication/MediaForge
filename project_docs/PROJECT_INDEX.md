@@ -1,19 +1,19 @@
 # Project index
 
-**Purpose:** Compact manifest, routing, ownership, supersession, active phase and delivery ledger.  
-**Read when:** Always after `/AGENTS.md`.  
-**Owner:** Project maintainer.  
-**Authority:** Canonical routing/index owner; it does not duplicate full records.  
-**Update trigger:** File ownership, route, ID status, phase pointer, supersession or delivery change.  
-**Linked IDs:** `PH-07`–`PH-19`, `ROUTE-001`–`ROUTE-015`, reports through `BR-20260919-01`.
+**Purpose:** Compact manifest, routing, ownership, supersession, active phase and delivery ledger.
+**Read when:** Always after `/AGENTS.md`.
+**Owner:** Project maintainer.
+**Authority:** Canonical routing/index owner; it does not duplicate full records.
+**Update trigger:** File ownership, route, ID status, phase pointer, supersession or delivery change.
+**Linked IDs:** `PH-07`–`PH-31`, `ROUTE-001`–`ROUTE-015`, reports through `BR-20260919-02`.
 
 ## Active pointer
 
-- **Current project state:** 1.1.0 source with PH-07 evidence automation and PH-08–PH-10 workflow-foundation source implementation; native x64 automated baseline passed.
-- **Active phase:** PH-10 sequencing-exception closure / V1 rollback-baseline establishment. Automated Windows evidence passed; deferred manual/native checks remain Unproven under `BR-20260919-01`.
-- **Active pointer:** review, commit, push and merge the PH-10 closure evidence; sync `main` and record the V1 rollback point before canonical V2 governance adoption.
-- **Active product milestone:** proposed 1.2.0 workflow foundation (`PH-08`–`PH-10`).
-- **Stop rule:** deferred PH-09/PH-10 checks remain Unproven and cannot support a fully verified V1 release claim. V2 must carry them forward and validate applicable safety contracts before release.
+- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance adoption active; V2 runtime implementation Unproven.
+- **Active phase:** `PH-20` MediaForge 2 product/UX/migration governance foundation.
+- **Active pointer:** review, stage, commit, push and merge the governance-only PH-20 adoption; after PH-20 exit proceed to `PH-22`. `PH-21` is the already-satisfied V1 closure/rollback bridge.
+- **Active product milestone:** MediaForge 2 task-first rebuild; exact 2.x package/version remains unresolved.
+- **Stop rule:** governance adoption does not prove V2 runtime behaviour; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
 
 ## Reading routes
 
@@ -56,6 +56,7 @@
 | project_docs/PH08_IMPLEMENTATION_REPORT.md | Complete | Full PH-08 source implementation and evidence boundary |
 | project_docs/PH09_IMPLEMENTATION_REPORT.md | Complete | PH-09 persistence/recovery implementation and evidence boundary |
 | project_docs/PH10_IMPLEMENTATION_REPORT.md | Complete | PH-10 preset/queue implementation and evidence boundary |
+| project_docs/PH20_CANONICAL_ADOPTION_REPORT.md | Active | PH-20 governance adoption evidence, boundaries and handoff |
 | project_docs/PROJECTS_AUTOSAVE_AND_RECOVERY.md | Complete | Project/recovery contracts |
 | project_docs/PRESETS_AND_QUEUE_CONTROL.md | Complete | Preset/override/queue contracts |
 | project_docs/CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md | Complete | FFmpeg capability and plan contracts |
@@ -80,20 +81,20 @@
 
 | Type | Canonical owner | Current range |
 |---|---|---|
-| `REQ-###` | `PROJECT_FOUNDATION.md` | `REQ-001`–`REQ-055` |
-| `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-087`, `VAL-001`–`VAL-065` |
-| `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-06`; active roadmap `PH-07`–`PH-19` |
-| `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-050` |
-| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-028`, reports through `BR-20260919-01` |
+| `REQ-###` | `PROJECT_FOUNDATION.md` | `REQ-001`–`REQ-070` |
+| `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-105`, `VAL-001`–`VAL-081` |
+| `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-19`; active V2 roadmap `PH-20`, `PH-22`–`PH-31`; `PH-21` satisfied bridge |
+| `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-060` |
+| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-037`, reports through `BR-20260919-02` |
 | `ROUTE-###` | this index | `ROUTE-001`–`ROUTE-015` |
 
 ## Supersession
 
-- This pack is a proposed managed replacement for the prior governance documents in the refined 1.1.0 archive.
-- It preserves historical IDs and reports but supersedes the earlier limited roadmap and outdated `PROJECT_SETTINGS.md` version statement.
-- It does not supersede application source or claim that any proposed feature exists.
-- The supplied assessment is product-direction input, not runtime evidence.
-
+- V1 historical decisions, phases and evidence remain preserved.
+- The earlier `PH-11`-next / proposed 1.2.0 sequencing is superseded by the MediaForge 2 roadmap.
+- `PH-11` through `PH-19` are historical IDs and are never reused; useful scope is carried into V2 phases.
+- The external MediaForge 2 planning pack remains design evidence, not a second canonical governance hierarchy.
+- Canonical V2 governance does not claim that V2 runtime behaviour exists.
 ## Delivery ledger
 
 | Report | Date | Scope | Status | Evidence |
@@ -114,3 +115,4 @@
 | `BR-20260729-14` | 2026-07-29 | PH-10 read-only progress binding and nullable startup-diagnostics correction | Source corrected; 36 static checks passed; corrected native smoke pending | Windows startup log, source, verifier guards and `/VERIFICATION.md` |
 | `BR-20260911-01` | 2026-09-11 | Consolidated PH-07 through PH-10 Windows x64 validation and harness correction | Native automated baseline passed; manual UI/filesystem/safety evidence pending | `artifacts/ph07-baseline-20260911-132855`, source/package audits and `/VERIFICATION.md` |
 | `BR-20260919-01` | 2026-09-19 | PH-10 sequencing exception and V1 rollback-baseline handoff | Automated Windows evidence retained; remaining manual/native checks Skipped/Unproven and carried to V2 post-build validation | `/VERIFICATION.md`, `PH10_IMPLEMENTATION_REPORT.md`, `TRACEABILITY.md`, reviewed external V2 validation matrix |
+| `BR-20260919-02` | 2026-09-19 | MediaForge 2 canonical governance adoption | Governance-only adoption; runtime implementation Unproven | Final V1 rollback baseline, reviewed V2 design pack, canonical audits and `PH20_CANONICAL_ADOPTION_REPORT.md` |

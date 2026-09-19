@@ -21,4 +21,15 @@ Release and source archives must be versioned, exclude generated/source-control 
 
 ## Rollback
 
-Retain the PH-08A.2 build-passing source archive as the pre-migration fallback. The PH-08 .NET 10 and architecture changes should remain one reviewable source slice. No persistence schema or user-data migration was introduced, so rollback is source/package replacement rather than data conversion.
+The current durable V1-to-V2 rollback baseline is `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+
+The older PH-08A.2 archive remains historical fallback evidence but is not the current V1/V2 transition boundary.
+
+V2 governance adoption and later implementation use feature branches and pull requests. No published history is rewritten. Persistent-data migration must preserve the original V1 copy until the migration succeeds and is explicitly saved/adopted.
+
+## MediaForge 2 transition policy
+
+- V2 application work branches from merged canonical governance, never from the external planning directory.
+- The external planning pack remains design evidence only.
+- The exact 2.x product/package version is unresolved and must not be changed merely because governance is adopted.
+- Commit, PR head, validation evidence and rollback points must correspond exactly before merge/release claims.

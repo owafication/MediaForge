@@ -46,5 +46,23 @@ MediaForge becomes A-class when it is trustworthy for long jobs and unattended b
 
 ## Boundaries
 
-Included: conversion, batch processing, crop/resize, single-track clip assembly, stream/metadata preparation, local automation and reports.  
+Included: conversion, batch processing, crop/resize, single-track clip assembly, stream/metadata preparation, local automation and reports.
 Excluded: unlimited multi-track editing, complex compositing, cloud media hosting, collaboration, marketplace, DRM circumvention and generative AI.
+
+## MediaForge 2 task-first overview
+
+V2 supersedes queue-first and project/preset-first presentation where they conflict.
+
+Primary flow:
+
+`Media -> Task -> Configure -> Review/Preview -> Output -> Process -> Result`
+
+Primary tasks:
+
+- Convert
+- Resize
+- Crop & Resize
+- Trim / Split
+- Combine
+
+`Add Media` is the dominant Home command. Batch is a property of applicable task workflows. Projects and presets remain available but are not prerequisites for one-off work.

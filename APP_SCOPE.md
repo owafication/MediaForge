@@ -1,44 +1,39 @@
 # MediaForge desktop app scope
 
-**Status:** Proposed scope summary. Canonical requirement definitions are in `project_docs/PROJECT_FOUNDATION.md`.
+**Status:** Canonical scope summary. Requirement definitions remain in `project_docs/PROJECT_FOUNDATION.md`.
 
-## Current product
+## V1 baseline
 
-- Local Windows WPF application
-- Mixed image, video and audio queue
-- Batch conversion, output rules, collisions, progress and cancellation
-- Image/video crop, resize and placement
-- Single-track video trim, split, reorder and stitch
-- Local FFmpeg/FFprobe and persistent global settings
+MediaForge is a local Windows WPF application using local FFmpeg/FFprobe child processes for image, video and audio conversion/preparation plus lightweight single-track assembly.
 
-Current source presence does not prove native Windows behaviour. `PH-07` is the release/safety gate.
+The durable V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`.
 
-## Next milestone — proposed 1.2.0
+PH-08 through PH-10 source includes the .NET 10 architecture seam, projects/recovery, presets, deterministic per-job option resolution and professional queue controls. The automated Windows x64 baseline passed for its recorded scope; deferred manual/native interaction and real conversion-safety fixtures remain Skipped/Unproven under `BR-20260919-01`.
 
-- Supported platform and testable architecture seam
-- Versioned `.mediaforge` projects
-- Manual save/save-as, autosave, recovery, recent projects and relinking
-- Optional portable project root
-- Built-in and user presets with import/export and field locking
-- Deterministic global → preset → job → edit option resolution
-- Multi-select queue editing, reorder, enable/disable, priority, duplicate, retry, pause and queue persistence
+## MediaForge 2 active scope
 
-## Later core
+Primary flow:
 
-- FFmpeg capability/compatibility engine and canonical processing plan
-- FFmpeg-backed preview, thumbnails, waveform and proxies
-- Hardware profiles, local benchmark, sample encoding and quality targeting
-- Stream, subtitle, chapter and metadata management
-- Conservative remux/lossless/partial-copy operations
-- Tiered verification, history, reports and support bundles
+`Media -> Task -> Configure -> Review/Preview -> Output -> Process -> Result`
 
-## Later workflow and polish
+Primary tasks:
 
-- Two-pass audio and analysis
-- Animated/multi-page/colour-aware image workflows
-- Controlled video filters and HDR/tone-map paths
-- Guarded watch folders and completion actions
-- Themes, DPI, accessibility, localisation, shell/portable/update/first-run experience
+- Convert
+- Resize
+- Crop & Resize
+- Trim / Split
+- Combine
+
+V2 keeps projects/presets/queue capability without making them prerequisites for ordinary one-off work. Batch is a property of applicable task workflows. WorkflowIntent and one immutable ProcessingPlan become the authority between UI intent and FFmpeg execution.
+
+## Roadmap
+
+- `PH-20`: active canonical governance/design adoption.
+- `PH-21`: immutable V1 closure/rollback bridge, already satisfied before PH-20 adoption.
+- `PH-22`–`PH-31`: active V2 implementation roadmap.
+- `PH-11`–`PH-19`: historical superseded sequencing; identifiers are not reused and useful technical scope is redistributed into V2.
+
+The exact V2 product/package version remains unresolved.
 
 ## Excluded unless scope is formally changed
 
@@ -49,4 +44,6 @@ Current source presence does not prove native Windows behaviour. `PH-07` is the 
 - Plugin marketplace
 - Generative AI
 - DRM circumvention
+- Telemetry or advertising
+- Background service architecture
 - Silent updater, unreviewed bundled FFmpeg or destructive source replacement

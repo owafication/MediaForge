@@ -1,31 +1,39 @@
 # Current state and gap analysis
 
-**Current report:** `BR-20260729-13`  
-**Product version:** 1.1.0 source; proposed 1.2.0 workflow milestone.  
+**Current report:** `BR-20260919-02`
+**Product version:** V1 source remains 1.1.0; exact V2 product/package version is unresolved.
 **Platform:** WPF, `net10.0-windows`, local FFmpeg/FFprobe child processes.
 
-## Implemented source state
+## V1 rollback baseline
 
-- PH-07 deterministic source/fixture/package evidence tooling.
-- PH-08 `ProcessRunner`, `EffectiveOptionsResolver`, `ProjectSession`, `QueueCoordinator` and `MainViewModel` seams.
-- PH-09 schema-v1 project persistence, atomic save/backups, separate autosave/recovery, recent projects, forward-schema read-only handling, fingerprints, relink and portable paths.
-- PH-10 schema-v1 built-in/user presets, safe import/export, typed locked overrides and global → preset → job → edit precedence.
-- PH-10 stable professional queue controls, independent queue files, priority dispatch, pause-after-current/resume, immutable source/edit/options run snapshots and advisory size/time estimates.
-- Multi-file Win64 release publishing (`PublishSingleFile=false`) and corresponding package-audit requirements.
-- Override-aware MediaForge application-data roots for isolated validation, post-render recovery prompting and per-case launch-smoke diagnostics.
+Rollback commit: `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+
+Implemented source includes PH-08 architecture/.NET 10 seams, PH-09 project/recovery persistence, PH-10 presets/per-job option resolution/queue control, multi-file Win64 publishing, profile-isolated launch diagnostics and the established safety boundaries.
 
 ## Evidence boundary
 
-The current PH-10 correction passed 34 Linux-scoped static checks over 123 non-generated files. No .NET SDK, PowerShell or Windows/WPF runtime is available here. User-provided Windows evidence proves PH-10 compilation, followed by a failed first launch-smoke correction. The prior smoke JSON was not supplied, so the exact failed case remains unknown; the supplied valid recovery snapshot established a concrete profile-leak and pre-render modal risk that this correction addresses.
+`BR-20260911-01` passed the automated Windows x64 baseline for its recorded scope: static verification, FFmpeg/FFprobe provenance, disposable fixtures, Release restore/build, 37 characterisation tests, multi-file publish, four launch-smoke cases and package audit.
 
-## Remaining architecture gaps
+`BR-20260919-01` deferred the remaining PH-09/PH-10 manual/native interaction and real conversion-safety checks. They remain Skipped/Unproven and must be satisfied later by applicable V2 validation before a release claim.
 
-- Native PH-09/PH-10 build, package-free tests and WPF workflow evidence remain absent.
-- `MediaConversionService` still owns a large FFmpeg argument builder; immutable capability-aware `ProcessingPlan` work remains PH-11 and later.
-- Editor interaction remains largely in `MediaEditorWindow` code-behind.
-- No capability discovery, FFmpeg-backed preview-fidelity engine, output verification service or history store exists yet.
-- Preset availability is not yet filtered against the selected FFmpeg build; built-in names are workflow intent, not compatibility guarantees.
+## V2 gaps and direction
+
+- V1 MainWindow remains queue/control-first rather than task-first.
+- WorkflowIntent is not yet implemented as a V2 application contract.
+- The immutable ProcessingPlan is not yet the single implemented authority across UI summary, preview intent, execution and verification.
+- V1 persistence compatibility classes for V2 remain evidence-dependent.
+- V2 shell/accessibility behaviour is not implemented or tested.
+- Fast post-build and full-release V2 harness entry points are planned, not yet implemented.
+
+## Phase disposition
+
+- `PH-20`: active canonical governance/design adoption.
+- `PH-21`: V1 closure/rollback bridge already satisfied before PH-20 adoption.
+- `PH-11`–`PH-19`: historical superseded sequencing; useful scope is redistributed.
+- `PH-22`–`PH-31`: active V2 implementation roadmap.
 
 ## Immediate next gate
 
-Build and run the consolidated PH-10 source on Windows. Exercise projects/recovery plus preset CRUD/import/export/locks, independent per-job options, queue persistence, priority/pause/cancel and immutable snapshot fixtures. Fix only evidenced regressions before PH-11 unless another explicit risk exception is recorded.
+Finish review, commit, push and merge the governance-only PH-20 adoption. Record PH-20 exit evidence. Then begin PH-22 shell/navigation work from the merged canonical governance state.
+
+Do not claim V2 runtime behaviour, migration compatibility or a 2.x package version before corresponding implementation/decision/evidence exists.
