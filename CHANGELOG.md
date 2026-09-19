@@ -50,11 +50,17 @@ All notable MediaForge changes should be recorded here. Source presence is not a
 - Fixed the Windows startup crash exposed by launch diagnostics: `ProgressBar.Value` now binds `MainViewModel.OverallProgress` explicitly `OneWay`, matching the view-model's read-only public contract.
 - Removed the remaining nullable startup-diagnostics warning by passing the already-normalised non-null stage into report generation.
 
-### Still required before phase/release exit
+### Native automated validation recorded
 
-- Clean Windows .NET 10 restore/build/test/launch evidence.
+- Windows x64 consolidated baseline passed on 2026-09-11: .NET 10 restore/build, 37 characterisation tests, FFmpeg/FFprobe provenance, disposable fixtures, multi-file publish, four-case launch smoke and package audit.
+- Corrected the baseline harness Python wrapper so successful child-process exit codes are not polluted by captured output.
+- Release packaging remains unsigned and is not a phase or release claim.
+
+### Deferred / still required before a fully verified release claim
+
 - Settings and fixture regression comparison.
-- Manual source immutability, destination, collision, cancellation and filesystem checks.
+- Manual/native source immutability, destination, collision, cancellation and filesystem checks are deferred under `BR-20260919-01` and remain Unproven until later automated/integration evidence covers them.
+- WPF preset/project/queue interaction, accessibility and pause/cancel race checks are deferred under `BR-20260919-01` and remain Unproven.
 - Reproducible executable package and installer evidence.
 
 ### Explicitly not included in the first 1.2.0 milestone
@@ -82,3 +88,11 @@ All notable MediaForge changes should be recorded here. Source presence is not a
 - Mixed-media converter and lightweight crop/trim/stitch editor
 - Static/archive checks passed in prior evidence
 - Native Windows build, launch, package and installer remain unproven in the supplied environment
+
+### PH-10 validation sequencing exception — 2026-09-19
+
+- Retained the passed automated Windows PH-07 through PH-10 baseline.
+- Deferred the remaining manual PH-09/PH-10 interaction and real conversion-safety fixtures under `BR-20260919-01`.
+- Deferred checks remain Unproven; they are not release verification.
+- Carried the deferred validation into the reviewed V2 post-build validation architecture for later automated/integration/UI validation.
+- This exception permits establishment of the V1 rollback baseline before MediaForge 2 governance adoption.

@@ -74,8 +74,12 @@ function Invoke-PythonCommand {
     param([string[]]$Arguments)
     if (-not $script:python) { throw "Python was not resolved." }
     $commandArguments = @($script:python.Prefix) + @($Arguments)
-    & $($script:python.Exe) @commandArguments
-    return $LASTEXITCODE
+    $commandOutput = & $($script:python.Exe) @commandArguments 2>&1
+    foreach ($line in $commandOutput) {
+        Write-Host ([string]$line)
+    }
+    $exitCode = $LASTEXITCODE
+    return $exitCode
 }
 
 function Resolve-ToolPath {
@@ -260,7 +264,7 @@ try {
 - Product version: $version
 - Runtime: $runtime
 - Overall automated status: $(if ($summary.passed) { 'Passed' } else { 'Not passed' })
-- Evidence root: `$evidenceRoot`
+- Evidence root: ``$evidenceRoot``
 
 | Validation | Step | Status | Detail |
 |---|---|---|---|
