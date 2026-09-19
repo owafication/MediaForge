@@ -27,13 +27,15 @@ Implemented source includes PH-08 architecture/.NET 10 seams, PH-09 project/reco
 
 ## Phase disposition
 
-- `PH-20`: active canonical governance/design adoption.
+- `PH-20`: complete canonical governance/design adoption, merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - `PH-21`: V1 closure/rollback bridge already satisfied before PH-20 adoption.
 - `PH-11`–`PH-19`: historical superseded sequencing; useful scope is redistributed.
-- `PH-22`–`PH-31`: active V2 implementation roadmap.
-
+- `PH-22`: active task-first shell/navigation implementation phase.
+- `PH-23`–`PH-31`: planned V2 implementation roadmap.
 ## Immediate next gate
 
-Finish review, commit, push and merge the governance-only PH-20 adoption. Record PH-20 exit evidence. Then begin PH-22 shell/navigation work from the merged canonical governance state.
+Implement `PH-22` from merged governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`: task-first WPF shell, conventional menu/navigation, Home/task routing, shared workflow state, progressive disclosure and accessibility foundation.
+
+Before PH-22 exit, run the phase-mapped Release build/XAML/accessibility/navigation checks and record evidence against its acceptance/validation contract. Do not begin PH-23 solely because shell source exists.
 
 Do not claim V2 runtime behaviour, migration compatibility or a 2.x package version before corresponding implementation/decision/evidence exists.

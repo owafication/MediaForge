@@ -9,12 +9,11 @@
 
 ## Active pointer
 
-- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance adoption active; V2 runtime implementation Unproven.
-- **Active phase:** `PH-20` MediaForge 2 product/UX/migration governance foundation.
-- **Active pointer:** review, stage, commit, push and merge the governance-only PH-20 adoption; after PH-20 exit proceed to `PH-22`. `PH-21` is the already-satisfied V1 closure/rollback bridge.
+- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 canonical governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; V2 runtime implementation remains Unproven.
+- **Active phase:** `PH-22` MediaForge 2 application shell and workflow navigation.
+- **Active pointer:** implement and validate the PH-22 task-first shell/navigation foundation from the merged PH-20 governance base. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
 - **Active product milestone:** MediaForge 2 task-first rebuild; exact 2.x package/version remains unresolved.
-- **Stop rule:** governance adoption does not prove V2 runtime behaviour; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
-
+- **Stop rule:** do not claim PH-22 exit from source presence alone; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
 ## Reading routes
 
 | ID | Task category | Required governance |
@@ -51,12 +50,12 @@
 | project_docs/PROJECT_INDEX.md | Complete | Manifest, routing, ownership, phase pointer and ledger |
 | project_docs/PROJECT_FOUNDATION.md | Complete | Scope and REQ definitions |
 | project_docs/CURRENT_STATE_AND_GAP_ANALYSIS.md | Complete | Inspected state and assessment translation |
-| project_docs/NEXT_BUILD_PLAN.md | Complete | PH-07–PH-10 active handoff |
-| project_docs/IMPLEMENTATION_PLAN.md | Complete | PH-07–PH-19 roadmap |
+| project_docs/NEXT_BUILD_PLAN.md | Complete | Active PH-22 implementation handoff |
+| project_docs/IMPLEMENTATION_PLAN.md | Complete | Historical PH-07–PH-19 plus active V2 PH-20–PH-31 roadmap |
 | project_docs/PH08_IMPLEMENTATION_REPORT.md | Complete | Full PH-08 source implementation and evidence boundary |
 | project_docs/PH09_IMPLEMENTATION_REPORT.md | Complete | PH-09 persistence/recovery implementation and evidence boundary |
 | project_docs/PH10_IMPLEMENTATION_REPORT.md | Complete | PH-10 preset/queue implementation and evidence boundary |
-| project_docs/PH20_CANONICAL_ADOPTION_REPORT.md | Active | PH-20 governance adoption evidence, boundaries and handoff |
+| project_docs/PH20_CANONICAL_ADOPTION_REPORT.md | Complete | PH-20 governance adoption, merge evidence, boundaries and PH-22 handoff |
 | project_docs/PROJECTS_AUTOSAVE_AND_RECOVERY.md | Complete | Project/recovery contracts |
 | project_docs/PRESETS_AND_QUEUE_CONTROL.md | Complete | Preset/override/queue contracts |
 | project_docs/CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md | Complete | FFmpeg capability and plan contracts |
@@ -83,7 +82,7 @@
 |---|---|---|
 | `REQ-###` | `PROJECT_FOUNDATION.md` | `REQ-001`–`REQ-070` |
 | `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-105`, `VAL-001`–`VAL-081` |
-| `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-19`; active V2 roadmap `PH-20`, `PH-22`–`PH-31`; `PH-21` satisfied bridge |
+| `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-19`; `PH-20` complete; `PH-21` satisfied bridge; active V2 roadmap `PH-22`–`PH-31` |
 | `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-060` |
 | `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-037`, reports through `BR-20260919-02` |
 | `ROUTE-###` | this index | `ROUTE-001`–`ROUTE-015` |
@@ -115,4 +114,4 @@
 | `BR-20260729-14` | 2026-07-29 | PH-10 read-only progress binding and nullable startup-diagnostics correction | Source corrected; 36 static checks passed; corrected native smoke pending | Windows startup log, source, verifier guards and `/VERIFICATION.md` |
 | `BR-20260911-01` | 2026-09-11 | Consolidated PH-07 through PH-10 Windows x64 validation and harness correction | Native automated baseline passed; manual UI/filesystem/safety evidence pending | `artifacts/ph07-baseline-20260911-132855`, source/package audits and `/VERIFICATION.md` |
 | `BR-20260919-01` | 2026-09-19 | PH-10 sequencing exception and V1 rollback-baseline handoff | Automated Windows evidence retained; remaining manual/native checks Skipped/Unproven and carried to V2 post-build validation | `/VERIFICATION.md`, `PH10_IMPLEMENTATION_REPORT.md`, `TRACEABILITY.md`, reviewed external V2 validation matrix |
-| `BR-20260919-02` | 2026-09-19 | MediaForge 2 canonical governance adoption | Governance-only adoption; runtime implementation Unproven | Final V1 rollback baseline, reviewed V2 design pack, canonical audits and `PH20_CANONICAL_ADOPTION_REPORT.md` |
+| `BR-20260919-02` | 2026-09-19 | MediaForge 2 canonical governance adoption | Merged via PR #2; PH-20 complete for governance scope; PH-22 active; runtime implementation Unproven | Adoption commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93`, merge `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`, canonical audits and `PH20_CANONICAL_ADOPTION_REPORT.md` |

@@ -6,14 +6,14 @@
 
 `PH-21` remains the immutable V1-closure/rollback bridge from the reviewed V2 design, but the required work was completed before canonical adoption. Active execution order is therefore:
 
-`PH-21 satisfied prerequisite -> PH-20 governance adoption -> PH-22 -> PH-23 -> ... -> PH-31`.
+`PH-21 satisfied prerequisite -> PH-20 complete -> PH-22 active -> PH-23 -> ... -> PH-31`.
 
 **Purpose:** Canonical phase sequence and phase contracts.
 **Read when:** Starting, sequencing, reviewing or closing implementation work.
 **Owner:** Technical maintainer.
 **Authority:** Canonical owner for `PH-##`.
 **Update trigger:** Phase scope, dependency, acceptance, validation, rollback or status change.
-**Current pointer:** `PH-20` governance adoption active; `PH-21` V1 closure/rollback bridge satisfied before adoption; next runtime implementation phase after PH-20 is `PH-22`.
+**Current pointer:** `PH-20` governance adoption complete at merge `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; `PH-21` V1 closure/rollback bridge satisfied before adoption; `PH-22` is the active implementation phase.
 
 ## Historical phase boundary
 
@@ -229,7 +229,7 @@
 
 ## `PH-20` — MediaForge 2 product, UX and migration foundation
 
-- **Status:** Active governance adoption.
+- **Status:** Complete — governance-only adoption merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; no V2 runtime claim.
 - **Objective:** Canonically establish task-first behaviour, migration boundaries, requirements, decisions, risks, acceptance and validation ownership.
 - **Prerequisites:** V1 rollback point `5acaf88e751327eac47ca673178fbbd88a8603f1`; reviewed V2 planning evidence; PH-10 sequencing exception recorded.
 - **Required reading:** `PROJECT_INDEX.md`, `PROJECT_FOUNDATION.md`, `TRACEABILITY.md`, `DECISIONS_AND_CHANGE_HISTORY.md`, `SECURITY_PRIVACY_AND_RISK.md`.
@@ -237,7 +237,7 @@
 - **Work:** Reconcile product direction, architecture, UX, phase sequence, decisions, risks, acceptance, validation, migration and rollback boundaries.
 - **Acceptance:** Existing governance `AC-001`–`AC-003` plus complete ownership/mapping consistency for `REQ-056`–`REQ-070`.
 - **Validation:** `VAL-065` plus canonical-owner, duplicate-definition, route/link, phase-dependency, mapping, dirty-scope and `git diff --check` audits.
-- **Governance update:** This adoption set and `BR-20260919-02`.
+- **Governance update:** Adoption set finalised under `BR-20260919-02`; commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93` merged via PR #2 as `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - **Rollback point:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
 - **Stop conditions:** Duplicate/competing definitions, stale active sequencing, runtime/source changes, unsupported status inflation or unresolved safety contradiction.
 
@@ -257,7 +257,7 @@
 
 ## `PH-22` — V2 application shell and workflow navigation
 
-- **Status:** Next after PH-20 exit.
+- **Status:** Active.
 - **Objective:** Build the task-first WPF shell without recreating the V1 control wall.
 - **Prerequisites:** PH-20 merged/exited; PH-21 satisfied bridge.
 - **Required reading:** `UI_UX_ACCESSIBILITY_AND_LOCALISATION.md`, `PROJECT_FOUNDATION.md`, `TRACEABILITY.md`, `ARCHITECTURE.md`.
@@ -266,7 +266,7 @@
 - **Acceptance:** `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-102`, `AC-103`, `AC-105`.
 - **Validation:** Release build/XAML checks plus `VAL-066`, `VAL-067`, `VAL-079`, `VAL-080` as applicable to the implemented shell.
 - **Governance update:** Record actual shell files/state model and any changed navigation/accessibility contract.
-- **Rollback point:** Merged PH-20 governance commit.
+- **Rollback point:** Merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - **Stop conditions:** Primary workflow requires unrelated technical controls, pointer-only operation, inaccessible navigation, or duplicated workflow authority in code-behind/services.
 
 ## `PH-23` — WorkflowIntent, compatibility and ProcessingPlan seam

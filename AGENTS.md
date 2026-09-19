@@ -30,7 +30,7 @@ Record same-level conflicts; do not guess.
 6. Expand context only for a dependency, conflict or evidence gap
 
 ## Task routes
-Use `ROUTE-001`–`ROUTE-015` in `PROJECT_INDEX.md`. Current priority is `PH-20` MediaForge 2 canonical governance adoption; after PH-20 exit, implementation proceeds to `PH-22` because the `PH-21` V1-closure bridge was satisfied before canonical adoption.
+Use `ROUTE-001`–`ROUTE-015` in `PROJECT_INDEX.md`. Current priority is `PH-22` MediaForge 2 application shell and workflow navigation. `PH-20` governance adoption is complete, and `PH-21` remains the already-satisfied V1-closure bridge.
 
 ## Reports
 Before edits state scope, IDs, risks and checks. After work report inspected, changed, ran, passed, failed, skipped, unproven, governance, rollback and next stop/decision. A check proves only its scope.

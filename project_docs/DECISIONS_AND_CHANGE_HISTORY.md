@@ -235,5 +235,7 @@ These items remain open without allocating new immutable `DEC-###` IDs yet:
 - **Historical phases:** `PH-11`–`PH-19` remain immutable and are not reused.
 - **Bridge:** `PH-21` V1 closure/rollback work was satisfied before this adoption.
 - **Open:** V1 project/queue/recovery compatibility details and exact V2 package/version transition.
-- **Claim boundary:** governance only; no V2 runtime, phase-exit, package-version or release claim.
+- **Delivery:** adoption commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93` merged via PR #2 as `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; local `main` was synchronised to that merge.
+- **Phase exit:** `PH-20` complete for the governance-adoption scope; `PH-22` is the active implementation phase.
+- **Claim boundary:** governance only; no V2 runtime, package-version or release claim.
 - **Rollback:** revert this governance-only adoption to `5acaf88e751327eac47ca673178fbbd88a8603f1`.
