@@ -1,8 +1,8 @@
 # Next build plan — workflow foundation validation
 
 **Target:** Proposed MediaForge 1.2.0  
-**Active phases:** consolidated `PH-07`–`PH-10` validation  
-**Status:** PH-08, PH-09 and PH-10 are implemented in source. Windows restore/build and all 37 characterisation tests passed. Launch diagnostics then identified a read-only progress property bound TwoWay during first layout; the binding is now explicitly OneWay and the launch smoke must be rerun.
+**Active phases:** PH-10 sequencing-exception closure and V1 rollback-baseline establishment
+**Status:** The automated Windows PH-07 through PH-10 gate passed. Remaining manual PH-09/PH-10 interaction and source/output-safety fixtures are explicitly deferred under `BR-20260919-01` and remain Unproven. Establish the V1 rollback commit, then adopt the reviewed V2 governance.
 
 ## Objective
 
@@ -35,15 +35,28 @@ Source-implemented:
 - explicitly low-confidence size/time estimates;
 - package-free characterisation coverage and deterministic source guards.
 
-## Pending exit evidence
+## Latest evidence - `BR-20260911-01`
 
-- repeat the already-green .NET 10 restore/build and 37-test run after the narrow XAML correction;
+Evidence root: `artifacts/ph07-baseline-20260911-132855`.
+
+- Automated Windows baseline passed with exit code 0.
+- Static verification passed 39 checks over 124 files; .NET 10.0.302 x64 restore/build passed with 0 warnings and 0 errors.
+- FFmpeg/FFprobe provenance and 13 disposable fixture files were captured.
+- Characterisation tests passed 37/37.
+- Multi-file Win64 publish, schema-2 four-case launch smoke and 406-file package audit passed; installer was intentionally skipped.
+- The baseline harness was corrected after its Python wrapper misclassified successful exit codes by capturing child output as return data.
+
+## Deferred / Unproven evidence under `BR-20260919-01`
+
 - WPF preset CRUD/import/export/locking and missing-preset snapshot fixtures;
 - two jobs using different effective options in one batch;
 - reorder/priority/enable/duplicate/retry and queue round-trip fixtures;
 - pause/resume/cancel race and immutable-run-snapshot fixtures;
 - PH-09 project/recovery/relink/portable regression fixtures;
-- multi-file publish; confirm all four profile-isolated launch-smoke cases pass, inspect the schema-2 case details/logs, then run package audit and the existing conversion safety matrix.
+- source immutability, collision/destination containment, cancellation, child-process and temporary-output cleanup fixtures;
+- accessibility/DPI/keyboard baseline and installer/signing evidence where a release claim requires them.
+
+The manual checklist remains intentionally incomplete. `BR-20260919-01` is the explicit sequencing exception: these checks remain Skipped/Unproven, PH-10 is not a fully verified release gate, and the next repository step is V1 rollback-baseline establishment followed by reviewed V2 governance adoption.
 
 ## Immediate commands
 
@@ -54,3 +67,18 @@ py -3 .\scripts\verify-source.py --root .
 Get-Content .\artifacts\MediaForge-1.1.0-win-x64-launch-smoke.json
 .\scripts\verify-release-package.ps1 -ZipPath .\artifacts\MediaForge-1.1.0-win-x64.zip
 ```
+
+## Immediate handoff after `BR-20260919-01`
+
+1. Review the exact final PH-10 closure diff.
+2. Stage only the intended eight PH-10 evidence/governance/script files.
+3. Commit the branch as the V1 rollback-baseline candidate.
+4. Push the exact commit.
+5. Create or update the pull request.
+6. Verify the PR head SHA equals the pushed commit and required repository checks apply to that exact head.
+7. Merge only when the exact-head checks and repository state permit it.
+8. Sync local `main` and record the resulting V1 rollback commit.
+9. Canonically adopt the reviewed V2 governance.
+10. Begin V2 implementation.
+
+The deferred V1 validations are carried into the V2 post-build matrix and remain Unproven until later evidence runs them.

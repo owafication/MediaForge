@@ -180,3 +180,29 @@
 - **Unproven:** Corrected four-case Windows launch/close smoke and final package audit.
 - **Next stop:** Rerun characterisation/build-release on Windows and inspect schema-2 smoke evidence only if a case remains red.
 
+### `BR-20260911-01` - Consolidated PH-07 through PH-10 Windows validation
+
+- **Objective:** Continue the active validation plan, confirm the corrected PH-10 build and launch gate, and preserve an evidence-backed stop before PH-11.
+- **Environment:** Windows 10.0.19045, .NET SDK 10.0.302, win-x64, repository HEAD `b42bd93613e82b78c41c98948c329a53a3f373c4`.
+- **Ran:** Consolidated `scripts/validate-windows-baseline.ps1 -Architecture x64`.
+- **Passed:** Static verification (39 checks over 124 files), FFmpeg/FFprobe provenance, 13 disposable fixtures, restore/build (0 warnings and 0 errors), 37 characterisation tests, multi-file publish, four-case schema-2 launch smoke and 406-file package audit.
+- **Artifact:** ZIP SHA-256 `06df87a547c516ade7a4bba529aa4b909e2c6ec2f7b67d474604116371799022`; evidence root `artifacts/ph07-baseline-20260911-132855`.
+- **Implemented:** Corrected the harness Python wrapper so captured child output is written to the transcript and only the native exit code is returned. Corrected the summary interpolation so the evidence root is printed.
+- **Observed:** A first publish replacement was blocked by a user-open MediaForge window holding `Accessibility.dll`; the process was not terminated, and the retry after the user closed it passed.
+- **Unproven:** Manual WPF interaction, accessibility, filesystem interruption and real FFmpeg source/output/cancellation safety fixtures; installer and signing.
+- **Rollback:** Revert the validation-script change; application source and user schemas were not changed.
+- **Next stop:** Complete the manual PH-09/PH-10 checklist. Do not claim PH-10 exit or begin PH-11 until it passes or an explicit risk exception is recorded.
+
+### `BR-20260919-01` — PH-10 sequencing exception and V1 rollback-baseline handoff
+
+- **Objective:** Close the PH-10 sequencing gate without misrepresenting the remaining manual validation, allowing the evidenced V1 implementation to become the rollback baseline for the MediaForge 2 rebuild.
+- **User authorisation:** On 2026-09-19 the user explicitly chose to defer the remaining ad-hoc PH-09/PH-10 manual checks and perform comprehensive runtime/debugging later.
+- **Passed evidence retained:** Windows static verification, FFmpeg/FFprobe provenance and fixture generation, .NET 10 x64 restore/build with 0 warnings and 0 errors, 37/37 characterisation tests, four-case launch smoke, multi-file Win64 publish and 406-file package audit.
+- **Additional observation:** Seven recorded disposable source fixture hashes were rechecked and all seven still matched their pre-test values.
+- **Skipped / Unproven:** remaining WPF workflow tests, PH-09 interactive persistence/recovery/relink/portable tests, real FFmpeg conversion/collision/cancellation/process/temp-cleanup safety tests, interrupted-write tests, accessibility and installer/signing where later claimed.
+- **Partial manual attempt:** An incomplete Pass-A session is retained as debugging evidence only; it is not a completed validation pass.
+- **Carry-forward:** The reviewed external V2 planning pack now includes a post-build matrix covering `VAL-001` through `VAL-081`, with most objective safety checks targeted for automation.
+- **Residual risks:** `RISK-005`, `RISK-006`, `RISK-007`, `RISK-008`, `RISK-022`, `RISK-023`, `RISK-025` and `RISK-027` remain applicable.
+- **Decision-ID handling:** No new `DEC-###` is allocated because this is an evidence/sequencing exception, preserving the reviewed V2 draft allocation beginning with `DEC-029`.
+- **Claim boundary:** PH-10 is closed for sequencing and rollback-baseline purposes only. MediaForge 1.1.0 is not declared a fully verified release.
+- **Next stop:** Review and commit the PH-10 closure, push/PR/merge the exact head when repository checks permit, sync `main`, record the V1 rollback point, then canonically adopt the reviewed V2 governance.

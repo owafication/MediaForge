@@ -1,9 +1,9 @@
 # Verification record
 
-**Current report:** `BR-20260729-14`  
-**Status:** Windows restore/build and all 37 package-free characterisation tests passed. The four-case launch smoke then exposed a WPF startup crash: `ProgressBar.Value` defaulted to a TwoWay binding against read-only `MainViewModel.OverallProgress`. The binding and the remaining nullable diagnostics warning are corrected in source; launch-smoke rerun remains pending.
+**Current report:** `BR-20260919-01`
+**Status:** The automated Windows PH-07 through PH-10 baseline passed. Remaining PH-09/PH-10 manual interaction and real conversion-safety fixtures are explicitly deferred under `BR-20260919-01`; they remain Skipped/Unproven and are carried into the V2 post-build validation programme.
 
-## Implemented through `BR-20260729-14`
+## Implemented and evidenced through `BR-20260911-01`
 
 - PH-08 .NET 10 architecture seams and package-free characterisation executable.
 - PH-09 schema-v1 projects, atomic save/backups, separate recovery, recent/relink/portable workflows and newer-schema read-only handling.
@@ -57,7 +57,26 @@ The second build exposed the full PH-09 I/O dependency set and CS0173 for an opt
 
 The user then ran the corrected source on Windows. Restore and build succeeded, and all 37 package-free characterisation tests passed. Publish also succeeded with the intended multi-file contract, but all four launch-smoke cases failed. The supplied startup diagnostic proves the immediate startup exception: WPF attempted a TwoWay binding to the read-only `MainViewModel.OverallProgress` property while showing `MainWindow`. This source correction makes that binding explicitly OneWay. The same Windows build reported one CS8604 warning in `StartupDiagnostics`; report generation now receives the non-null normalised stage. A launch-smoke rerun is still required.
 
-The current Windows run also completed the self-contained multi-file publish into an isolated temporary directory before the mandatory smoke gate stopped packaging. The prior single-file-host antivirus/file-lock problem remains avoided by `PublishSingleFile=false`; final ZIP/package audit still depend on a green launch smoke.
+The predecessor Windows run also completed the self-contained multi-file publish into an isolated temporary directory before the mandatory smoke gate stopped packaging. The prior single-file-host antivirus/file-lock problem remains avoided by `PublishSingleFile=false`; the corrected run below completed the ZIP/package audit.
+
+## Current native evidence — `BR-20260911-01`
+
+Environment: Windows PowerShell with .NET SDK 10.0.302, x64 WPF publish, repository HEAD `b42bd93613e82b78c41c98948c329a53a3f373c4`, clean worktree at validation start.
+
+Ran and passed:
+
+```text
+.\scripts\validate-windows-baseline.ps1 -Architecture x64
+```
+
+- Static source verification: 39 checks over 124 files passed.
+- FFmpeg/FFprobe provenance capture and generation of 13 disposable fixture files passed.
+- Release restore/build: 0 warnings and 0 errors.
+- Package-free characterisation: 37 passed, 0 failed.
+- Launch smoke: schema 2, all four isolated cases passed with a closeable `MediaForge — Unsaved project` window and no startup diagnostics.
+- Package audit: 406 files passed; required entries present; `singleFile=false`; ZIP SHA-256 `06df87a547c516ade7a4bba529aa4b909e2c6ec2f7b67d474604116371799022`.
+
+Evidence root: `artifacts/ph07-baseline-20260911-132855`. The first consolidated run exposed a harness-only Python exit-code capture defect; the wrapper was corrected to keep child output in the transcript while returning only the native exit code, and this final run exited 0. A separate publish attempt was also blocked by a user-open MediaForge window holding `Accessibility.dll`; the process was not terminated, and the retry after the user closed it passed.
 
 ## Required Windows commands
 
@@ -90,9 +109,68 @@ Full evidence run:
 
 ## Unproven
 
-- Native launch-smoke confirmation for this binding correction.
-- WPF preset/project/queue interaction and thread-affinity behaviour.
-- Pause/cancel race behaviour under real conversions.
-- Windows atomic replacement/interruption outcomes.
-- Existing conversion safety fixtures after PH-10 integration.
-- Multi-file self-contained publish, the new four-case launch smoke, installer and signing.
+- WPF preset/project/queue interaction, accessibility and thread-affinity behaviour; the Windows UI helper exited before exposing a target window, so no UI actions were taken.
+- Real FFmpeg mixed-batch output, source immutability, collision/destination containment, pause/cancel races, close-during-work, child-process and temporary-output cleanup fixtures.
+- Windows atomic replacement/interruption outcomes and PH-09 recovery/relink/portable interactive regression fixtures.
+- Installer, signing, FFmpeg licence/acquisition decision and any release claim for architectures other than Win64.
+
+## PH-10 sequencing exception — `BR-20260919-01`
+
+**Authorisation:** On 2026-09-19 the user explicitly chose to defer the remaining ad-hoc PH-09/PH-10 manual validation so MediaForge 2 development can proceed. The deferred checks are not deleted and are not converted into pass evidence.
+
+### Passed evidence retained
+
+The following previously executed Windows evidence remains Passed for its exact scope:
+
+- static source verification;
+- FFmpeg/FFprobe provenance capture;
+- deterministic disposable fixture generation;
+- .NET 10 x64 restore/build with zero warnings and zero errors;
+- all 37 package-free characterisation tests;
+- four-case isolated schema-2 launch smoke;
+- multi-file Win64 publish;
+- 406-file package audit with `singleFile=false`.
+
+Closure preparation also rechecked the seven recorded disposable source fixture hashes and all seven matched their pre-test hashes. That observation proves only those files were unchanged at the time of the comparison; it does not replace the skipped conversion-safety fixture matrix.
+
+### Skipped / Unproven
+
+The following remain unproven until later executable evidence covers them:
+
+- native WPF preset CRUD/import/export/locking end-to-end behaviour;
+- missing-catalogue preset snapshot behaviour through the UI;
+- native queue reorder/priority/enable/duplicate/retry round-trip behaviour;
+- pause/resume/cancel race behaviour;
+- immutable active-run behaviour under live state mutation;
+- PH-09 project/recovery/relink/portable interactive regression;
+- Windows interrupted atomic-write behaviour;
+- real FFmpeg mixed-media conversion;
+- source immutability across success, failure, skip, overwrite-target and cancellation cases;
+- destination containment and full Rename/Skip/Overwrite collision fixtures;
+- child-process cleanup and temporary-output cleanup;
+- close-during-work cleanup;
+- full accessibility validation;
+- installer/signing validation where later claimed.
+
+A partial manual Pass-A session reached the preset export/import workflow but its evidence harness then failed to locate the expected deterministic export artefact. It remains diagnostic history only and is not a completed manual validation pass.
+
+### V2 carry-forward
+
+The externally reviewed V2 planning pack now contains `V2_POST_BUILD_VALIDATION_MATRIX.md`, covering inherited and proposed `VAL-001` through `VAL-081`.
+
+Its execution classification currently targets:
+
+- 63 validation IDs as automated;
+- 10 as UI automation plus human spot-check;
+- 7 as environment-dependent automated;
+- 1 as human review.
+
+This planning evidence is external until canonical V2 governance adoption.
+
+### Claim boundary
+
+This exception closes the PH-10 sequencing gate for the purpose of establishing a V1 rollback baseline and proceeding to V2 governance.
+
+It does **not** mean the deferred checks passed, PH-10 received complete manual acceptance, or MediaForge 1.1.0 is a fully verified release.
+
+Deferred safety validation must be satisfied by later executable V2 evidence before a corresponding V2 release claim.

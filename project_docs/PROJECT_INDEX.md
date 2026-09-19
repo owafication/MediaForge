@@ -5,15 +5,15 @@
 **Owner:** Project maintainer.  
 **Authority:** Canonical routing/index owner; it does not duplicate full records.  
 **Update trigger:** File ownership, route, ID status, phase pointer, supersession or delivery change.  
-**Linked IDs:** `PH-07`–`PH-19`, `ROUTE-001`–`ROUTE-015`, reports through `BR-20260729-11`.
+**Linked IDs:** `PH-07`–`PH-19`, `ROUTE-001`–`ROUTE-015`, reports through `BR-20260919-01`.
 
 ## Active pointer
 
-- **Current project state:** 1.1.0 source with PH-07 evidence automation and PH-08–PH-10 workflow-foundation source implementation.
-- **Active phase:** consolidated `PH-09/PH-10` Windows validation; source tasks are complete, native build/test/UI/filesystem/package evidence is the exit gate.
-- **Active pointer:** validate the PH-10 archive on Windows and fix only evidenced regressions.
+- **Current project state:** 1.1.0 source with PH-07 evidence automation and PH-08–PH-10 workflow-foundation source implementation; native x64 automated baseline passed.
+- **Active phase:** PH-10 sequencing-exception closure / V1 rollback-baseline establishment. Automated Windows evidence passed; deferred manual/native checks remain Unproven under `BR-20260919-01`.
+- **Active pointer:** review, commit, push and merge the PH-10 closure evidence; sync `main` and record the V1 rollback point before canonical V2 governance adoption.
 - **Active product milestone:** proposed 1.2.0 workflow foundation (`PH-08`–`PH-10`).
-- **Stop rule:** do not claim PH-10 exit or begin PH-11 without native evidence or another explicit risk exception.
+- **Stop rule:** deferred PH-09/PH-10 checks remain Unproven and cannot support a fully verified V1 release claim. V2 must carry them forward and validate applicable safety contracts before release.
 
 ## Reading routes
 
@@ -84,7 +84,7 @@
 | `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-087`, `VAL-001`–`VAL-065` |
 | `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-06`; active roadmap `PH-07`–`PH-19` |
 | `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-050` |
-| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-028`, reports through `BR-20260729-11` |
+| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-028`, reports through `BR-20260919-01` |
 | `ROUTE-###` | this index | `ROUTE-001`–`ROUTE-015` |
 
 ## Supersession
@@ -112,3 +112,5 @@
 | `BR-20260729-11` | 2026-07-29 | PH-10 presets, typed per-job precedence, immutable run snapshots and professional queue | Implemented in source; 31 static checks passed; native validation pending | Source, PH-10 tests, static evidence and `PH10_IMPLEMENTATION_REPORT.md` |
 | `BR-20260729-13` | 2026-07-29 | PH-10 launch-smoke profile isolation and post-render recovery containment | Source corrected; 34 static checks passed; corrected native smoke pending | Source, regression test, schema-2 smoke evidence contract and `/VERIFICATION.md` |
 | `BR-20260729-14` | 2026-07-29 | PH-10 read-only progress binding and nullable startup-diagnostics correction | Source corrected; 36 static checks passed; corrected native smoke pending | Windows startup log, source, verifier guards and `/VERIFICATION.md` |
+| `BR-20260911-01` | 2026-09-11 | Consolidated PH-07 through PH-10 Windows x64 validation and harness correction | Native automated baseline passed; manual UI/filesystem/safety evidence pending | `artifacts/ph07-baseline-20260911-132855`, source/package audits and `/VERIFICATION.md` |
+| `BR-20260919-01` | 2026-09-19 | PH-10 sequencing exception and V1 rollback-baseline handoff | Automated Windows evidence retained; remaining manual/native checks Skipped/Unproven and carried to V2 post-build validation | `/VERIFICATION.md`, `PH10_IMPLEMENTATION_REPORT.md`, `TRACEABILITY.md`, reviewed external V2 validation matrix |

@@ -196,15 +196,15 @@
 | REQ-021 | Editor | MediaElement preview | PH-06/PH-07/PH-12 | editor, probe | AC-037, AC-038, AC-066 | VAL-024, VAL-027, VAL-028, VAL-043 | Source-implemented; unproven |
 | REQ-022 | Editor | Single-track clip list | PH-06/PH-07 | editor, edit plan | AC-039, AC-040 | VAL-024, VAL-025, VAL-029 | Source-implemented; unproven |
 | REQ-023 | Editor safety | Normalise/guards | PH-06/PH-07 | editor, main, conversion | AC-041–AC-043 | VAL-009, VAL-025, VAL-026, VAL-031 | Source-implemented; unproven |
-| REQ-024 | Next gate | Build/safety baseline | PH-07 | source, scripts, tests, evidence | AC-044 | VAL-030, VAL-031, VAL-058, VAL-059, VAL-063 | Proposed |
-| REQ-025 | Next platform | Supported .NET + architecture seam | PH-08 | project, services, ViewModels, tests | AC-045, AC-086 | VAL-032, VAL-058, VAL-063 | Native .NET 10 build and 37 tests passed; launch rerun pending after binding fix |
-| REQ-026 | Current validation | Project persistence | PH-09 | project DTO/service/session/UI | AC-046, AC-050 | VAL-033, VAL-060 | Implemented in source; native evidence pending |
-| REQ-027 | Current safety validation | Atomic save/recovery | PH-09 | ProjectService, recovery store | AC-047, AC-048 | VAL-034, VAL-061 | Implemented in source; interruption evidence pending |
-| REQ-028 | Current validation | Recent/relink/portable | PH-09 | project service/dialogs | AC-049–AC-051 | VAL-035, VAL-060 | Implemented in source; native UI evidence pending |
-| REQ-029 | Current validation | Preset catalogue | PH-10 | preset model/service/UI | AC-052 | VAL-036 | Catalogue tests passed; native WPF UI/launch evidence pending |
-| REQ-030 | Current validation | Preset lifecycle | PH-10 | preset service/UI | AC-052–AC-054 | VAL-036, VAL-060 | Import/compatibility characterisation passed; native UI evidence pending |
-| REQ-031 | Current validation | Effective option resolver | PH-08/PH-10 | resolver, job snapshot, UI | AC-054, AC-055 | VAL-037, VAL-041 | Typed precedence/run-snapshot tests passed; native conversion batch evidence pending |
-| REQ-032 | Current validation | Professional queue | PH-10 | queue coordinator/ViewModel/service | AC-056–AC-059 | VAL-037, VAL-038, VAL-061 | Queue characterisation passed; native UI/pause/race/package evidence pending |
+| REQ-024 | Next gate | Build/safety baseline | PH-07 | source, scripts, tests, evidence | AC-044 | VAL-030, VAL-031, VAL-058, VAL-059, VAL-063 | Native x64 baseline, publish, smoke and package audit passed; deferred manual safety evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-025 | Next platform | Supported .NET + architecture seam | PH-08 | project, services, ViewModels, tests | AC-045, AC-086 | VAL-032, VAL-058, VAL-063 | Native .NET 10 build, 37 tests and four-case launch smoke passed; remaining UI/conversion fixtures Skipped/Unproven under BR-20260919-01 |
+| REQ-026 | Current validation | Project persistence | PH-09 | project DTO/service/session/UI | AC-046, AC-050 | VAL-033, VAL-060 | Source and characterisation coverage passed; native project interaction evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-027 | Current safety validation | Atomic save/recovery | PH-09 | ProjectService, recovery store | AC-047, AC-048 | VAL-034, VAL-061 | Source and characterisation coverage passed; Windows interruption evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-028 | Current validation | Recent/relink/portable | PH-09 | project service/dialogs | AC-049–AC-051 | VAL-035, VAL-060 | Source and characterisation coverage passed; native UI evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-029 | Current validation | Preset catalogue | PH-10 | preset model/service/UI | AC-052 | VAL-036 | Catalogue tests and launch smoke passed; native WPF workflow evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-030 | Current validation | Preset lifecycle | PH-10 | preset service/UI | AC-052–AC-054 | VAL-036, VAL-060 | Import/compatibility characterisation passed; native UI evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-031 | Current validation | Effective option resolver | PH-08/PH-10 | resolver, job snapshot, UI | AC-054, AC-055 | VAL-037, VAL-041 | Typed precedence/run-snapshot tests passed; native conversion-batch evidence Skipped/Unproven under BR-20260919-01 |
+| REQ-032 | Current validation | Professional queue | PH-10 | queue coordinator/ViewModel/service | AC-056–AC-059 | VAL-037, VAL-038, VAL-061 | Queue characterisation, publish and package audit passed; native UI/pause/race evidence Skipped/Unproven under BR-20260919-01 |
 | REQ-033 | Later core | Capability discovery | PH-11 | capability service/cache/report | AC-060, AC-061 | VAL-039 | Proposed |
 | REQ-034 | Later core | Compatibility engine | PH-11 | compatibility rules/UI | AC-061–AC-063 | VAL-040 | Proposed |
 | REQ-035 | Later architecture | Canonical plan | PH-11 | ProcessingPlan/compiler | AC-063, AC-064 | VAL-041 | Proposed |
@@ -246,3 +246,18 @@
 ## Runtime AI contract
 
 Not applicable. Runtime AI is excluded by `REQ-052` and `DEC-027`. Adding it requires a new use case, prompt/schema/model/tool/grounding/failure/evaluation contract and privacy decision.
+
+## `BR-20260919-01` validation interpretation
+
+The sequencing exception changes when the remaining validation is executed; it does not change the validation definitions or turn unrun checks into passes.
+
+For `REQ-024` through `REQ-032`:
+
+- previously executed automated/native evidence remains Passed for its exact scope;
+- deferred manual/native portions are Skipped/Unproven;
+- affected acceptance criteria and validation IDs remain requirements;
+- later V2 validation may satisfy inherited contracts only when new evidence actually executes the corresponding checks.
+
+The reviewed external V2 post-build validation architecture carries forward inherited `VAL-001` through `VAL-065` alongside proposed V2 `VAL-066` through `VAL-081`.
+
+The following residual V1 validation areas are especially important to retain: `VAL-006` through `VAL-011`, `VAL-019`, `VAL-022` through `VAL-029`, `VAL-031`, `VAL-034` through `VAL-038`, `VAL-056`, and `VAL-060` through `VAL-064`.
