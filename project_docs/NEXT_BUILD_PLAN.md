@@ -1,42 +1,72 @@
-# Next build plan — MediaForge 2 canonical adoption
+# Next build plan — PH-22 task-first application shell
 
-**Target:** Governance/design foundation for MediaForge 2; exact package version unresolved.
-**Active phase:** `PH-20`.
-**Rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-**Runtime status:** V2 Unproven.
+**Target:** MediaForge 2 application shell and workflow navigation; exact package version unresolved.
+**Active phase:** `PH-22`.
+**Governance base:** `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+**V1 rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+**Runtime status:** V2 shell implementation not yet performed; V2 runtime remains Unproven.
 
 ## Objective
 
-Finish canonical V2 governance adoption without changing application source.
+Implement the task-first WPF shell without recreating the V1 control wall or weakening inherited processing, persistence or source-safety contracts.
 
 ## Satisfied prerequisites
 
-- PH-10 sequencing closure recorded by `BR-20260919-01`.
-- V1 rollback point established and merged at `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-- external V2 planning pack reviewed and hash-verified;
-- deferred V1 checks remain explicitly Skipped/Unproven.
+- `PH-20` governance adoption merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+- `PH-21` V1 closure/rollback bridge remains satisfied.
+- canonical V2 requirements, acceptance, validation, risks and phase contracts are adopted.
+- deferred V1 manual/native safety checks remain explicitly Skipped/Unproven and carry forward.
 
-`PH-21` is the immutable V1-closure/rollback bridge and is already satisfied; it is not future implementation work.
+## Required reading
 
-## PH-20 work
+- `/AGENTS.md`
+- `PROJECT_INDEX.md`
+- `IMPLEMENTATION_PLAN.md`
+- `PROJECT_FOUNDATION.md`
+- `UI_UX_ACCESSIBILITY_AND_LOCALISATION.md`
+- `/ARCHITECTURE.md`
+- `TRACEABILITY.md`
+- `SECURITY_PRIVACY_AND_RISK.md`
 
-1. adopt V2 facts into existing canonical owners;
-2. keep one definition per immutable ID;
-3. preserve V1 history and safety contracts;
-4. supersede PH-11-next/queue-first sequencing explicitly;
-5. reconcile V1 later-scope requirements with V2 phases;
-6. keep external planning files as design evidence only;
-7. run immutable-ID, duplicate-definition, owner, route, link, phase and mapping audits;
-8. confirm no source/XAML/test/script/installer/package changes;
-9. inspect the full governance diff;
-10. stage, commit, push and PR only the intended governance files;
-11. merge only after exact-head checks permit it;
-12. sync main and record PH-20 exit evidence.
+## PH-22 scope
 
-## Next implementation phase
+Implement only the shell/navigation foundation required by the PH-22 contract:
 
-After PH-20 exits, begin `PH-22` task-first WPF shell/navigation. `PH-23` then establishes WorkflowIntent, capability/compatibility and ProcessingPlan seams before the first complete Resize/Crop vertical slice in `PH-24`.
+1. conventional `File | Edit | View | Project | Tools | Help` shell;
+2. Home with `Add Media` as the dominant command and primary task choices;
+3. task routing for Convert, Resize, Crop & Resize, Trim / Split and Combine;
+4. shared workflow frame/state lifecycle;
+5. normal controls separated from collapsed Advanced controls;
+6. keyboard/focus/automation-property baseline;
+7. empty/loading/error/needs-decision/review-ready state presentation;
+8. minimum reuse/refactor required to keep workflow authority outside ad-hoc window code-behind.
 
-## Validation boundary
+Do not implement PH-23 ProcessingPlan/capability work beyond the minimum interfaces required to avoid architectural dead ends.
 
-Targeted validation remains mandatory during implementation. Deferred V1 safety validation remains Unproven until executable V2 evidence covers it. A future release requires the applicable full validation matrix; governance adoption alone satisfies none of those runtime checks.
+## Acceptance and validation
+
+Primary V2 acceptance: `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-102`, `AC-103`, `AC-105`.
+
+Primary V2 validation: `VAL-066`, `VAL-067`, `VAL-079`, `VAL-080`, plus Release build, XAML/name/handler checks and any directly affected existing regression tests.
+
+A source implementation alone does not close PH-22. Evidence must demonstrate the implemented shell against the applicable acceptance/validation scope.
+
+## Safety and non-goals
+
+- Do not modify source media or weaken output/collision/temp/cancellation safeguards.
+- Do not add cloud, telemetry, accounts, database, runtime AI, background service architecture or bundled FFmpeg.
+- Do not change package/product version.
+- Do not perform broad backend refactoring unrelated to the shell seam.
+- Do not treat V1 visual layout as a compatibility requirement.
+
+## Rollback
+
+Rollback the PH-22 implementation branch to merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+
+## Stop conditions
+
+Stop if the shell requires duplicated processing authority, raw FFmpeg arguments in UI state, pointer-only primary navigation, inaccessible task selection, unrelated backend redesign, version/package changes, or weakening of inherited V1 safety contracts.
+
+## Next phase
+
+`PH-23` begins only after PH-22 exit evidence supports the shell/navigation contract or an explicit governance exception is recorded.

@@ -6,7 +6,7 @@ The durable V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`.
 
 MediaForge 2 is the approved governance/product direction: keep the Windows/WPF/local-FFmpeg processing foundation and safety boundaries, replace queue-first interaction with task-first workflows and progressive disclosure, and use one typed WorkflowIntent/ProcessingPlan authority.
 
-The active governance phase is `PH-20`. No V2 runtime implementation is yet claimed, and the exact 2.x package/version transition remains unresolved.
+`PH-20` governance adoption is complete at merge commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`. The active implementation phase is `PH-22`. No V2 runtime implementation is yet claimed, and the exact 2.x package/version transition remains unresolved.
 
 MediaForge is a local-first Windows media conversion, preparation and lightweight single-track assembly application. The source is a WPF application that invokes local FFmpeg and FFprobe child processes.
 
@@ -46,7 +46,7 @@ If Local AppData is unavailable, it falls back to the Windows temporary director
 
 ## Product direction
 
-`PH-20` adopts the reviewed MediaForge 2 governance and migration direction. The `PH-21` V1-closure bridge is already satisfied by the merged rollback baseline; after PH-20 exit, the next implementation phase is `PH-22` task-first shell/navigation.
+`PH-20` adopted the reviewed MediaForge 2 governance and migration direction and is complete. The `PH-21` V1-closure bridge was already satisfied by the merged rollback baseline. `PH-22` is now active for the task-first shell/navigation foundation.
 
 V1 capability work originally sequenced as `PH-11` through `PH-19` is preserved historically and redistributed into the V2 roadmap rather than discarded or reused as phase IDs.
 ## Product boundary
@@ -78,5 +78,5 @@ The release ZIP is intentionally multi-file. Keep all files together when runnin
 - **Passed automated Windows scope:** consolidated x64 build/tests/launch-smoke/publish/package evidence recorded by `BR-20260911-01`.
 - **Deferred V1 evidence:** remaining manual/native interaction and real conversion-safety fixtures remain Skipped/Unproven under `BR-20260919-01`.
 - **Rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-- **Current work:** `PH-20` governance-only V2 adoption.
+- **Current work:** `PH-22` task-first WPF shell/navigation foundation; runtime implementation has not yet been performed.
 - **V2 runtime:** Unproven.

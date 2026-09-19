@@ -2,7 +2,7 @@
 
 **Report:** `BR-20260919-02`
 **Phase:** `PH-20`
-**Status:** Governance patch prepared for review; PH-20 exit is not claimed until exact-head commit/PR/merge and final governance audit complete.
+**Status:** Complete. Governance-only adoption commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93` merged via PR #2 as `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-20 exit is established for its governance scope.
 
 ## Objective
 
@@ -57,7 +57,7 @@ No normative V2 definition is intentionally owned by an external planning file.
 
 Active order after this report:
 
-`PH-20 -> PH-22 -> PH-23 -> ... -> PH-31`.
+`PH-20 complete -> PH-22 active -> PH-23 -> ... -> PH-31`.
 
 ## Evidence-dependent items
 
@@ -82,8 +82,16 @@ The PH-10 manual/native checks deferred under `BR-20260919-01` remain Unproven u
 
 ## Claim boundary
 
-This report does not prove V2 runtime implementation, UX behaviour, persistence migration compatibility, the exact V2 version, PH-20 exit, a build, a package, an installer or a release.
+PH-20 exit is established only for the governance-adoption scope by exact commit/PR/merge evidence. This report does not prove V2 runtime implementation, UX behaviour, persistence migration compatibility, the exact V2 version, a build, a package, an installer or a release.
+## Merge and exit evidence
+
+- adoption commit: `c8fdc552cca699bb4eae9169bdcf8e042fc57f93`;
+- pull request: `#2`;
+- previous `main`: `5acaf88e751327eac47ca673178fbbd88a8603f1`;
+- merge commit / canonical governance base: `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`;
+- local `main` was synchronised to the exact merge commit after merge;
+- PR exact-head checks found no configured workflow/status checks, reviews or unresolved review threads before merge.
 
 ## Next stop
 
-Run the final canonical governance audit and inspect the reduced diff. If clean, stage exactly the intended governance files, commit/push/PR the exact head, merge only when repository requirements permit, sync main, record PH-20 exit, then begin PH-22.
+Activate and implement `PH-22` from merged governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`. Do not claim PH-22 exit until its implementation and applicable build/XAML/navigation/accessibility validation evidence exist.

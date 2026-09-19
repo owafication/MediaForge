@@ -2,7 +2,7 @@
 
 ## Current MediaForge 2 sequence
 
-The active roadmap is `PH-20`, then `PH-22` through `PH-31`. `PH-21` is retained as the immutable V1-closure/rollback bridge and is already satisfied by the merged V1 rollback point.
+The active phase is `PH-22`, followed by `PH-23` through `PH-31`. `PH-20` governance adoption is complete, and `PH-21` remains the immutable V1-closure/rollback bridge already satisfied before V2 adoption.
 
 Historical `PH-11` through `PH-19` are not reused. Their useful technical scope is carried into the V2 phases where mapped.
 
@@ -22,14 +22,13 @@ Retain WPF and the single local process. Use explicit composition. PH-08 service
 
 ## Active sequence
 
-1. `PH-07`: evidence automation implemented; native safety evidence remains pending.
-2. `PH-08`: full source scope implemented, including `net10.0-windows`; clean Windows build/test/launch and fixture comparison remain the exit gate.
-3. `PH-09`: source-implemented versioned projects, atomic save, autosave/recovery, recent projects, relinking and portable mode; native validation pending.
-4. `PH-10`: source-implemented presets, deterministic per-job options, immutable run snapshots and professional queue control; native validation pending.
-5. `PH-11`: capability and compatibility engine only after the consolidated PH-09/PH-10 Windows gate is green or another explicit risk exception is recorded.
+1. `PH-20`: complete governance-only MediaForge 2 adoption, merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+2. `PH-21`: satisfied V1 closure/rollback bridge; no future implementation work is scheduled under this ID.
+3. `PH-22`: active — task-first WPF shell, conventional menus, Home/task navigation, shared workflow state, progressive disclosure and accessibility baseline.
+4. `PH-23`: planned after PH-22 exit — WorkflowIntent, capability/compatibility and immutable ProcessingPlan seam.
+5. `PH-24` onward: follow the canonical phase contracts in `project_docs/IMPLEMENTATION_PLAN.md`.
 
-Do not claim phase exit or begin dependent persistence work while the current native gate is failed.
-
+Do not begin dependent PH-23 implementation until PH-22 acceptance/validation evidence supports exit or an explicit governance exception is recorded.
 ## Data and safety
 
 Never intentionally modify source media. Preserve deterministic destination reservation and same-directory temporary output. A failure must not silently replace a valid destination. Never trust raw command fragments from imported files. Keep local media and path data local by default. Do not add telemetry, accounts, cloud processing, advertisements or AI without a new requirement and privacy decision.

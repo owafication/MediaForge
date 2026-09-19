@@ -104,3 +104,4 @@ All notable MediaForge changes should be recorded here. Source presence is not a
 - Superseded the proposed 1.2.0/PH-11-next sequencing without reusing `PH-11`–`PH-19`.
 - Allocated `REQ-056`–`REQ-070`, `AC-088`–`AC-105`, `VAL-066`–`VAL-081`, `DEC-029`–`DEC-037`, `RISK-051`–`RISK-060` and `PH-20`–`PH-31` in canonical owners.
 - No V2 runtime implementation, version bump or release claim is made by this governance-only change.
+- Adoption commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93` merged via PR #2 as `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-20 is complete for governance scope and PH-22 becomes active.

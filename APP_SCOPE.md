@@ -28,13 +28,13 @@ V2 keeps projects/presets/queue capability without making them prerequisites for
 
 ## Roadmap
 
-- `PH-20`: active canonical governance/design adoption.
+- `PH-20`: complete canonical governance/design adoption; merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - `PH-21`: immutable V1 closure/rollback bridge, already satisfied before PH-20 adoption.
-- `PH-22`–`PH-31`: active V2 implementation roadmap.
+- `PH-22`: active task-first application shell and workflow navigation phase.
+- `PH-23`–`PH-31`: planned V2 implementation roadmap.
 - `PH-11`–`PH-19`: historical superseded sequencing; identifiers are not reused and useful technical scope is redistributed into V2.
 
 The exact V2 product/package version remains unresolved.
-
 ## Excluded unless scope is formally changed
 
 - Unlimited multi-track timeline
