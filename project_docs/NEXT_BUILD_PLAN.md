@@ -1,10 +1,22 @@
-# Next build plan — PH-22 task-first application shell
+# Next build plan — PH-23 typed WorkflowIntent and ProcessingPlan (PH-22 closure handoff)
 
-**Target:** MediaForge 2 application shell and workflow navigation; exact package version unresolved.
-**Active phase:** `PH-22`.
+**Target:** PH-23 typed intent/compatibility/immutable-plan seam, pending verified closure PR merge; exact package version remains unresolved.
+**Active phase:** `PH-23` (effective when PH-22 closure PR is verified merged; until then, PH-22 is the last delivered phase).
 **Governance base:** `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 **V1 rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-**Runtime status:** PH-22A and PH-22B shell/navigation/lifecycle source is merged through `637fc06be7135e90be47152d6054ec783c836cf0`. The PH-22C candidate passed Release build, four isolated launch/close cases and all 12 shell-specific `VAL-082` checks on Windows on 2026-09-23. PH-22 remains Active pending delivery and explicit closure evidence. End-to-end Resize (`VAL-067`) and full screen-reader/DPI validation remain downstream under `DEC-038`.
+**Runtime status:** PH-22A/B merged through `637fc06be7135e90be47152d6054ec783c836cf0`. PH-22C was merged through PR #6 (`5f002af3434f519aa388e3ce8149655ab9e81b53`, merge `3d885760f9e91dd84866a7d61a044e6db643ce0f`); the reviewed Release build, four-case smoke and 12/12 `VAL-082` Windows checks are retained. The 2026-09-24 merged closure-readiness audit passed within this evidence scope. `AC-096` has one retained fixture-backed projectless Home-to-Advanced conversion pass; complete V2 task-first processing remains Unproven. `DEC-039` is proposed, not accepted, and its necessity requires review. PH-22 closure is user-authorised, effective on verified merge of `BR-20260924-01`.
+
+PH22-AC096-EVIDENCE-20260924: Retained user-operated disposable projectless conversion via current PH-22C executable: Convert on Home, Add Media, then configure/process via Advanced. Source SHA-256 unchanged; one 160x120 output verified by FFprobe; zero saved .mediaforge files observed in the isolated test tree. JSON: artifacts/ph22-ac096-projectless-conversion-evidence-20260924.json; SHA-256 C515C4EDF35B5C9FCDE470BB611890969DA998B9130DB1BAA51DF18301296FF2. Full V2 task-first Configure/Review/Output/Process/Result and VAL-067 remain Unproven; this is not full AC-098/AC-099 safety validation. DEC-039 is unapproved and should be reconsidered against the new evidence; PH-22 stays Active.
+
+## PH-23 next implementation step (effective after PH-22 closure merge)
+
+- **Goal:** Establish one typed `WorkflowIntent` to capability/compatibility resolution to immutable `ProcessingPlan` seam, shared by summary, FFmpeg compilation and execution snapshot. Preserve the existing V1 processing and source/collision/cancellation safety contracts.
+- **Read first:** `CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md`, root `ARCHITECTURE.md`, `TRACEABILITY.md`, `SECURITY_PRIVACY_AND_RISK.md`; inspect actual models/services/tests before changes.
+- **First bounded work:** inventory current V1 effective option/queue/conversion seams, identify reusable paths and propose the smallest typed model and targeted test slice. Do not implement the complete PH-24 Resize UX or change package/version in PH-23.
+- **Acceptance:** `AC-095`, `AC-101`, applicable `AC-060`-`AC-064`; `VAL-039`-`VAL-041`, `VAL-071`, `VAL-077` with Release build and targeted service tests. The PH-22 projectless fixture does not replace these checks.
+- **Gate:** Do not start dependent PH-23 edits until the PH-22 closure PR is independently confirmed merged, local `main` is safely synchronised and a new guarded `agent/ph23-*` branch has been created from that verified base.
+
+## PH-22 historical plan (closed on merge)
 
 ## Objective
 
@@ -51,6 +63,8 @@ Primary PH-22 acceptance: `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-105`, plus
 Primary PH-22 validation: `VAL-066`, `VAL-082`, Release build, XAML/name/handler checks and directly affected regression tests. `AC-103`/`VAL-067` remain mandatory downstream in PH-24/PH-31; full `VAL-079`/`VAL-080` remain release-quality accessibility evidence in PH-31. This split is governed by `DEC-038` and does not weaken those criteria.
 
 A source implementation alone does not close PH-22. Evidence must demonstrate the implemented shell against the applicable acceptance/validation scope.
+
+**Closure decision:** The user determined `DEC-039` unnecessary and authorised PH-22 closure with `AC-096` unchanged, using the retained Home-to-Advanced conversion evidence. This becomes effective only after verified merge of the closure record. Full `AC-102`/`AC-103`, `VAL-067`/`VAL-079`/`VAL-080` and deferred V1 checks remain mandatory downstream.
 
 ## Safety and non-goals
 

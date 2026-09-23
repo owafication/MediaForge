@@ -207,4 +207,27 @@ Deferred safety validation must be satisfied by later executable V2 evidence bef
 
 **Still Unproven/downstream:** Full `AC-102` contextual guidance including multi-file/batch review remains mandatory in PH-26; `AC-103`/`VAL-067` require end-to-end Resize in PH-24; screen-reader/high-contrast visual quality (`VAL-079`) and declared DPI/multi-monitor coverage (`VAL-080`) remain release validation. Deferred V1 conversion, source/collision/cancellation and persistence checks remain governed by `BR-20260919-01`.
 
-PH-22 remains **Active** pending PH-22C delivery and explicit closure evidence.
+At the earlier pre-closure readiness audit, PH-22 remained **Active**. PH-22C delivery and the following merged readiness evidence were established; see the subsequent closure decision below.
+
+### PH-22C PR #6 delivery and 2026-09-24 merged closure-readiness audit
+
+- Exact reviewed PH-22C head `5f002af3434f519aa388e3ce8149655ab9e81b53` was merged to `main` via PR #6 as `3d885760f9e91dd84866a7d61a044e6db643ce0f`; the returned Windows merge output confirmed a clean, synchronised local `main`. GitHub independently reported that exact merged PR/merge commit.
+- Prior corrected-state Release build and hashed launch (4/4) / `VAL-082` (12/12) reports were retained, not rerun. `VAL-066` control-tree Home assertions were included in the Passed `VAL-082` checks; none of these tests is a complete end-to-end output test or a CI pass. PR #6 had zero applicable GitHub check runs/statuses/workflow runs in the inspected merge gate.
+- User-run read-only merged closure-readiness audit: `C:\Apps\MediaForge\artifacts\ph22-closure-readiness-20260924-002639\ph22-closure-readiness.json`; current local JSON SHA-256: `C3B1953E90EA44D58E0B13B3378877F5E5CC1AB4FB0B7E0B56F4F53F3385D7AB`. The audit reported clean synchronised main, exact merged file hashes or pinned blobs, executable/evidence hash agreement, shell source presence and passed scoped shell checks.
+- `AC-096` project-optional shell entry is supported, but full task-first output processing without creating a project remains **Unproven**. At that pre-closure audit, `DEC-039` was proposed and PH-22 remained **Active**; the subsequent native fixture and user closure decision supersede that earlier status below.
+- Full `AC-102` including batch review (PH-26), `AC-103`/`VAL-067` end-to-end Resize (PH-24), `VAL-079`/`VAL-080` screen-reader/high-contrast/DPI release coverage (PH-31), and inherited deferred V1 media/safety/persistence checks remain mandatory downstream as previously recorded.
+- This is a governance-only proposal; no application, runtime, tests or product/version files were changed by this proposal. Its rollback point is the merged PH-22C main commit stated above.
+
+### PH-22 AC-096 additional runtime evidence (2026-09-24)
+
+PH22-AC096-EVIDENCE-20260924: Retained user-operated disposable projectless conversion via current PH-22C executable: Convert on Home, Add Media, then configure/process via Advanced. Source SHA-256 unchanged; one 160x120 output verified by FFprobe; zero saved .mediaforge files observed in the isolated test tree. JSON: artifacts/ph22-ac096-projectless-conversion-evidence-20260924.json; SHA-256 C515C4EDF35B5C9FCDE470BB611890969DA998B9130DB1BAA51DF18301296FF2. Full V2 task-first Configure/Review/Output/Process/Result and VAL-067 remain Unproven; this is not full AC-098/AC-099 safety validation. DEC-039 is unapproved and should be reconsidered against the new evidence; PH-22 stays Active.
+
+### PH-22 approved closure decision and PH-23 handoff (2026-09-24)
+
+`BR-20260924-01`: The user determined proposed `DEC-039` redundant and authorised PH-22 closure against the **unchanged** `AC-096`: quick processing does not require explicit project creation. The retained PH-22C Home-to-Advanced disposable conversion succeeded without project creation; the source SHA-256 remained unchanged, FFprobe reported 160x120 output and no saved `.mediaforge` file was found in the isolated test tree. The existing corrected Release build, four isolated launch/close cases, 12/12 `VAL-082` checks and `VAL-066` Home/control-tree subset support the PH-22 shell scope. This is an evidence-scoped decision, not a claim that all V2 processing is complete.
+
+**Evidence provenance:** local retained `artifacts/ph22-ac096-projectless-conversion-evidence-20260924.json`, SHA-256 `C515C4EDF35B5C9FCDE470BB611890969DA998B9130DB1BAA51DF18301296FF2`; earlier closure-readiness JSON SHA-256 `C3B1953E90EA44D58E0B13B3378877F5E5CC1AB4FB0B7E0B56F4F53F3385D7AB`; verified PH-22C merge `3d885760f9e91dd84866a7d61a044e6db643ce0f`. Ignored artifacts are local, not included in the PR.
+
+**Remaining Unproven:** complete V2 task-first keyboard workflow (`AC-103`/`VAL-067`, PH-24), full contextual/batch guidance (`AC-102`, PH-26), screen-reader/high-contrast/DPI coverage (`VAL-079`/`VAL-080`, PH-31), and inherited deferred V1 safety/persistence fixtures. One successful conversion does not pass complete `AC-098`/`AC-099` or certify release/package quality.
+
+**Effectivity:** PH-22 closure and PH-23 active routing take effect only after the associated documentation PR is **verified merged**. This prepared local worktree alone is not delivery or a verified phase exit. The PH-22C merge above remains the rollback base until then.

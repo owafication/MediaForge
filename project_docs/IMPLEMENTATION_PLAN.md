@@ -13,7 +13,7 @@
 **Owner:** Technical maintainer.
 **Authority:** Canonical owner for `PH-##`.
 **Update trigger:** Phase scope, dependency, acceptance, validation, rollback or status change.
-**Current pointer:** `PH-20` governance adoption complete at merge `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; `PH-21` V1 closure/rollback bridge satisfied before adoption; `PH-22` is the active implementation phase.
+**Current pointer (effective on verified PH-22 closure PR merge):** `PH-22` evidence-scoped shell closure is recorded by `BR-20260924-01`, with `DEC-039` not adopted; `PH-23` is the next active implementation phase. Until that merge, PH-22 remains the last delivered phase.
 
 ## Historical phase boundary
 
@@ -257,7 +257,7 @@
 
 ## `PH-22` — V2 application shell and workflow navigation
 
-- **Status:** Active.
+- **Status:** Closed for shell scope by `BR-20260924-01` (effective when closure PR is merged).
 - **Objective:** Build the task-first WPF shell without recreating the V1 control wall.
 - **Prerequisites:** PH-20 merged/exited; PH-21 satisfied bridge.
 - **Required reading:** `UI_UX_ACCESSIBILITY_AND_LOCALISATION.md`, `PROJECT_FOUNDATION.md`, `TRACEABILITY.md`, `ARCHITECTURE.md`.
@@ -265,13 +265,14 @@
 - **Work:** Shell/menu commands; Home; task routing; shared workflow state; empty/loading/error states; Advanced disclosure; keyboard/focus/automation properties.
 - **Acceptance:** `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-105`, plus source inspection of task guidance. Full `AC-102` (including multi-file/batch-review guidance) remains mandatory with PH-26; `AC-103` remains mandatory with the end-to-end PH-24 workflow and later release validation. Neither is a PH-22 exit gate under `DEC-038`.
 - **Validation:** Release build/XAML checks plus `VAL-066` and `VAL-082`. PH-22 retains structural evidence toward accessibility, while full `VAL-067`, `VAL-079` and `VAL-080` remain mandatory in their downstream workflow/release phases under `DEC-038`.
+- **Closure evidence:** User-authorised PH-22 exit uses the retained `AC-096` projectless Home-to-Advanced native fixture plus the existing scoped Windows shell/build evidence. `DEC-039` was not adopted and `AC-096` remains unchanged. `AC-103`/`VAL-067`, full `AC-102`, release accessibility and deferred V1 safety validation remain downstream. Closure becomes effective on verified merge of `BR-20260924-01`.
 - **Governance update:** Record actual shell files/state model and any changed navigation/accessibility contract.
 - **Rollback point:** Merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - **Stop conditions:** Primary workflow requires unrelated technical controls, pointer-only operation, inaccessible navigation, or duplicated workflow authority in code-behind/services.
 
 ## `PH-23` — WorkflowIntent, compatibility and ProcessingPlan seam
 
-- **Status:** Planned.
+- **Status:** Next active phase upon verified merge of `BR-20260924-01`.
 - **Objective:** Establish one typed path from user intent to executable processing.
 - **Prerequisites:** PH-22 shell state/navigation seam is stable enough for the first workflow.
 - **Required reading:** `CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md`, `ARCHITECTURE.md`, `TRACEABILITY.md`, `SECURITY_PRIVACY_AND_RISK.md`.

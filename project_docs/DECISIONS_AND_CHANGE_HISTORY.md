@@ -49,6 +49,7 @@
 | DEC-036 | Accepted 2026-09-19 | Typed WorkflowIntent feeds one immutable ProcessingPlan authority shared by visible summary, execution snapshot and verification expectation. |
 | DEC-037 | Accepted 2026-09-19 | Output-size estimates use method-appropriate confidence/range language and never present uncertain predictions as guarantees. |
 | DEC-038 | Accepted 2026-09-23 | PH-22 exit uses a shell-specific keyboard/accessibility baseline rather than requiring the downstream end-to-end Resize workflow. `AC-103` and `VAL-067` remain mandatory downstream evidence in PH-24/PH-31; PH-22 establishes the task-first shell, keyboard-reachable navigation, progressive disclosure, automation metadata and system-aware accessibility resources through `VAL-066` and `VAL-082`. The PH-22 candidate establishes source-present task guidance and limited shell HelpText checks; full `AC-102` contextual guidance, including multi-file/batch review, remains mandatory in PH-26. Full screen-reader usability and DPI/multi-monitor release-quality checks remain `VAL-079`/`VAL-080` in PH-31. |
+| DEC-039 | Not adopted 2026-09-24 | Original PH-22/PH-24 split of `AC-096` was proposed before the retained PH-22C Home-to-Advanced projectless-conversion fixture. User determined the split was redundant and authorised PH-22 closure with the original `AC-096` wording unchanged. Full V2 task-first keyboard operation remains under accepted `DEC-038` (`AC-103`/`VAL-067`, PH-24); this decision does not waive safety or accessibility requirements. |
 
 ## Open canonical decisions
 
@@ -240,3 +241,12 @@ These items remain open without allocating new immutable `DEC-###` IDs yet:
 - **Phase exit:** `PH-20` complete for the governance-adoption scope; `PH-22` is the active implementation phase.
 - **Claim boundary:** governance only; no V2 runtime, package-version or release claim.
 - **Rollback:** revert this governance-only adoption to `5acaf88e751327eac47ca673178fbbd88a8603f1`.
+
+### `BR-20260924-01` - PH-22 evidence-scoped closure
+
+- **Decision:** User explicitly authorised PH-22 closure and determined `DEC-039` unnecessary on 2026-09-24. The original `AC-096` definition is unchanged.
+- **Evidence:** PH-22C PR #6 merge `3d885760f9e91dd84866a7d61a044e6db643ce0f`; retained corrected Release build, 4/4 isolated launch cases, 12/12 `VAL-082` checks and `VAL-066` shell control-tree subset; retained `PH22-AC096-EVIDENCE-20260924` successful Home-to-Advanced projectless output fixture (source unchanged; FFprobe 160x120; no saved project file in isolated test tree).
+- **Phase boundary:** `AC-088`, `AC-091`, `AC-092` and `AC-105` supported to PH-22 shell scope; `AC-096` accepted for its literal project-optional quick-processing scope. Source-present task guidance is not full `AC-102`.
+- **Deferred:** Full V2 task-first `AC-103`/`VAL-067` in PH-24, full `AC-102` in PH-26, `VAL-079`/`VAL-080` in PH-31 and inherited V1 deferred media/safety/persistence checks remain Unproven. This is not a release or a full `AC-098`/`AC-099` pass.
+- **Delivery boundary:** This closure and PH-23 active pointer take effect only when this documentation PR is verified merged; no remote state is inferred from the prepared working tree.
+- **Rollback:** Merged PH-22C `3d885760f9e91dd84866a7d61a044e6db643ce0f` until this closure PR merges, then the verified merged closure commit.
