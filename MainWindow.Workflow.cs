@@ -2,6 +2,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using MediaForge.Models;
 using MediaForge.Models.Presets;
 using MediaForge.Models.Projects;
@@ -274,7 +275,11 @@ public partial class MainWindow
         if (_isRunning) return;
         var selectedPreset = (PresetCombo.SelectedItem as PresetChoice)?.Preset;
         var cataloguePreset = selectedPreset is null ? null : FindCataloguePreset(selectedPreset.Id);
-        var menu = new ContextMenu { PlacementTarget = PresetManagerButton };
+        var menu = new ContextMenu
+        {
+            PlacementTarget = sender as UIElement ?? PresetManagerButton,
+            Placement = PlacementMode.Bottom
+        };
         menu.Items.Add(CreateMenuItem("Save current settings as new preset", (_, _) => SaveCurrentAsPreset()));
         menu.Items.Add(CreateMenuItem("Edit selected user preset", (_, _) => EditSelectedPreset(), cataloguePreset is { IsBuiltIn: false }));
         menu.Items.Add(CreateMenuItem("Duplicate selected preset", (_, _) => DuplicateSelectedPreset(), selectedPreset is not null));

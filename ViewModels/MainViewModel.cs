@@ -16,10 +16,12 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public MainViewModel(ReadOnlyObservableCollection<MediaJob> jobs)
     {
         Jobs = jobs ?? throw new ArgumentNullException(nameof(jobs));
+        Shell = new ShellNavigationViewModel(Jobs);
         RefreshSummary();
     }
 
     public ReadOnlyObservableCollection<MediaJob> Jobs { get; }
+    public ShellNavigationViewModel Shell { get; }
 
     public double OverallProgress
     {
@@ -45,10 +47,14 @@ public sealed class MainViewModel : INotifyPropertyChanged
         private set => SetField(ref _isRunning, value);
     }
 
-    public void SetRunning(bool running)
+    public void SetRunning(bool running) =>
+        SetRuntimeState(running, isPaused: false, isCancelling: false);
+
+    public void SetRuntimeState(bool isRunning, bool isPaused, bool isCancelling)
     {
-        IsRunning = running;
-        if (!running) _statusOverride = null;
+        IsRunning = isRunning;
+        Shell.SetRuntimeState(isRunning, isPaused, isCancelling);
+        if (!isRunning) _statusOverride = null;
         RefreshSummary();
     }
 
@@ -71,6 +77,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
         var progress = enabled == 0 ? 0 : Jobs.Where(job => job.Enabled).Sum(job => job.Progress) / enabled;
 
         OverallProgress = progress;
+        Shell.RefreshMediaState();
         SummaryText = _statusOverride ?? (total == 0
             ? "No files queued"
             : $"{completed} completed, {running} running, {failed} failed, {skipped} skipped, {cancelled} cancelled, {disabled} disabled");

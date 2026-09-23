@@ -1,10 +1,359 @@
 <Window x:Class="MediaForge.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MediaForge — Bulk Image, Video &amp; Audio Converter"
+        Title="MediaForge"
         Width="1320" Height="880" MinWidth="1080" MinHeight="720"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="14">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0"
+              Padding="6,2"
+              AutomationProperties.Name="MediaForge application menu">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Add Media..." Click="AddFiles_Click"/>
+                <MenuItem Header="Add _Folder..." Click="AddFolder_Click"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Remove selected" Click="RemoveSelected_Click"/>
+                <MenuItem Header="_Clear media list" Click="Clear_Click"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Home" Click="ShowHome_Click"/>
+                <MenuItem Header="_Current task" Click="ShowTaskWorkspace_Click"/>
+                <MenuItem Header="_Advanced controls" Click="OpenAdvancedWorkspace_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Project">
+                <MenuItem Header="_New" Click="NewProject_Click"/>
+                <MenuItem Header="_Open..." Click="OpenProject_Click"/>
+                <MenuItem Header="_Recent" Click="RecentProjects_Click"/>
+                <Separator/>
+                <MenuItem Header="_Save" Click="SaveProject_Click"/>
+                <MenuItem Header="Save _As..." Click="SaveProjectAs_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Presets..." Click="PresetManager_Click"/>
+                <MenuItem Header="_Advanced workspace" Click="OpenAdvancedWorkspace_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Getting started" Click="GettingStarted_Click"/>
+                <MenuItem Header="_About MediaForge" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer x:Name="HomeShell"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          AutomationProperties.Name="MediaForge Home">
+                <Grid Margin="32">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel MaxWidth="980" HorizontalAlignment="Center">
+                        <TextBlock Text="MediaForge"
+                                   FontSize="34"
+                                   FontWeight="SemiBold"
+                                   Margin="0,18,0,6"/>
+                        <TextBlock Text="What do you want to do?"
+                                   FontSize="22"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Add media, choose a task, review the result, then process. Projects are optional."
+                                   FontSize="14"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"
+                                MaxWidth="980"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Margin="0,26,0,22">
+                        <Button x:Name="HomeAddMediaButton"
+                                Content="Add Media"
+                                Style="{StaticResource PrimaryButton}"
+                                MinWidth="170"
+                                MinHeight="46"
+                                Click="AddFiles_Click"
+                                AutomationProperties.Name="Add Media"
+                                AutomationProperties.HelpText="Choose one or more image, video or audio files to work with."/>
+                        <Button Content="Add Folder"
+                                MinWidth="125"
+                                MinHeight="46"
+                                Click="AddFolder_Click"
+                                AutomationProperties.Name="Add Folder"
+                                AutomationProperties.HelpText="Add supported media from a folder and its subfolders."/>
+                    </StackPanel>
+
+                    <Border Grid.Row="2"
+                            MaxWidth="980"
+                            HorizontalAlignment="Center"
+                            Background="{StaticResource SurfaceBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="16"
+                            Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Shell.MediaSummary}"
+                                       FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Shell.StateDisplay}"
+                                       Foreground="{StaticResource MutedBrush}"
+                                       Margin="0,3,0,0"
+                                       AutomationProperties.Name="Workflow status"
+                                       AutomationProperties.LiveSetting="Polite"/>
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel Grid.Row="3"
+                               MaxWidth="1000"
+                               HorizontalAlignment="Center"
+                               ItemWidth="188"
+                               ItemHeight="118">
+                        <Button Tag="Convert"
+                                Click="V2Task_Click"
+                                Margin="6"
+                                Padding="14"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Top"
+                                AutomationProperties.Name="Convert"
+                                AutomationProperties.HelpText="Change media format using a simple conversion workflow.">
+                            <StackPanel>
+                                <TextBlock Text="Convert" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Change format with normal choices first."
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="Resize"
+                                Click="V2Task_Click"
+                                Margin="6"
+                                Padding="14"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Top"
+                                AutomationProperties.Name="Resize"
+                                AutomationProperties.HelpText="Change image or video dimensions without requiring codec knowledge.">
+                            <StackPanel>
+                                <TextBlock Text="Resize" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Change size and fit behaviour."
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="CropResize"
+                                Click="V2Task_Click"
+                                Margin="6"
+                                Padding="14"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Top"
+                                AutomationProperties.Name="Crop and Resize"
+                                AutomationProperties.HelpText="Choose a crop and target size with explicit geometry.">
+                            <StackPanel>
+                                <TextBlock Text="Crop &amp; Resize" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Reframe, then choose the target size."
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="TrimSplit"
+                                Click="V2Task_Click"
+                                Margin="6"
+                                Padding="14"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Top"
+                                AutomationProperties.Name="Trim or Split"
+                                AutomationProperties.HelpText="Keep a time range or create split segments.">
+                            <StackPanel>
+                                <TextBlock Text="Trim / Split" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Keep ranges or create segments."
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="Combine"
+                                Click="V2Task_Click"
+                                Margin="6"
+                                Padding="14"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Top"
+                                AutomationProperties.Name="Combine"
+                                AutomationProperties.HelpText="Arrange compatible media into one ordered result.">
+                            <StackPanel>
+                                <TextBlock Text="Combine" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Arrange media into one ordered result."
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Button>
+                    </WrapPanel>
+
+                    <TextBlock Grid.Row="4"
+                               MaxWidth="980"
+                               HorizontalAlignment="Center"
+                               Text="You can start without creating a project. Save a project only when you want to keep the workflow for later."
+                               Foreground="{StaticResource MutedBrush}"
+                               TextWrapping="Wrap"
+                               Margin="0,18,0,30"/>
+                </Grid>
+            </ScrollViewer>
+
+            <Grid x:Name="TaskShell"
+                  Visibility="Collapsed"
+                  Margin="24"
+                  AutomationProperties.Name="MediaForge task workspace">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="18"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                        Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="12">
+                    <StackPanel>
+                        <Button Content="← Home"
+                                Click="ShowHome_Click"
+                                Margin="0,0,0,14"
+                                AutomationProperties.Name="Back to Home"/>
+                        <TextBlock Text="Tasks"
+                                   FontWeight="SemiBold"
+                                   Margin="4,0,0,8"/>
+                        <Button Content="Convert" Tag="Convert" Click="V2Task_Click"
+                                Margin="0,0,0,6" AutomationProperties.Name="Convert task"/>
+                        <Button Content="Resize" Tag="Resize" Click="V2Task_Click"
+                                Margin="0,0,0,6" AutomationProperties.Name="Resize task"/>
+                        <Button Content="Crop &amp; Resize" Tag="CropResize" Click="V2Task_Click"
+                                Margin="0,0,0,6" AutomationProperties.Name="Crop and Resize task"/>
+                        <Button Content="Trim / Split" Tag="TrimSplit" Click="V2Task_Click"
+                                Margin="0,0,0,6" AutomationProperties.Name="Trim or Split task"/>
+                        <Button Content="Combine" Tag="Combine" Click="V2Task_Click"
+                                Margin="0,0,0,6" AutomationProperties.Name="Combine task"/>
+                    </StackPanel>
+                </Border>
+
+                <ScrollViewer Grid.Column="2"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel MaxWidth="900">
+                        <TextBlock Text="Media  →  Task  →  Configure  →  Review  →  Output  →  Process  →  Result"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,12"/>
+
+                        <TextBlock Text="{Binding Shell.TaskTitle}"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="{Binding Shell.TaskGuidance}"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,18"/>
+
+                        <Border Background="{StaticResource SurfaceBrush}"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="14"
+                                Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Selected media"
+                                               FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Shell.MediaSummary}"
+                                               Margin="0,4,0,0"/>
+                                    <TextBlock Text="{Binding Shell.StateDisplay}"
+                                               Foreground="{StaticResource MutedBrush}"
+                                               Margin="0,3,0,0"
+                                               AutomationProperties.Name="Workflow status"
+                                               AutomationProperties.LiveSetting="Polite"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button x:Name="TaskAddMediaButton"
+                                            Content="Add Media"
+                                            Style="{StaticResource PrimaryButton}"
+                                            Click="AddFiles_Click"
+                                            AutomationProperties.Name="Add Media"
+                                            AutomationProperties.HelpText="Add media to the current task."/>
+                                    <Button Content="Add Folder"
+                                            Click="AddFolder_Click"
+                                            Margin="0"
+                                            AutomationProperties.Name="Add Folder"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{StaticResource SurfaceBrush}"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="16"
+                                Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Text="Task setup"
+                                           FontSize="17"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text="This shell keeps configuration specific to the task. Detailed task controls are added in the task implementation phases rather than exposing the full converter control set here."
+                                           TextWrapping="Wrap"
+                                           Margin="0,8,0,0"
+                                           Foreground="{StaticResource MutedBrush}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Expander x:Name="AdvancedControlsExpander"
+                                  Header="Advanced controls"
+                                  IsExpanded="False"
+                                  Margin="0,0,0,14"
+                                  AutomationProperties.Name="Advanced controls"
+                                  AutomationProperties.HelpText="Reveal access to the existing technical workspace when you need detailed controls.">
+                            <Border Background="{StaticResource SurfaceBrush}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="14"
+                                    Margin="0,8,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="Technical controls are kept separate from the normal task flow."
+                                               TextWrapping="Wrap"/>
+                                    <Button Content="Open advanced workspace"
+                                            Click="OpenAdvancedWorkspace_Click"
+                                            HorizontalAlignment="Left"
+                                            Margin="0,10,0,0"
+                                            AutomationProperties.Name="Open advanced workspace"
+                                            AutomationProperties.HelpText="Open the existing detailed queue, project, FFmpeg and conversion controls."/>
+                                </StackPanel>
+                            </Border>
+                        </Expander>
+
+                        <Border Background="{StaticResource PanelBrush}"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="14">
+                            <TextBlock Text="Review, output and processing actions will use this same task frame as each workflow is implemented. The existing processing engine remains unchanged in this shell phase."
+                                       TextWrapping="Wrap"
+                                       Foreground="{StaticResource MutedBrush}"/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+    <Grid x:Name="LegacyWorkspaceGrid" Margin="14" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -556,6 +905,8 @@
                 <TextBlock x:Name="SummaryText" Text="{Binding SummaryText}" Margin="0,4,0,0" Foreground="{StaticResource MutedBrush}"/>
             </StackPanel>
             <TextBlock x:Name="TotalsText" Text="{Binding TotalsText}" Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0" FontWeight="SemiBold"/>
+        </Grid>
+    </Grid>
         </Grid>
     </Grid>
 </Window>

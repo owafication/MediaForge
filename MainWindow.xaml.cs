@@ -26,6 +26,7 @@ public partial class MainWindow : Window
     private readonly MainViewModel _viewModel;
     private readonly CancellationTokenSource _windowCancellation = new();
     private bool _isRunning;
+    private bool _isCancellationRequested;
     private bool _closeWhenBatchStops;
     private bool _allowClose;
     private bool _isClosing;
@@ -52,6 +53,7 @@ public partial class MainWindow : Window
         UpdateOutputControls();
         UpdateSummary();
         CompleteProjectInitialization();
+        RefreshV2Shell();
     }
 
     private void Session_Changed(object? sender, ProjectSessionChangedEventArgs e)
@@ -71,17 +73,107 @@ public partial class MainWindow : Window
     {
         if (!Dispatcher.CheckAccess())
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                UpdateSummary();
-                UpdateWorkflowControlState();
-            }));
+            Dispatcher.BeginInvoke(new Action(() => QueueCoordinator_StateChanged(sender, e)));
             return;
         }
+
+        if (!_queueCoordinator.IsRunning)
+        {
+            _isCancellationRequested = false;
+        }
+
+        _viewModel.SetRuntimeState(
+            _queueCoordinator.IsRunning,
+            _queueCoordinator.IsDispatchPaused,
+            _isCancellationRequested);
+
         UpdateSummary();
         UpdateWorkflowControlState();
     }
 
+    private void V2Task_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { Tag: string tag } ||
+            !Enum.TryParse<WorkflowTaskKind>(tag, ignoreCase: false, out var task))
+        {
+            return;
+        }
+
+        _viewModel.Shell.SelectTask(task);
+        RefreshV2Shell();
+        TaskAddMediaButton?.Focus();
+    }
+
+    private void ShowHome_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.Shell.ShowHome();
+        RefreshV2Shell();
+        HomeAddMediaButton?.Focus();
+    }
+
+    private void ShowTaskWorkspace_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.Shell.ShowTaskWorkspace();
+        RefreshV2Shell();
+
+        if (_viewModel.Shell.Surface == ShellSurface.Home)
+        {
+            HomeAddMediaButton?.Focus();
+        }
+        else
+        {
+            TaskAddMediaButton?.Focus();
+        }
+    }
+
+    private void OpenAdvancedWorkspace_Click(object sender, RoutedEventArgs e)
+    {
+        _viewModel.Shell.ShowAdvanced();
+        RefreshV2Shell();
+        JobsGrid?.Focus();
+    }
+
+    private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+
+    private void GettingStarted_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            this,
+            "1. Add media.\n2. Choose Convert, Resize, Crop & Resize, Trim / Split, or Combine.\n3. Configure the task.\n4. Review output and process.\n\nProjects are optional. Advanced controls remain available from View or Tools.",
+            "Getting started",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    private void About_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            this,
+            "MediaForge\nLocal-first Windows media conversion and preparation.\n\nThis build is developing the task-first MediaForge interface over the existing local FFmpeg processing foundation.",
+            "About MediaForge",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    private void RefreshV2Shell()
+    {
+        if (HomeShell is null || TaskShell is null || LegacyWorkspaceGrid is null)
+        {
+            return;
+        }
+
+        HomeShell.Visibility = _viewModel.Shell.Surface == ShellSurface.Home
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
+        TaskShell.Visibility = _viewModel.Shell.Surface == ShellSurface.Task
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
+        LegacyWorkspaceGrid.Visibility = _viewModel.Shell.Surface == ShellSurface.Advanced
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+    }
     private void AddFiles_Click(object sender, RoutedEventArgs e)
     {
         if (_isRunning || _projectReadOnly) return;
@@ -291,6 +383,11 @@ public partial class MainWindow : Window
 
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
+        _isCancellationRequested = true;
+        _viewModel.SetRuntimeState(
+            isRunning: true,
+            isPaused: _queueCoordinator.IsDispatchPaused,
+            isCancelling: true);
         _queueCoordinator.Cancel();
         CancelButton.IsEnabled = false;
         _viewModel.SetStatusOverride("Cancelling active FFmpeg processes…");
@@ -693,7 +790,16 @@ public partial class MainWindow : Window
     private void SetRunningState(bool running)
     {
         _isRunning = running;
-        _viewModel.SetRunning(running);
+        if (!running)
+        {
+            _isCancellationRequested = false;
+        }
+
+        _viewModel.SetRuntimeState(
+            running,
+            _queueCoordinator.IsDispatchPaused,
+            _isCancellationRequested);
+
         var canEdit = !running && !_projectReadOnly;
         AddFilesButton.IsEnabled = canEdit;
         AddFolderButton.IsEnabled = canEdit;
