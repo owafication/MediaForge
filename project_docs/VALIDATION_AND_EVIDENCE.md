@@ -5,7 +5,7 @@
 **Owner:** Reliability maintainer.
 **Authority:** Validation procedure owner; individual `VAL` definitions live in `TRACEABILITY.md`.
 **Update trigger:** Requirement, risk, platform, fixture, tolerance or release claim change.
-**Linked IDs:** `VAL-001`–`VAL-081`, `AC-001`–`AC-105`, `PH-07`–`PH-31`.
+**Linked IDs:** `VAL-001`–`VAL-082`, `AC-001`–`AC-105`, `PH-07`–`PH-31`.
 
 ## Evidence levels
 
@@ -91,7 +91,7 @@ Target evidence root: `artifacts\validation-YYYYMMDD-HHMMSS\`.
 
 Objectively measurable safety behaviour is automated wherever practical. Human review remains appropriate for actual screen-reader usability, subjective visual/DPI/multi-monitor clarity, wording/help usability, final privacy/support-bundle inspection and exploratory release review.
 
-The reviewed execution architecture classifies the 81 validation IDs as 63 automated, 10 UI-automation-plus-human-spot-check, 7 environment-dependent automated and 1 human review. This is an execution classification, not a second definition catalogue.
+The reviewed external execution architecture classified the original 81 validation IDs as 63 automated, 10 UI-automation-plus-human-spot-check, 7 environment-dependent automated and 1 human review. `VAL-082` was added later by `DEC-038` as an automated PH-22 Windows shell baseline and is not part of that historical 81-ID classification.
 
 ### Deferred V1 carry-forward
 

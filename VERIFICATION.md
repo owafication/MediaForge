@@ -174,3 +174,37 @@ This exception closes the PH-10 sequencing gate for the purpose of establishing 
 It does **not** mean the deferred checks passed, PH-10 received complete manual acceptance, or MediaForge 1.1.0 is a fully verified release.
 
 Deferred safety validation must be satisfied by later executable V2 evidence before a corresponding V2 release claim.
+
+## PH-22C shell validation candidate - 2026-09-23
+
+**State:** User-run Windows evidence for an uncommitted PH-22C candidate on branch `agent/ph22-shell-validation-baseline`, based on `637fc06be7135e90be47152d6054ec783c836cf0`. This is not a merge, phase-closure or release claim.
+
+**Ran on the corrected PH-22C UI-resource state:**
+
+- `dotnet restore .\MediaForge.sln` and `dotnet build .\MediaForge.sln -c Release --no-restore`
+- `scripts\smoke-launch.ps1` against the corrected Release executable
+- `scripts\validate-ph22-shell.ps1` for `VAL-082`
+
+**Passed:**
+
+- Release restore/build.
+- All four isolated launch/close cases: absent settings, valid settings, malformed settings and blocked preset storage.
+- All 12 defined `VAL-082` checks with final stage `complete`: system-aware resources, unsaved-project launch, task-first Home, advanced controls absent from Home, six real Alt-key menus, logical Home Tab order, Enter route to Resize, collapsed Advanced controls, Advanced keyboard route, Home keyboard return, advanced controls hidden after return, and workflow-status automation name.
+- Corrected system-aware resources use `ControlDarkColorKey` for borders and `GrayTextColorKey` for muted text; the executable was rebuilt and revalidated after that change.
+
+**Evidence (ignored local artifacts, not committed):**
+
+- Launch-smoke JSON: `C:\Apps\MediaForge\artifacts\ph22c-review-correction-20260923-153803\launch-smoke.json`
+- Launch-smoke JSON SHA-256: `A1B16AE6F3467335B1A12A7D7F77DA659111C2C20BEEFE952151C830DA51104D`
+- `VAL-082` JSON: `C:\Apps\MediaForge\artifacts\ph22c-review-correction-20260923-153803\ph22-shell-validation.json`
+- `VAL-082` JSON SHA-256: `D5F786E149F2EE2249330B39A10A89FFE2B729903EAEF35400E43089E2E8F2CC`
+- Tested Release executable SHA-256: `94adcb2a6f6f1d06b5104fc0131c03ab293a03824bc2f6df9ed0ce841df3c87e`
+- Reported Windows version: `Microsoft Windows NT 10.0.19045.0`; PowerShell version: `5.1.19041.6456`.
+- High-contrast mode at test time: `False` (not a test of high-contrast visual quality).
+- Primary screen recorded by the test: 3440 x 1440, origin (0, 0); this is metadata only, not DPI/multi-monitor coverage.
+
+**Not rerun:** Characterisation tests were already Passed before the resource-only change. No C#, processing, persistence or test source was changed; that prior evidence is retained only for its unchanged scope.
+
+**Still Unproven/downstream:** Full `AC-102` contextual guidance including multi-file/batch review remains mandatory in PH-26; `AC-103`/`VAL-067` require end-to-end Resize in PH-24; screen-reader/high-contrast visual quality (`VAL-079`) and declared DPI/multi-monitor coverage (`VAL-080`) remain release validation. Deferred V1 conversion, source/collision/cancellation and persistence checks remain governed by `BR-20260919-01`.
+
+PH-22 remains **Active** pending PH-22C delivery and explicit closure evidence.

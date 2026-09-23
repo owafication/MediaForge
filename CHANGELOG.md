@@ -10,6 +10,7 @@ All notable MediaForge changes should be recorded here. Source presence is not a
 - PH-22B source extends the shared shell lifecycle with explicit Loading, NeedsDecision and ReviewReady presentation while keeping processing authority in the existing runtime and deferring typed ProcessingPlan work to PH-23.
 - The existing detailed V1 project/queue/FFmpeg controls remain available through the Advanced workspace rather than dominating startup.
 - Release build, characterisation tests and isolated launch smoke are development checks only; keyboard-only workflow, screen-reader usability and DPI/multi-monitor evidence remain Unproven until run.
+- PH-22C adds semantically mapped dynamic WPF SystemColors-based shell resources plus an isolated Windows UI-automation shell validator. Corrected local Windows validation on 2026-09-23 passed Release build, four isolated launch/close cases and all 12 `VAL-082` shell checks. `DEC-038`/`VAL-082` remove the circular PH-22 dependency on the downstream Resize workflow without weakening downstream `AC-102`, `AC-103`, `VAL-067`, `VAL-079` or `VAL-080`; PH-22 remains Active pending delivery and explicit closure.
 
 ## [1.2.0] — Proposed
 
