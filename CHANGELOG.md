@@ -2,6 +2,15 @@
 
 All notable MediaForge changes should be recorded here. Source presence is not a release claim.
 
+## MediaForge 2 development — version unresolved
+
+### PH-22 task-first shell/navigation
+
+- PR #4 merged PH-22A task-first Home, conventional menu, primary task routing, progressive Advanced disclosure, shell-state projection and accessibility metadata at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`.
+- PH-22B source extends the shared shell lifecycle with explicit Loading, NeedsDecision and ReviewReady presentation while keeping processing authority in the existing runtime and deferring typed ProcessingPlan work to PH-23.
+- The existing detailed V1 project/queue/FFmpeg controls remain available through the Advanced workspace rather than dominating startup.
+- Release build, characterisation tests and isolated launch smoke are development checks only; keyboard-only workflow, screen-reader usability and DPI/multi-monitor evidence remain Unproven until run.
+
 ## [1.2.0] — Proposed
 
 ### PH-08 implemented in source

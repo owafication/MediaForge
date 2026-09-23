@@ -32,6 +32,7 @@ internal static class Program
         ("MediaClassifier is case-insensitive", MediaClassifierIsCaseInsensitiveAsync),
         ("V2 shell starts on task-first Home", V2ShellStartsTaskFirstHomeAsync),
         ("V2 shell routes tasks and derives media state", V2ShellRoutesTasksAndMediaStateAsync),
+        ("V2 shell presents loading decision and review states", V2ShellPresentsLifecycleStatesAsync),
         ("CropSelection clamps invalid values", CropSelectionClampsInvalidValuesAsync),
         ("MediaClipEdit normalises trim ranges", MediaClipEditNormalisesTrimRangesAsync),
         ("EffectiveOptionsResolver resolves a valid snapshot", EffectiveOptionsResolverResolvesValidSnapshotAsync),
@@ -249,6 +250,42 @@ internal static class Program
         Equal(ShellSurface.Task, shell.Surface, "return to selected task");
         shell.ShowHome();
         Equal(ShellSurface.Home, shell.Surface, "home route");
+        return Task.CompletedTask;
+    }
+    private static Task V2ShellPresentsLifecycleStatesAsync()
+    {
+        var jobs = new ObservableCollection<MediaJob>();
+        var shell = new ShellNavigationViewModel(new ReadOnlyObservableCollection<MediaJob>(jobs));
+
+        shell.SelectTask(WorkflowTaskKind.Combine);
+        shell.SetLoading(true);
+        Equal(WorkflowState.Loading, shell.State, "loading state");
+        True(shell.StateDetail.Contains("adding supported media", StringComparison.Ordinal), "loading guidance");
+
+        shell.SetLoading(false);
+        Equal(WorkflowState.Empty, shell.State, "loading clears to empty without media");
+
+        jobs.Add(NewJob("first.mp4", MediaKind.Video));
+        Equal(WorkflowState.NeedsDecision, shell.State, "Combine one-item decision state");
+        True(shell.StateDetail.Contains("at least two", StringComparison.Ordinal), "Combine decision guidance");
+
+        jobs.Add(NewJob("second.mp4", MediaKind.Video));
+        Equal(WorkflowState.Configuring, shell.State, "Combine becomes configurable with two media items");
+
+        shell.SetReviewReady(true);
+        Equal(WorkflowState.ReviewReady, shell.State, "review-ready state");
+        Equal("Review", shell.StateTitle, "review-ready title");
+
+        shell.RequireDecision("Choose how mismatched media should be handled.");
+        Equal(WorkflowState.NeedsDecision, shell.State, "explicit decision state");
+        True(shell.StateDetail.Contains("mismatched media", StringComparison.Ordinal), "explicit decision guidance");
+
+        shell.ClearDecision();
+        Equal(WorkflowState.ReviewReady, shell.State, "review readiness survives a resolved explicit decision");
+
+        jobs.Add(NewJob("third.mp4", MediaKind.Video));
+        Equal(WorkflowState.Configuring, shell.State, "media change invalidates prior review readiness");
+
         return Task.CompletedTask;
     }
     private static Task CropSelectionClampsInvalidValuesAsync()

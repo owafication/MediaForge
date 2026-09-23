@@ -18,11 +18,11 @@ Implemented source includes PH-08 architecture/.NET 10 seams, PH-09 project/reco
 
 ## V2 gaps and direction
 
-- V1 MainWindow remains queue/control-first rather than task-first.
+- PH-22A task-first Home/menu/task routing is merged; the V1 detailed queue/control workspace is retained behind the explicit Advanced surface rather than remaining the default startup model.
 - WorkflowIntent is not yet implemented as a V2 application contract.
 - The immutable ProcessingPlan is not yet the single implemented authority across UI summary, preview intent, execution and verification.
 - V1 persistence compatibility classes for V2 remain evidence-dependent.
-- V2 shell/accessibility behaviour is not implemented or tested.
+- PH-22A shell/navigation source, accessibility names/help text and live-status semantics are implemented; keyboard-only, screen-reader, high-contrast and DPI/multi-monitor runtime validation remains Unproven.
 - Fast post-build and full-release V2 harness entry points are planned, not yet implemented.
 
 ## Phase disposition
@@ -34,7 +34,7 @@ Implemented source includes PH-08 architecture/.NET 10 seams, PH-09 project/reco
 - `PH-23`–`PH-31`: planned V2 implementation roadmap.
 ## Immediate next gate
 
-Implement `PH-22` from merged governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`: task-first WPF shell, conventional menu/navigation, Home/task routing, shared workflow state, progressive disclosure and accessibility foundation.
+Continue `PH-22` from merged PH-22A commit `aedfb10117c7a95a199a9f7de4047b3567d3e26e`: complete shared lifecycle presentation and validate the shell/navigation foundation without pulling PH-23 ProcessingPlan work forward.
 
 Before PH-22 exit, run the phase-mapped Release build/XAML/accessibility/navigation checks and record evidence against its acceptance/validation contract. Do not begin PH-23 solely because shell source exists.
 
