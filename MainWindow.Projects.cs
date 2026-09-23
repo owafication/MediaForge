@@ -145,7 +145,11 @@ public partial class MainWindow
     {
         if (_isRunning) return;
         var entries = _recentProjectStore.Load();
-        var menu = new ContextMenu { PlacementTarget = RecentProjectsButton };
+        var menu = new ContextMenu
+        {
+            PlacementTarget = sender as UIElement ?? RecentProjectsButton,
+            Placement = PlacementMode.Bottom
+        };
         if (entries.Count == 0)
         {
             menu.Items.Add(new MenuItem { Header = "No recent projects", IsEnabled = false });

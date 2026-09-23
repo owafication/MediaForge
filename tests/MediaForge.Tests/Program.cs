@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -16,6 +17,7 @@ using MediaForge.Services.Presets;
 using MediaForge.Services.Queue;
 using MediaForge.Services.Runtime;
 using MediaForge.Services.Session;
+using MediaForge.ViewModels;
 
 namespace MediaForge.Tests;
 
@@ -28,6 +30,8 @@ internal static class Program
         ("ProcessRunner returns non-zero exit codes", ProcessRunnerReturnsNonZeroExitCodeAsync),
         ("ProcessRunner cancellation kills the process tree", ProcessRunnerCancellationKillsTreeAsync),
         ("MediaClassifier is case-insensitive", MediaClassifierIsCaseInsensitiveAsync),
+        ("V2 shell starts on task-first Home", V2ShellStartsTaskFirstHomeAsync),
+        ("V2 shell routes tasks and derives media state", V2ShellRoutesTasksAndMediaStateAsync),
         ("CropSelection clamps invalid values", CropSelectionClampsInvalidValuesAsync),
         ("MediaClipEdit normalises trim ranges", MediaClipEditNormalisesTrimRangesAsync),
         ("EffectiveOptionsResolver resolves a valid snapshot", EffectiveOptionsResolverResolvesValidSnapshotAsync),
@@ -179,6 +183,74 @@ internal static class Program
         return Task.CompletedTask;
     }
 
+    private static Task V2ShellStartsTaskFirstHomeAsync()
+    {
+        var jobs = new ObservableCollection<MediaJob>();
+        var shell = new ShellNavigationViewModel(new ReadOnlyObservableCollection<MediaJob>(jobs));
+
+        Equal(ShellSurface.Home, shell.Surface, "initial shell surface");
+        Equal(WorkflowState.Empty, shell.State, "initial shell state");
+        True(shell.SelectedTask is null, "no task is forced at startup");
+        Equal("Choose a task", shell.TaskTitle, "initial task title");
+        Equal("No media selected", shell.MediaSummary, "initial media summary");
+        return Task.CompletedTask;
+    }
+
+    private static Task V2ShellRoutesTasksAndMediaStateAsync()
+    {
+        var jobs = new ObservableCollection<MediaJob>();
+        var shell = new ShellNavigationViewModel(new ReadOnlyObservableCollection<MediaJob>(jobs));
+
+        shell.SelectTask(WorkflowTaskKind.Resize);
+        Equal(ShellSurface.Task, shell.Surface, "task route");
+        Equal(WorkflowTaskKind.Resize, shell.SelectedTask, "selected task");
+        Equal("Resize", shell.TaskTitle, "task title");
+        Equal(WorkflowState.Empty, shell.State, "task with no media remains empty");
+
+        jobs.Add(NewJob("fixture.png", MediaKind.Image));
+        Equal(WorkflowState.Configuring, shell.State, "media plus task enters configuring state");
+        True(shell.MediaSummary.Contains("1 media item", StringComparison.Ordinal), "media summary updates");
+
+        shell.SetRuntimeState(isRunning: true, isPaused: false, isCancelling: false);
+        Equal(WorkflowState.Running, shell.State, "running state");
+
+        shell.SetRuntimeState(isRunning: true, isPaused: true, isCancelling: false);
+        Equal(WorkflowState.Paused, shell.State, "paused runtime state");
+
+        shell.SetRuntimeState(isRunning: true, isPaused: false, isCancelling: true);
+        Equal(WorkflowState.Cancelling, shell.State, "cancelling runtime state");
+
+        shell.SetRuntimeState(isRunning: false, isPaused: false, isCancelling: false);
+        Equal(WorkflowState.Configuring, shell.State, "return to configuring after run state clears");
+
+        jobs[0].State = JobState.Completed;
+        shell.RefreshMediaState();
+        Equal(WorkflowState.Completed, shell.State, "completed job projection");
+
+        jobs[0].State = JobState.CompletedWithWarnings;
+        shell.RefreshMediaState();
+        Equal(WorkflowState.CompletedWithWarning, shell.State, "warning job projection");
+
+        jobs[0].State = JobState.VerificationFailed;
+        shell.RefreshMediaState();
+        Equal(WorkflowState.VerificationFailed, shell.State, "verification failure projection");
+
+        jobs[0].State = JobState.Failed;
+        shell.RefreshMediaState();
+        Equal(WorkflowState.Failed, shell.State, "failure projection");
+
+        jobs[0].Reset();
+        shell.RefreshMediaState();
+        Equal(WorkflowState.Configuring, shell.State, "reset returns to configuring");
+
+        shell.ShowAdvanced();
+        Equal(ShellSurface.Advanced, shell.Surface, "advanced route");
+        shell.ShowTaskWorkspace();
+        Equal(ShellSurface.Task, shell.Surface, "return to selected task");
+        shell.ShowHome();
+        Equal(ShellSurface.Home, shell.Surface, "home route");
+        return Task.CompletedTask;
+    }
     private static Task CropSelectionClampsInvalidValuesAsync()
     {
         var clamped = new CropSelection(double.NaN, -3, 9, double.PositiveInfinity).Clamp();
