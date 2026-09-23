@@ -187,7 +187,7 @@ public partial class MainWindow : Window
 
         if (dialog.ShowDialog(this) == true)
         {
-            AddPaths(dialog.FileNames, rootFolder: null);
+            RunWithShellLoading(() => AddPaths(dialog.FileNames, rootFolder: null));
         }
     }
 
@@ -202,7 +202,24 @@ public partial class MainWindow : Window
 
         if (dialog.ShowDialog(this) == true)
         {
-            AddFolder(dialog.FolderName);
+            RunWithShellLoading(() => AddFolder(dialog.FolderName));
+        }
+    }
+
+    private void RunWithShellLoading(Action action)
+    {
+        ArgumentNullException.ThrowIfNull(action);
+        _viewModel.Shell.SetLoading(true);
+        UpdateSummary();
+
+        try
+        {
+            action();
+        }
+        finally
+        {
+            _viewModel.Shell.SetLoading(false);
+            UpdateSummary();
         }
     }
 

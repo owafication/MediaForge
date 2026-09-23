@@ -304,15 +304,74 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 Padding="16"
-                                Margin="0,0,0,14">
+                                Margin="0,0,0,14"
+                                AutomationProperties.Name="Shared workflow frame">
                             <StackPanel>
-                                <TextBlock Text="Task setup"
-                                           FontSize="17"
-                                           FontWeight="SemiBold"/>
-                                <TextBlock Text="This shell keeps configuration specific to the task. Detailed task controls are added in the task implementation phases rather than exposing the full converter control set here."
-                                           TextWrapping="Wrap"
-                                           Margin="0,8,0,0"
+                                <TextBlock Text="Workflow state"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
                                            Foreground="{StaticResource MutedBrush}"/>
+                                <TextBlock Text="{Binding Shell.StateTitle}"
+                                           FontSize="19"
+                                           FontWeight="SemiBold"
+                                           Margin="0,4,0,0"/>
+                                <TextBlock Text="{Binding Shell.StateDetail}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,14"/>
+
+                                <Separator Margin="0,0,0,14"/>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0"
+                                            Background="{StaticResource PanelBrush}"
+                                            CornerRadius="6"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <TextBlock Text="Configure"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="Normal task controls belong here. PH-22 provides the shared frame without inventing task-specific processing settings."
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0"
+                                                       Foreground="{StaticResource MutedBrush}"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Column="2"
+                                            Background="{StaticResource PanelBrush}"
+                                            CornerRadius="6"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <TextBlock Text="Review"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="The same frame supports decision and review-ready states before later phases add resolved task summaries."
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0"
+                                                       Foreground="{StaticResource MutedBrush}"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Column="4"
+                                            Background="{StaticResource PanelBrush}"
+                                            CornerRadius="6"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <TextBlock Text="Output → Process → Result"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="Execution remains owned by the existing runtime until the typed PH-23 plan seam is implemented."
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,5,0,0"
+                                                       Foreground="{StaticResource MutedBrush}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
                             </StackPanel>
                         </Border>
 

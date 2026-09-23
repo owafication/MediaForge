@@ -25,6 +25,7 @@ public enum WorkflowTaskKind
 public enum WorkflowState
 {
     Empty,
+    Loading,
     MediaReady,
     Configuring,
     NeedsDecision,
@@ -47,13 +48,22 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
     private bool _isRunning;
     private bool _isPaused;
     private bool _isCancelling;
+    private bool _isLoading;
+    private bool _reviewReady;
+    private string? _decisionMessage;
 
     public ShellNavigationViewModel(ReadOnlyObservableCollection<MediaJob> jobs)
     {
         _jobs = jobs ?? throw new ArgumentNullException(nameof(jobs));
+
         if (jobs is INotifyCollectionChanged notifyCollection)
         {
-            notifyCollection.CollectionChanged += (_, _) => RefreshMediaState();
+            notifyCollection.CollectionChanged += (_, _) =>
+            {
+                _reviewReady = false;
+                _decisionMessage = null;
+                RefreshMediaState();
+            };
         }
 
         RefreshMediaState();
@@ -80,6 +90,8 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
         {
             if (SetField(ref _selectedTask, value))
             {
+                _reviewReady = false;
+                _decisionMessage = null;
                 OnPropertyChanged(nameof(TaskTitle));
                 OnPropertyChanged(nameof(TaskGuidance));
                 RefreshMediaState();
@@ -95,6 +107,8 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
             if (SetField(ref _state, value))
             {
                 OnPropertyChanged(nameof(StateDisplay));
+                OnPropertyChanged(nameof(StateTitle));
+                OnPropertyChanged(nameof(StateDetail));
             }
         }
     }
@@ -139,6 +153,7 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
     public string StateDisplay => State switch
     {
         WorkflowState.Empty => "Add media to continue",
+        WorkflowState.Loading => "Loading media",
         WorkflowState.MediaReady => "Media ready — choose a task",
         WorkflowState.Configuring => "Configure this task",
         WorkflowState.NeedsDecision => "A decision is required",
@@ -151,6 +166,56 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
         WorkflowState.Failed => "Failed",
         WorkflowState.VerificationFailed => "Verification failed",
         _ => State.ToString()
+    };
+
+    public string StateTitle => State switch
+    {
+        WorkflowState.Empty => "Add media",
+        WorkflowState.Loading => "Loading media",
+        WorkflowState.MediaReady => "Choose a task",
+        WorkflowState.Configuring => "Configure",
+        WorkflowState.NeedsDecision => "Decision needed",
+        WorkflowState.ReviewReady => "Review",
+        WorkflowState.Running => "Processing",
+        WorkflowState.Paused => "Processing paused",
+        WorkflowState.Cancelling => "Cancelling",
+        WorkflowState.Completed => "Completed",
+        WorkflowState.CompletedWithWarning => "Completed with warnings",
+        WorkflowState.Failed => "Processing failed",
+        WorkflowState.VerificationFailed => "Verification failed",
+        _ => State.ToString()
+    };
+
+    public string StateDetail => State switch
+    {
+        WorkflowState.Empty =>
+            "Add one or more supported media files. You can work without creating a project.",
+        WorkflowState.Loading =>
+            "MediaForge is adding supported media and updating the current task state.",
+        WorkflowState.MediaReady =>
+            "Your media is ready. Choose Convert, Resize, Crop & Resize, Trim / Split, or Combine.",
+        WorkflowState.Configuring =>
+            "Use the normal task controls first. Advanced technical controls stay separate from the normal workflow.",
+        WorkflowState.NeedsDecision =>
+            ResolveDecisionMessage(),
+        WorkflowState.ReviewReady =>
+            "The shared workflow is ready to present task review details before processing.",
+        WorkflowState.Running =>
+            "Processing is active. The existing queue/runtime services remain the execution authority.",
+        WorkflowState.Paused =>
+            "No new queue work will start until processing is resumed.",
+        WorkflowState.Cancelling =>
+            "MediaForge is cancelling owned processing work and waiting for cleanup.",
+        WorkflowState.Completed =>
+            "Enabled media reached a completed state.",
+        WorkflowState.CompletedWithWarning =>
+            "Processing finished, but one or more items completed with warnings or were skipped.",
+        WorkflowState.Failed =>
+            FirstProblemMessage("Processing failed. Review the affected item before retrying."),
+        WorkflowState.VerificationFailed =>
+            FirstProblemMessage("Output verification failed. Treat the affected result as unverified."),
+        _ =>
+            string.Empty
     };
 
     public void ShowHome() => Surface = ShellSurface.Home;
@@ -176,15 +241,52 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
         _isRunning = isRunning;
         _isPaused = isRunning && isPaused;
         _isCancelling = isRunning && isCancelling;
+
+        if (isRunning)
+        {
+            _isLoading = false;
+            _reviewReady = false;
+        }
+
         RefreshMediaState();
     }
 
     public void SetRunning(bool running) =>
         SetRuntimeState(running, isPaused: false, isCancelling: false);
 
+    public void SetLoading(bool loading)
+    {
+        _isLoading = loading;
+        RefreshMediaState();
+    }
+
+    public void RequireDecision(string message)
+    {
+        _decisionMessage = string.IsNullOrWhiteSpace(message)
+            ? "Review the current task choices before continuing."
+            : message.Trim();
+        RefreshMediaState();
+    }
+
+    public void ClearDecision()
+    {
+        _decisionMessage = null;
+        RefreshMediaState();
+    }
+
+    public void SetReviewReady(bool reviewReady)
+    {
+        _reviewReady = reviewReady &&
+                       SelectedTask.HasValue &&
+                       _jobs.Count > 0 &&
+                       string.IsNullOrWhiteSpace(_decisionMessage);
+        RefreshMediaState();
+    }
+
     public void RefreshMediaState()
     {
         OnPropertyChanged(nameof(MediaSummary));
+        OnPropertyChanged(nameof(StateDetail));
 
         if (_isCancelling)
         {
@@ -197,6 +299,12 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
             State = _isPaused
                 ? WorkflowState.Paused
                 : WorkflowState.Running;
+            return;
+        }
+
+        if (_isLoading)
+        {
+            State = WorkflowState.Loading;
             return;
         }
 
@@ -235,12 +343,56 @@ public sealed class ShellNavigationViewModel : INotifyPropertyChanged
             return;
         }
 
+        if (!string.IsNullOrWhiteSpace(_decisionMessage))
+        {
+            State = WorkflowState.NeedsDecision;
+            return;
+        }
+
+        if (SelectedTask == WorkflowTaskKind.Combine && _jobs.Count < 2)
+        {
+            State = WorkflowState.NeedsDecision;
+            return;
+        }
+
+        if (_reviewReady)
+        {
+            State = WorkflowState.ReviewReady;
+            return;
+        }
+
         State = SelectedTask.HasValue
             ? WorkflowState.Configuring
             : WorkflowState.MediaReady;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    private string ResolveDecisionMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(_decisionMessage))
+        {
+            return _decisionMessage;
+        }
+
+        if (SelectedTask == WorkflowTaskKind.Combine && _jobs.Count < 2)
+        {
+            return "Combine needs at least two media items. Add another item or choose a different task.";
+        }
+
+        return "Review the current task choices before continuing.";
+    }
+
+    private string FirstProblemMessage(string fallback)
+    {
+        var problem = _jobs.FirstOrDefault(job =>
+            job.Enabled &&
+            job.State is JobState.Failed or JobState.VerificationFailed);
+
+        return problem is null || string.IsNullOrWhiteSpace(problem.Message)
+            ? fallback
+            : $"{problem.FileName}: {problem.Message}";
+    }
 
     private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {

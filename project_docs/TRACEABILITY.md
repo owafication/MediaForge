@@ -310,19 +310,19 @@ The following residual V1 validation areas are especially important to retain: `
 
 | Requirement | Scope | Architecture | Phase | Primary files/surfaces | Acceptance | Validation | Status |
 |---|---|---|---|---|---|---|---|
-| REQ-056 | V2 UX | task shell/workflow navigation | PH-20, PH-22 | WPF Home/task views and workflow-state projection | AC-088, AC-089 | VAL-066, VAL-067 | Governance adopted; runtime Unproven |
-| REQ-057 | V2 UX | progressive disclosure over typed intent | PH-22, PH-25 | task views and advanced-control projection | AC-092, AC-105 | VAL-066, VAL-067 | Governance adopted; runtime Unproven |
-| REQ-058 | V2 desktop | conventional shell commands | PH-22 | shell/menu commands and resources | AC-091 | VAL-067, VAL-079 | Governance adopted; runtime Unproven |
-| REQ-059 | V2 UX/help | contextual task guidance | PH-22, PH-24, PH-25, PH-26, PH-31 | task views/help resources | AC-102 | VAL-067 | Governance adopted; runtime Unproven |
+| REQ-056 | V2 UX | task shell/workflow navigation | PH-20, PH-22 | WPF Home/task views and workflow-state projection | AC-088, AC-089 | VAL-066, VAL-067 | PH-22 shell/navigation source merged; Resize workflow and keyboard runtime path remain Unproven |
+| REQ-057 | V2 UX | progressive disclosure over typed intent | PH-22, PH-25 | task views and advanced-control projection | AC-092, AC-105 | VAL-066, VAL-067 | PH-22 collapsed Advanced shell source merged; capability-aware projection remains later/unproven |
+| REQ-058 | V2 desktop | conventional shell commands | PH-22 | shell/menu commands and resources | AC-091 | VAL-067, VAL-079 | Conventional menu source merged; keyboard runtime validation remains Unproven |
+| REQ-059 | V2 UX/help | contextual task guidance | PH-22, PH-24, PH-25, PH-26, PH-31 | task views/help resources | AC-102 | VAL-067 | PH-22 shell guidance source merged; workflow-specific/runtime validation continues in later phases |
 | REQ-060 | V2 batch | WorkflowIntent + per-file batch planning | PH-26 | batch workflow services, plan review and queue projection | AC-093, AC-094 | VAL-070 | Governance adopted; runtime Unproven |
 | REQ-061 | V2 estimate | estimate service over resolved intent/plan | PH-23, PH-24, PH-25, PH-26 | estimate service plus task/result projections | AC-095 | VAL-071 | Governance adopted; runtime Unproven |
 | REQ-062 | V2 normal output | task output intent -> ProcessingPlan | PH-24, PH-25 | normal output controls and plan compiler | AC-089, AC-090 | VAL-068, VAL-069 | Governance adopted; runtime Unproven |
-| REQ-063 | V2 advanced | capability-aware advanced projection | PH-22, PH-25, PH-30 | advanced controls and capability services | AC-092, AC-105 | VAL-066, VAL-077 | Governance adopted; runtime Unproven |
+| REQ-063 | V2 advanced | capability-aware advanced projection | PH-22, PH-25, PH-30 | advanced controls and capability services | AC-092, AC-105 | VAL-066, VAL-077 | PH-22 Advanced disclosure source merged; capability-aware/ProcessingPlan consistency remains later/unproven |
 | REQ-064 | V2 safety | inherited runtime/process/path/persistence safety | PH-22 through PH-31 | process/conversion/path/persistence services and regression fixtures | AC-098, AC-099, AC-100 | VAL-072, VAL-073, VAL-074, VAL-081 | V1 safeguards source-present; V2 integration Unproven |
 | REQ-065 | V2 architecture | WorkflowIntent -> immutable ProcessingPlan -> execution | PH-23 onward | domain intent/plan/compiler/execution-snapshot seams | AC-101 | VAL-077, VAL-078 | Governance adopted; runtime Unproven |
-| REQ-066 | V2 projects | optional session/project persistence | PH-22, PH-28 | task session, project persistence and recovery surfaces | AC-096, AC-097 | VAL-075, VAL-081 | Governance adopted; runtime Unproven |
+| REQ-066 | V2 projects | optional session/project persistence | PH-22, PH-28 | task session, project persistence and recovery surfaces | AC-096, AC-097 | VAL-075, VAL-081 | PH-22 shell permits quick work without project creation; V2 persistence compatibility remains PH-28/unproven |
 | REQ-067 | V2 batch UX | per-file plan projection | PH-26 | batch plan table and exception workflow | AC-094 | VAL-070 | Governance adopted; runtime Unproven |
-| REQ-068 | V2 accessibility | WPF presentation/resources/automation | PH-22 through PH-31 | shell/task views, resources and UI automation | AC-091, AC-103 | VAL-067, VAL-079, VAL-080 | Governance adopted; runtime Unproven |
+| REQ-068 | V2 accessibility | WPF presentation/resources/automation | PH-22 through PH-31 | shell/task views, resources and UI automation | AC-091, AC-103 | VAL-067, VAL-079, VAL-080 | PH-22 accessibility metadata/live-status source merged; keyboard/screen-reader/DPI runtime validation remains Unproven |
 | REQ-069 | V2 migration | typed persistence migration/classification | PH-28 | project/preset/queue readers, mappers and fixtures | AC-104 | VAL-075, VAL-076 | Governance adopted; compatibility Unproven |
 | REQ-070 | Product boundary | governance/scope/phase control | PH-20 through PH-31 | product foundation, scope and phase review | AC-083 | VAL-065 | Governance adopted; enforced by phase review |
 

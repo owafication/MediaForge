@@ -9,9 +9,9 @@
 
 ## Active pointer
 
-- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 canonical governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; V2 runtime implementation remains Unproven.
+- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-22A task-first shell/navigation merged via PR #4 at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; full PH-22 runtime interaction/accessibility validation remains Unproven.
 - **Active phase:** `PH-22` MediaForge 2 application shell and workflow navigation.
-- **Active pointer:** implement and validate the PH-22 task-first shell/navigation foundation from the merged PH-20 governance base. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
+- **Active pointer:** continue PH-22 from merged PH-22A main `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; complete shared lifecycle presentation and remaining runtime keyboard/accessibility/DPI evidence before any PH-22 exit claim. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
 - **Active product milestone:** MediaForge 2 task-first rebuild; exact 2.x package/version remains unresolved.
 - **Stop rule:** do not claim PH-22 exit from source presence alone; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
 ## Reading routes

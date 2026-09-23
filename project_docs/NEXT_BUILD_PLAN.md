@@ -4,7 +4,7 @@
 **Active phase:** `PH-22`.
 **Governance base:** `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 **V1 rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-**Runtime status:** V2 shell implementation not yet performed; V2 runtime remains Unproven.
+**Runtime status:** PH-22A task-first Home/menu/task routing and shell state source merged via PR #4 at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; PH-22 remains Active and keyboard/screen-reader/DPI interaction evidence remains Unproven.
 
 ## Objective
 
@@ -14,6 +14,7 @@ Implement the task-first WPF shell without recreating the V1 control wall or wea
 
 - `PH-20` governance adoption merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - `PH-21` V1 closure/rollback bridge remains satisfied.
+- `PH-22A` task-first Home/menu/task routing, progressive disclosure, live-status metadata and shell-state source merged via PR #4 at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`.
 - canonical V2 requirements, acceptance, validation, risks and phase contracts are adopted.
 - deferred V1 manual/native safety checks remain explicitly Skipped/Unproven and carry forward.
 
@@ -61,7 +62,7 @@ A source implementation alone does not close PH-22. Evidence must demonstrate th
 
 ## Rollback
 
-Rollback the PH-22 implementation branch to merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+For PH-22B, rollback to merged PH-22A commit `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; the phase-root rollback remains merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 
 ## Stop conditions
 
