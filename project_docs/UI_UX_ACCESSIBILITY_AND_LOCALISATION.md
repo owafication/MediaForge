@@ -5,7 +5,7 @@
 **Owner:** UX maintainer.
 **Authority:** UI/accessibility owner.
 **Update trigger:** Flow, screen, state, keyboard, theme, DPI, accessible name or locale change.
-**Linked IDs:** legacy `PH-18`, `AC-081`–`AC-082`, `VAL-056`–`VAL-057`, `RISK-016`, `RISK-049`–`RISK-050`; V2 `REQ-056`–`REQ-068`, `PH-22`–`PH-31`, `AC-088`–`AC-105`, `VAL-066`–`VAL-080`, `RISK-051`–`RISK-059`.
+**Linked IDs:** legacy `PH-18`, `AC-081`–`AC-082`, `VAL-056`–`VAL-057`, `RISK-016`, `RISK-049`–`RISK-050`; V2 `REQ-056`–`REQ-068`, `PH-22`–`PH-31`, `AC-088`–`AC-105`, `VAL-066`–`VAL-082`, `RISK-051`–`RISK-059`.
 
 ## Information architecture
 
@@ -80,4 +80,6 @@ Workflow states include Empty, MediaReady, Configuring, NeedsDecision, ReviewRea
 
 Projects remain optional for quick work. Queue is a running/status surface, not the default conceptual model. Presets are contextual in normal workflows and managed through advanced Tools surfaces.
 
-From PH-22 onward require keyboard access, logical tab order, visible focus, accessible names/help text, high contrast, DPI resilience, screen-reader-compatible status updates and no required pointer-only workflow.
+From PH-22 onward require keyboard access, logical tab order, visible focus, accessible names/help text, high-contrast-aware system resources, DPI resilience, screen-reader-compatible status updates and no required pointer-only workflow.
+
+`DEC-038` separates the architectural shell baseline from later end-to-end/release proof. PH-22 uses `VAL-082` to prove isolated keyboard navigation, default Home separation, collapsed-but-reachable Advanced controls and automation metadata. Full `AC-102` guidance, including multi-file/batch review, remains mandatory with PH-26; PH-22 retains source-present task guidance without claiming that complete criterion. `AC-103`/`VAL-067` complete with the first end-to-end Resize workflow in PH-24, while full screen-reader/high-contrast visual review and DPI/multi-monitor coverage remain `VAL-079`/`VAL-080` release-quality evidence in PH-31.

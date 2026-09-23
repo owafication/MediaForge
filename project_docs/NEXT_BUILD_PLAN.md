@@ -4,7 +4,7 @@
 **Active phase:** `PH-22`.
 **Governance base:** `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 **V1 rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-**Runtime status:** PH-22A task-first Home/menu/task routing and shell state source merged via PR #4 at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; PH-22 remains Active and keyboard/screen-reader/DPI interaction evidence remains Unproven.
+**Runtime status:** PH-22A and PH-22B shell/navigation/lifecycle source is merged through `637fc06be7135e90be47152d6054ec783c836cf0`. The PH-22C candidate passed Release build, four isolated launch/close cases and all 12 shell-specific `VAL-082` checks on Windows on 2026-09-23. PH-22 remains Active pending delivery and explicit closure evidence. End-to-end Resize (`VAL-067`) and full screen-reader/DPI validation remain downstream under `DEC-038`.
 
 ## Objective
 
@@ -46,9 +46,9 @@ Do not implement PH-23 ProcessingPlan/capability work beyond the minimum interfa
 
 ## Acceptance and validation
 
-Primary V2 acceptance: `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-102`, `AC-103`, `AC-105`.
+Primary PH-22 acceptance: `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-105`, plus source-present task guidance. Full `AC-102` guidance (including actual multi-file/batch review) remains mandatory in PH-26 under `DEC-038`.
 
-Primary V2 validation: `VAL-066`, `VAL-067`, `VAL-079`, `VAL-080`, plus Release build, XAML/name/handler checks and any directly affected existing regression tests.
+Primary PH-22 validation: `VAL-066`, `VAL-082`, Release build, XAML/name/handler checks and directly affected regression tests. `AC-103`/`VAL-067` remain mandatory downstream in PH-24/PH-31; full `VAL-079`/`VAL-080` remain release-quality accessibility evidence in PH-31. This split is governed by `DEC-038` and does not weaken those criteria.
 
 A source implementation alone does not close PH-22. Evidence must demonstrate the implemented shell against the applicable acceptance/validation scope.
 
@@ -62,7 +62,7 @@ A source implementation alone does not close PH-22. Evidence must demonstrate th
 
 ## Rollback
 
-For PH-22B, rollback to merged PH-22A commit `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; the phase-root rollback remains merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
+For PH-22C, rollback to merged PH-22B commit `637fc06be7135e90be47152d6054ec783c836cf0`; the phase-root rollback remains merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 
 ## Stop conditions
 

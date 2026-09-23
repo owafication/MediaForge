@@ -9,9 +9,9 @@
 
 ## Active pointer
 
-- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-22A task-first shell/navigation merged via PR #4 at `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; full PH-22 runtime interaction/accessibility validation remains Unproven.
+- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-22A/PH-22B shell/navigation/lifecycle source merged through `637fc06be7135e90be47152d6054ec783c836cf0`; the PH-22C candidate passed its shell-specific `VAL-082` Windows baseline on 2026-09-23. End-to-end Resize, full screen-reader usability and DPI/multi-monitor validation remain downstream/Unproven.
 - **Active phase:** `PH-22` MediaForge 2 application shell and workflow navigation.
-- **Active pointer:** continue PH-22 from merged PH-22A main `aedfb10117c7a95a199a9f7de4047b3567d3e26e`; complete shared lifecycle presentation and remaining runtime keyboard/accessibility/DPI evidence before any PH-22 exit claim. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
+- **Active pointer:** continue PH-22 from merged PH-22B main `637fc06be7135e90be47152d6054ec783c836cf0`; the PH-22C candidate has passed the shell-specific `VAL-082` baseline and now requires delivery plus explicit PH-22 closure evidence before PH-23. Preserve full `AC-102` batch-review guidance, `AC-103`/`VAL-067` end-to-end operation and `VAL-079`/`VAL-080` release-quality accessibility checks for their downstream phases under `DEC-038`. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
 - **Active product milestone:** MediaForge 2 task-first rebuild; exact 2.x package/version remains unresolved.
 - **Stop rule:** do not claim PH-22 exit from source presence alone; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
 ## Reading routes
@@ -81,10 +81,10 @@
 | Type | Canonical owner | Current range |
 |---|---|---|
 | `REQ-###` | `PROJECT_FOUNDATION.md` | `REQ-001`–`REQ-070` |
-| `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-105`, `VAL-001`–`VAL-081` |
+| `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-105`, `VAL-001`–`VAL-082` |
 | `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-19`; `PH-20` complete; `PH-21` satisfied bridge; active V2 roadmap `PH-22`–`PH-31` |
 | `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-060` |
-| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-037`, reports through `BR-20260919-02` |
+| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-038`, reports through `BR-20260919-02` |
 | `ROUTE-###` | this index | `ROUTE-001`–`ROUTE-015` |
 
 ## Supersession

@@ -48,6 +48,7 @@
 | DEC-035 | Accepted 2026-09-19 | Project creation is optional for quick tasks; project persistence remains available for durable/repeatable work. |
 | DEC-036 | Accepted 2026-09-19 | Typed WorkflowIntent feeds one immutable ProcessingPlan authority shared by visible summary, execution snapshot and verification expectation. |
 | DEC-037 | Accepted 2026-09-19 | Output-size estimates use method-appropriate confidence/range language and never present uncertain predictions as guarantees. |
+| DEC-038 | Accepted 2026-09-23 | PH-22 exit uses a shell-specific keyboard/accessibility baseline rather than requiring the downstream end-to-end Resize workflow. `AC-103` and `VAL-067` remain mandatory downstream evidence in PH-24/PH-31; PH-22 establishes the task-first shell, keyboard-reachable navigation, progressive disclosure, automation metadata and system-aware accessibility resources through `VAL-066` and `VAL-082`. The PH-22 candidate establishes source-present task guidance and limited shell HelpText checks; full `AC-102` contextual guidance, including multi-file/batch review, remains mandatory in PH-26. Full screen-reader usability and DPI/multi-monitor release-quality checks remain `VAL-079`/`VAL-080` in PH-31. |
 
 ## Open canonical decisions
 

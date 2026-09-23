@@ -263,8 +263,8 @@
 - **Required reading:** `UI_UX_ACCESSIBILITY_AND_LOCALISATION.md`, `PROJECT_FOUNDATION.md`, `TRACEABILITY.md`, `ARCHITECTURE.md`.
 - **Expected state:** Conventional menu, Home, task navigation, shared workflow frame, media selection, task-state lifecycle, progressive disclosure and accessibility baseline.
 - **Work:** Shell/menu commands; Home; task routing; shared workflow state; empty/loading/error states; Advanced disclosure; keyboard/focus/automation properties.
-- **Acceptance:** `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-102`, `AC-103`, `AC-105`.
-- **Validation:** Release build/XAML checks plus `VAL-066`, `VAL-067`, `VAL-079`, `VAL-080` as applicable to the implemented shell.
+- **Acceptance:** `AC-088`, `AC-091`, `AC-092`, `AC-096`, `AC-105`, plus source inspection of task guidance. Full `AC-102` (including multi-file/batch-review guidance) remains mandatory with PH-26; `AC-103` remains mandatory with the end-to-end PH-24 workflow and later release validation. Neither is a PH-22 exit gate under `DEC-038`.
+- **Validation:** Release build/XAML checks plus `VAL-066` and `VAL-082`. PH-22 retains structural evidence toward accessibility, while full `VAL-067`, `VAL-079` and `VAL-080` remain mandatory in their downstream workflow/release phases under `DEC-038`.
 - **Governance update:** Record actual shell files/state model and any changed navigation/accessibility contract.
 - **Rollback point:** Merged PH-20 governance commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 - **Stop conditions:** Primary workflow requires unrelated technical controls, pointer-only operation, inaccessible navigation, or duplicated workflow authority in code-behind/services.
@@ -291,8 +291,8 @@
 - **Required reading:** `UI_UX_ACCESSIBILITY_AND_LOCALISATION.md`, `CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md`, `TRACEABILITY.md`.
 - **Expected state:** Add media -> Resize/Crop & Resize -> review/preview -> output -> estimate -> process -> result works for supported single and multi-file fixtures.
 - **Work:** Source inspection; target dimensions; `Fit within`/`Fit in frame`/`Fill frame`/`Stretch`; crop geometry; normal quality; advanced disclosure; estimate; execution; output probe.
-- **Acceptance:** `AC-089`, `AC-090`, `AC-095`, `AC-098`–`AC-101`.
-- **Validation:** `VAL-068`, `VAL-069`, `VAL-071`–`VAL-074`, `VAL-077`, `VAL-078` plus relevant inherited source/output safety fixtures.
+- **Acceptance:** `AC-089`, `AC-090`, `AC-095`, `AC-098`–`AC-101`, `AC-103`.
+- **Validation:** `VAL-067`–`VAL-069`, `VAL-071`–`VAL-074`, `VAL-077`, `VAL-078` plus relevant inherited source/output safety fixtures.
 - **Governance update:** Record implemented geometry/preview/estimate tolerances and first-slice reuse decisions.
 - **Rollback point:** PH-23 merged state.
 - **Stop conditions:** Preview/export geometry diverges, source hash changes, collision/temp/cancel safety regresses, or ambiguous geometry is hidden from the user.
@@ -319,8 +319,8 @@
 - **Required reading:** `CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md`, `PRESETS_AND_QUEUE_CONTROL.md`, `TRACEABILITY.md`.
 - **Expected state:** Explicit target policies, per-file plan review, exceptions/warnings, aggregate estimates and queue integration for mixed media.
 - **Work:** Mixed-source policy resolution; per-file plan table; aggregate/free-space advisory; incompatibility handling; batch progress/results.
-- **Acceptance:** `AC-093`, `AC-094`, `AC-095` plus inherited queue/cancellation safety criteria where exercised.
-- **Validation:** `VAL-070`, `VAL-071` plus applicable `VAL-006`, `VAL-007`, `VAL-031`, `VAL-061`, `VAL-063`.
+- **Acceptance:** `AC-093`, `AC-094`, `AC-095`, `AC-102` (complete Convert/Resize/Crop & Resize and multi-file/batch-review guidance) plus inherited queue/cancellation safety criteria where exercised.
+- **Validation:** `VAL-070`, `VAL-071`, targeted task/batch-review guidance checks for `AC-102`, plus applicable `VAL-006`, `VAL-007`, `VAL-031`, `VAL-061`, `VAL-063`.
 - **Governance update:** Record per-file override rules and final V1 queue-compatibility decision inputs.
 - **Rollback point:** PH-25 merged state.
 - **Stop conditions:** One incompatible item silently alters global intent, active plans mutate, destination reservations race, or batch cancellation leaves ambiguous outputs.
