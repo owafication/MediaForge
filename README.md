@@ -6,7 +6,7 @@ The durable V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`.
 
 MediaForge 2 is the approved governance/product direction: keep the Windows/WPF/local-FFmpeg processing foundation and safety boundaries, replace queue-first interaction with task-first workflows and progressive disclosure, and use one typed WorkflowIntent/ProcessingPlan authority.
 
-`PH-20` governance adoption is complete at merge commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`. The active implementation phase is `PH-22`. No V2 runtime implementation is yet claimed, and the exact 2.x package/version transition remains unresolved.
+`PH-20` governance adoption is complete at merge commit `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`. PH-22 closure is user-approved and takes effect upon verified merge of `BR-20260924-01`; PH-23 is the next implementation phase. PH-22C shell runtime exists and passed its scoped Windows validation; complete V2 workflow operation is not yet claimed, and the exact 2.x package/version transition remains unresolved.
 
 MediaForge is a local-first Windows media conversion, preparation and lightweight single-track assembly application. The source is a WPF application that invokes local FFmpeg and FFprobe child processes.
 
@@ -33,7 +33,7 @@ The application and package-free characterisation tests target `net10.0-windows`
 
 `BR-20260919-01` explicitly deferred the remaining PH-09/PH-10 manual/native interaction and real conversion-safety fixtures. Those items remain Skipped/Unproven and are carried into the V2 validation programme.
 
-The V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`. No V2 runtime, UI, migration or release result exists yet.
+The V1 rollback point is `5acaf88e751327eac47ca673178fbbd88a8603f1`. PH-22C native shell runtime and a projectless Home-to-Advanced fixture have scoped Windows evidence; complete V2 task-first processing, migration and release remain Unproven.
 ## Startup diagnostics
 
 When startup fails before the main window appears, MediaForge writes a diagnostic log under:
@@ -46,7 +46,7 @@ If Local AppData is unavailable, it falls back to the Windows temporary director
 
 ## Product direction
 
-`PH-20` adopted the reviewed MediaForge 2 governance and migration direction and is complete. The `PH-21` V1-closure bridge was already satisfied by the merged rollback baseline. `PH-22` is now active for the task-first shell/navigation foundation.
+`PH-20` adopted the reviewed MediaForge 2 governance and migration direction and is complete. The `PH-21` V1-closure bridge was already satisfied by the merged rollback baseline. `PH-22` shell-scope closure is authorised, effective upon verified merge of `BR-20260924-01`; `PH-23` begins next.
 
 V1 capability work originally sequenced as `PH-11` through `PH-19` is preserved historically and redistributed into the V2 roadmap rather than discarded or reused as phase IDs.
 ## Product boundary
@@ -78,5 +78,5 @@ The release ZIP is intentionally multi-file. Keep all files together when runnin
 - **Passed automated Windows scope:** consolidated x64 build/tests/launch-smoke/publish/package evidence recorded by `BR-20260911-01`.
 - **Deferred V1 evidence:** remaining manual/native interaction and real conversion-safety fixtures remain Skipped/Unproven under `BR-20260919-01`.
 - **Rollback:** `5acaf88e751327eac47ca673178fbbd88a8603f1`.
-- **Current work:** `PH-22` task-first WPF shell/navigation foundation; runtime implementation has not yet been performed.
-- **V2 runtime:** Unproven.
+- **Current work after closure merge:** `PH-23` typed WorkflowIntent/ProcessingPlan implementation; PH-22 shell and project-optional native Advanced conversion have scoped runtime evidence, not full V2 task-first processing.
+- **V2 runtime:** PH-22C task-first shell and one projectless Home-to-Advanced fixture passed to their declared scope; complete V2 task-first processing remains Unproven.

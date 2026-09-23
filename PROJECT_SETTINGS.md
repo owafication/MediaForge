@@ -2,7 +2,7 @@
 
 ## Current MediaForge 2 sequence
 
-The active phase is `PH-22`, followed by `PH-23` through `PH-31`. `PH-20` governance adoption is complete, and `PH-21` remains the immutable V1-closure/rollback bridge already satisfied before V2 adoption.
+The next active phase is `PH-23` after the PH-22 closure PR is verified merged, followed by `PH-24` through `PH-31`. `PH-20` governance adoption is complete, and `PH-21` remains the immutable V1-closure/rollback bridge already satisfied before V2 adoption.
 
 Historical `PH-11` through `PH-19` are not reused. Their useful technical scope is carried into the V2 phases where mapped.
 
@@ -24,11 +24,11 @@ Retain WPF and the single local process. Use explicit composition. PH-08 service
 
 1. `PH-20`: complete governance-only MediaForge 2 adoption, merged via PR #2 at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`.
 2. `PH-21`: satisfied V1 closure/rollback bridge; no future implementation work is scheduled under this ID.
-3. `PH-22`: active — task-first WPF shell, conventional menus, Home/task navigation, shared workflow state, progressive disclosure and accessibility baseline.
-4. `PH-23`: planned after PH-22 exit — WorkflowIntent, capability/compatibility and immutable ProcessingPlan seam.
+3. `PH-22`: user-approved shell-scope closure, effective on verified merge of `BR-20260924-01`.
+4. `PH-23`: next active phase after verified PH-22 closure merge - WorkflowIntent, capability/compatibility and immutable ProcessingPlan seam.
 5. `PH-24` onward: follow the canonical phase contracts in `project_docs/IMPLEMENTATION_PLAN.md`.
 
-Do not begin dependent PH-23 implementation until PH-22 acceptance/validation evidence supports exit or an explicit governance exception is recorded.
+Do not begin dependent PH-23 implementation until the PH-22 closure PR is independently verified merged and the local branch is safely based on that merged commit.
 ## Data and safety
 
 Never intentionally modify source media. Preserve deterministic destination reservation and same-directory temporary output. A failure must not silently replace a valid destination. Never trust raw command fragments from imported files. Keep local media and path data local by default. Do not add telemetry, accounts, cloud processing, advertisements or AI without a new requirement and privacy decision.

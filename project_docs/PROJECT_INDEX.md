@@ -9,9 +9,9 @@
 
 ## Active pointer
 
-- **Current project state:** V1 rollback baseline at `5acaf88e751327eac47ca673178fbbd88a8603f1`; MediaForge 2 governance merged at `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`; PH-22A/PH-22B shell/navigation/lifecycle source merged through `637fc06be7135e90be47152d6054ec783c836cf0`; the PH-22C candidate passed its shell-specific `VAL-082` Windows baseline on 2026-09-23. End-to-end Resize, full screen-reader usability and DPI/multi-monitor validation remain downstream/Unproven.
-- **Active phase:** `PH-22` MediaForge 2 application shell and workflow navigation.
-- **Active pointer:** continue PH-22 from merged PH-22B main `637fc06be7135e90be47152d6054ec783c836cf0`; the PH-22C candidate has passed the shell-specific `VAL-082` baseline and now requires delivery plus explicit PH-22 closure evidence before PH-23. Preserve full `AC-102` batch-review guidance, `AC-103`/`VAL-067` end-to-end operation and `VAL-079`/`VAL-080` release-quality accessibility checks for their downstream phases under `DEC-038`. `PH-21` remains the already-satisfied V1 closure/rollback bridge.
+- **Current project state:** PH-22A/B and PH-22C are merged; PH-22C merge `3d885760f9e91dd84866a7d61a044e6db643ce0f` is the rollback base. The retained shell evidence and fixture-backed projectless Home-to-Advanced conversion support the unchanged PH-22 acceptance scope. User authorised PH-22 closure; `DEC-039` was not adopted. `BR-20260924-01` makes PH-22 exit effective only when its closure PR is verified merged. Downstream V2 task-first and deferred safety/accessibility evidence remain mandatory.
+- **Active phase:** `PH-23` WorkflowIntent, compatibility and ProcessingPlan seam (effective on verified closure PR merge; prior to merge, PH-22 remains the last delivered phase).
+- **Active pointer:** After verified merge of PH-22 closure `BR-20260924-01`, begin PH-23 from its merged commit using `IMPLEMENTATION_PLAN.md` and `NEXT_BUILD_PLAN.md`. Keep full `AC-102`, `AC-103`, `VAL-067`, `VAL-079`, `VAL-080` and inherited V1 safety/persistence work downstream under existing governance.
 - **Active product milestone:** MediaForge 2 task-first rebuild; exact 2.x package/version remains unresolved.
 - **Stop rule:** do not claim PH-22 exit from source presence alone; inherited safety contracts remain mandatory; deferred V1 validation remains Unproven until executed; migration/version claims require evidence.
 ## Reading routes
@@ -56,6 +56,7 @@
 | project_docs/PH09_IMPLEMENTATION_REPORT.md | Complete | PH-09 persistence/recovery implementation and evidence boundary |
 | project_docs/PH10_IMPLEMENTATION_REPORT.md | Complete | PH-10 preset/queue implementation and evidence boundary |
 | project_docs/PH20_CANONICAL_ADOPTION_REPORT.md | Complete | PH-20 governance adoption, merge evidence, boundaries and PH-22 handoff |
+| project_docs/PH22_CLOSURE_READINESS_REPORT.md | Closure record; effective on merge | PH-22 scoped acceptance, retained evidence, DEC-039 not adopted and PH-23 handoff |
 | project_docs/PROJECTS_AUTOSAVE_AND_RECOVERY.md | Complete | Project/recovery contracts |
 | project_docs/PRESETS_AND_QUEUE_CONTROL.md | Complete | Preset/override/queue contracts |
 | project_docs/CAPABILITY_COMPATIBILITY_AND_PROCESSING_PLAN.md | Complete | FFmpeg capability and plan contracts |
@@ -84,7 +85,7 @@
 | `AC-###`, `VAL-###` | `TRACEABILITY.md` | `AC-001`–`AC-105`, `VAL-001`–`VAL-082` |
 | `PH-##` | `IMPLEMENTATION_PLAN.md` | historical `PH-00`–`PH-19`; `PH-20` complete; `PH-21` satisfied bridge; active V2 roadmap `PH-22`–`PH-31` |
 | `RISK-###` | `SECURITY_PRIVACY_AND_RISK.md` | `RISK-001`–`RISK-060` |
-| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-038`, reports through `BR-20260919-02` |
+| `DEC-###`, `BR-YYYYMMDD-##` | `DECISIONS_AND_CHANGE_HISTORY.md` | `DEC-001`–`DEC-039` (`DEC-039` Not adopted), reports through `BR-20260924-01` (closure PR pending) |
 | `ROUTE-###` | this index | `ROUTE-001`–`ROUTE-015` |
 
 ## Supersession
@@ -115,3 +116,4 @@
 | `BR-20260911-01` | 2026-09-11 | Consolidated PH-07 through PH-10 Windows x64 validation and harness correction | Native automated baseline passed; manual UI/filesystem/safety evidence pending | `artifacts/ph07-baseline-20260911-132855`, source/package audits and `/VERIFICATION.md` |
 | `BR-20260919-01` | 2026-09-19 | PH-10 sequencing exception and V1 rollback-baseline handoff | Automated Windows evidence retained; remaining manual/native checks Skipped/Unproven and carried to V2 post-build validation | `/VERIFICATION.md`, `PH10_IMPLEMENTATION_REPORT.md`, `TRACEABILITY.md`, reviewed external V2 validation matrix |
 | `BR-20260919-02` | 2026-09-19 | MediaForge 2 canonical governance adoption | Merged via PR #2; PH-20 complete for governance scope; PH-22 active; runtime implementation Unproven | Adoption commit `c8fdc552cca699bb4eae9169bdcf8e042fc57f93`, merge `d3c1c0958aae71afcc5462bfa2c4e66c6fd7ab55`, canonical audits and `PH20_CANONICAL_ADOPTION_REPORT.md` |
+| `BR-20260924-01` | 2026-09-24 | PH-22 evidence-scoped closure, DEC-039 not adopted and PH-23 handoff | User-authorised; effective when closure PR is verified merged | Retained PH-22C Windows shell/Release evidence and `PH22-AC096-EVIDENCE-20260924`; `PH22_CLOSURE_READINESS_REPORT.md` |
